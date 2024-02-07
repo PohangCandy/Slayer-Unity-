@@ -9,7 +9,6 @@ public class EnemyTarget : MonoBehaviour, Potion
 {
     public Text description;
     State currentState;
-    string target_tag;
     
 
     [SerializeField]
@@ -19,6 +18,7 @@ public class EnemyTarget : MonoBehaviour, Potion
     {
         Idle,
         Hover,
+        Select,
         Drag,
         Apply
     }
@@ -58,10 +58,10 @@ public class EnemyTarget : MonoBehaviour, Potion
                         
                         if (hit)
                         {
-                            //ÅÂ±×¸¦ ºñ±³ÇØ¼­ »ç¿ëÇÔ.
+                            //ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
                            // if (hit.collider.gameObject.tag == "Enemy")
                             {
-                                Debug.Log("Àû Ã£À½");
+                                Debug.Log("ï¿½ï¿½ Ã£ï¿½ï¿½");
                                 visualizerLine.Play(this.gameObject.transform.position, hit.point);
                             }
                         }
@@ -87,7 +87,7 @@ public class EnemyTarget : MonoBehaviour, Potion
     }
     private void OnMouseEnter()
     {
-        Debug.Log("¸ó½ºÅÍ¿¡°Ô µ¥¹ÌÁö 10");
+        Debug.Log("ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10");
         currentState = State.Hover;
         description.enabled = true;
     }
@@ -101,7 +101,7 @@ public class EnemyTarget : MonoBehaviour, Potion
 
     void OnMouseDown()
     {
-        Debug.Log("°´Ã¼°¡ Å¬¸¯µÇ¾ú½À´Ï´Ù!");
+        Debug.Log("ï¿½ï¿½Ã¼ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
 
     }
 }

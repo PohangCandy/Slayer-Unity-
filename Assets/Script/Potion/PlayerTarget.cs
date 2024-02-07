@@ -9,27 +9,68 @@ public class PlayerTarget :MonoBehaviour, Potion
 {
     public Text description;
     State currentState;
+    Collider2D collider;
+    Vector3 point;
+    public GameObject button;
+    SAInformation saInformation;
+
+    public struct SAInformation
+    {
+        public SAInformation(string _target, int _turn, string _category, int _damage)
+        {
+            target = _target;
+            turn = _turn;
+            category = _category;
+
+            damage = _damage;
+        }
+        public string target;
+        public int turn;
+        public string category;
+        public int damage;
+    }
+
     enum State
     {
         Idle,
         Hover,
+        Select,
         Apply
     }
     // Start is called before the first frame update
     void Start()
     {
- 
+
         currentState = State.Idle;
+        collider = GetComponent<Collider2D>();
+        //saInformation = new SAInformation();    Îç∞Ïù¥ÌÑ∞Î≤†Ïù¥Ïä§Î°ú Î∂ÄÌÑ∞ Í∞ÄÏ†∏Ïò¥
     }
     public void handleinput()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case State.Idle:
-                description.enabled = false;
+                {
+
+                    if (isInside(point))
+                        currentState = State.Hover;
+                }
                 break;
             case State.Hover:
-                description.enabled = true;
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        currentState = State.Select;
+                        break;
+                    }
+                    if (!isInside(point))
+                    {
+                        currentState = State.Idle;
+                        break;
+                    }
+                }
+                break;
+            case State.Select:
                 break;
             case State.Apply:
                 break;
@@ -39,24 +80,45 @@ public class PlayerTarget :MonoBehaviour, Potion
     // Update is called once per frame
     void Update()
     {
+        point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        Debug.Log(currentState);
+        //print("current state %s", currentState);
         handleinput();
-    }
-    private void OnMouseEnter()
-    {
-        Debug.Log("«√∑π¿ÃæÓø°∞‘ πÊæÓµµ ºˆƒ° 2æ˜");
-        currentState = State.Hover;
 
+        if (currentState == State.Idle)
+        {
+            button.SetActive(false);
+            description.enabled = false;
+        }
+        else if (currentState == State.Hover)
+        {
+            description.enabled = true;
+        }
+        else if (currentState == State.Select)
+        {
+            button.SetActive(true);
+        }
+        else if (currentState == State.Apply)
+        {
+            //Ïù¥ÌéôÌä∏ effect(Card,saInformation)
+        }
     }
 
-    private void OnMouseExit()
+    bool isInside(Vector2 mousepoint)
     {
-        currentState=State.Idle;
-       
+        if (collider.OverlapPoint(mousepoint))
+        {
+            return true;
+        }
+        return false;
+    }
+    public void applyEvent()
+    {
+        currentState = State.Apply;
     }
 
-    void OnMouseDown()
+    public void cancleEvent()
     {
-        Debug.Log("∞¥√º∞° ≈¨∏Øµ«æ˙Ω¿¥œ¥Ÿ!");
-        
+        currentState = State.Idle;
     }
 }
