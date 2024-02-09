@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using StatusAdjustmentInformationNameSpace;
 
 public class PlayerTarget :MonoBehaviour, Potion
 {
@@ -14,21 +15,21 @@ public class PlayerTarget :MonoBehaviour, Potion
     public GameObject button;
     SAInformation saInformation;
 
-    public struct SAInformation
-    {
-        public SAInformation(string _target, int _turn, string _category, int _damage)
-        {
-            target = _target;
-            turn = _turn;
-            category = _category;
+    //public struct SAInformation
+    //{
+    //    public SAInformation(string _target, int _turn, string _category, int _damage)
+    //    {
+    //        target = _target;
+    //        turn = _turn;
+    //        category = _category;
 
-            damage = _damage;
-        }
-        public string target;
-        public int turn;
-        public string category;
-        public int damage;
-    }
+    //        damage = _damage;
+    //    }
+    //    public string target;
+    //    public int turn;
+    //    public string category;
+    //    public int damage;
+    //}
 
     enum State
     {
