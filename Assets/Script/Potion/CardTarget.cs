@@ -4,30 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using StatusAdjustmentInformationNameSpace;
 
-public class CardTarget :MonoBehaviour ,Potion
+public class CardTarget :MonoBehaviour , PotionInterface
 {
     public Text description;
+    public Text Cardname;
+    int rarity;
     State currentState;
     Collider2D collider;
     Vector3 point;
-    public GameObject button;
     [SerializeField]
+    SpriteRenderer potionsprite;
+    public GameObject button;
     public SAInformation saInformation;
+    public Player player;
 
-    //public struct SAInformation
-    //{
-    //    public SAInformation(string _target,int _turn,string _category,int _damage)
-    //    {
-    //        target= _target;
-    //        turn= _turn;
-    //        category= _category;
-    //        damage= _damage;
-    //    }
-    //    public string target;
-    //    public int turn;
-    //    public string category;
-    //    public int damage;
-    //}
+    public void setUp(Potion potion)
+    {
+        description.text = potion.description.ToString();
+        Cardname.text = potion.name.ToString();
+        rarity = potion.rarity;
+        potionsprite.sprite = potion.sprite;
+        saInformation = new SAInformation(potion.target, potion.turn, potion.category, potion.amount);
+        
+    }
     
 
     enum State
@@ -41,7 +40,6 @@ public class CardTarget :MonoBehaviour ,Potion
     // Start is called before the first frame update
     void Start()
     {
-
         currentState = State.Idle;
         collider=GetComponent<Collider2D>();
         saInformation =new SAInformation("defense",3,"Defense",10);
@@ -103,7 +101,8 @@ public class CardTarget :MonoBehaviour ,Potion
         else if( currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-             StatusAdjustment.SetFunction(this, saInformation);
+             StatusAdjustment.SetFunction(player, saInformation);
+            Destroy(this.gameObject);
         }
     }
 
