@@ -46,7 +46,7 @@ public static class StatusAdjustment
 
     public static void SetFunction(Object gameObject,SAInformation sAInformation)
     {
-        Player a= gameObject as Player;
+        Player a = (Player)gameObject; //왜 안넘어가지?
         switch (sAInformation.category)
         {
             case "attack":
@@ -56,6 +56,7 @@ public static class StatusAdjustment
                 break;
             case "Defense":
                 {
+                    Debug.Log("방어력 상승");
                     defense(a, sAInformation);
                 }
                 break;

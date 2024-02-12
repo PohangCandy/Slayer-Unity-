@@ -9,12 +9,13 @@ using StatusAdjustmentInformationNameSpace;
 public class PlayerTarget :MonoBehaviour, PotionInterface
 {
     public Text description;
-    public Text name;
+    public Text potionname;
     int rarity;
     State currentState;
     Collider2D collider;
     Vector3 point;
-    Sprite sprite;
+    [SerializeField]
+    SpriteRenderer potionsprite;
     public GameObject button;
     SAInformation saInformation;
     public Player player;
@@ -22,9 +23,9 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
     public void setUp(Potion potion)
     {
         description.text = potion.description.ToString();
-        name.text = potion.name.ToString();
+        potionname.text = potion.name.ToString();
         rarity = potion.rarity;
-        sprite = potion.sprite;
+        potionsprite.sprite = potion.sprite;
         saInformation = new SAInformation(potion.target, potion.turn, potion.category, potion.amount);
     }
 

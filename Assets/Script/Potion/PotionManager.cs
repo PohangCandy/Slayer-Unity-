@@ -66,6 +66,10 @@ public class PotionManager : MonoBehaviour
 
     public Potion PopPotion()
     {
+        if( potionBuffer.Count <= 0 ) 
+        {
+            SetupBuffer ();
+        }
         Potion potion = potionBuffer[0];
         potionBuffer.RemoveAt(0);
         return potion;
@@ -77,19 +81,23 @@ public class PotionManager : MonoBehaviour
         {
             case 0:
                 {
-                    var potionObject = Instantiate(potionPrefab[0],new Vector3(3,3,0), Quaternion.identity);
+                    var potionObject = Instantiate(potionPrefab[0],new Vector3(0,0,0), Quaternion.identity);
                 var cardTarget=potionObject.GetComponent<CardTarget>();
                     cardTarget.setUp(PopPotion());
                 }
                 break;
             case 1:
                 {
-                    var potionObject = Instantiate(potionPrefab[1], new Vector3(5, 5,0), Quaternion.identity);
+                    var potionObject = Instantiate(potionPrefab[1], new Vector3(3, 0,0), Quaternion.identity);
+                    var playerTarget = potionObject.GetComponent<PlayerTarget>();
+                    playerTarget.setUp(PopPotion());
                 }
                 break;
             case 2:
                 {
-                    var potionObject = Instantiate(potionPrefab[2], Vector3.zero, Quaternion.identity);
+                    var potionObject = Instantiate(potionPrefab[2], new Vector3(-3,0,0), Quaternion.identity);
+                    var enemyTarget = potionObject.GetComponent<EnemyTarget>();
+                    enemyTarget.setUp(PopPotion());
                 }
                 break;
         }
