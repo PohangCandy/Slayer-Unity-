@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using StatusAdjustmentInformationNameSpace;
 
-public class CardTarget : MonoBehaviour ,Potion
+public class CardTarget :MonoBehaviour , PotionInterface
 {
     public Text description;
+    public Text Cardname;
+    int rarity;
     State currentState;
     Collider2D collider;
     Vector3 point;
+    [SerializeField]
+    SpriteRenderer potionsprite;
     public GameObject button;
-    SAInformation saInformation;
+    public SAInformation saInformation;
+    public Player player;
 
-    public struct SAInformation
+    public void setUp(Potion potion)
     {
-        public SAInformation(string _target,int _turn,string _category,int _damage)
-        {
-            target= _target;
-            turn= _turn;
-            category= _category;
-            damage= _damage;
-        }
-        public string target;
-        public int turn;
-        public string category;
-        public int damage;
-}
+        description.text = potion.description.ToString();
+        Cardname.text = potion.name.ToString();
+        rarity = potion.rarity;
+        potionsprite.sprite = potion.sprite;
+        saInformation = new SAInformation(potion.target, potion.turn, potion.category, potion.amount);
+        
+    }
+    
 
     enum State
     {
@@ -34,15 +36,16 @@ public class CardTarget : MonoBehaviour ,Potion
         Select,
         Apply
     }
+
     // Start is called before the first frame update
     void Start()
     {
-
         currentState = State.Idle;
         collider=GetComponent<Collider2D>();
+        saInformation =new SAInformation("defense",3,"Defense",10);
         //saInformation = new SAInformation();    데이터베이스로 부터 가져옴
     }
-    public void handleinput()
+    public void handleinput()//상태를 바꾸는 함수
     {
         switch (currentState)
         {
@@ -75,10 +78,10 @@ public class CardTarget : MonoBehaviour ,Potion
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()//상태가 바뀌면 처리해야하는 것들을 여기에 넣어둠
     {
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         //print("current state %s", currentState);
         handleinput();
 
@@ -97,7 +100,9 @@ public class CardTarget : MonoBehaviour ,Potion
         }
         else if( currentState == State.Apply)
         {
-            //이펙트 effect(Card,saInformation)
+            //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
+             StatusAdjustment.SetFunction(player, saInformation);
+            Destroy(this.gameObject);
         }
     }
 

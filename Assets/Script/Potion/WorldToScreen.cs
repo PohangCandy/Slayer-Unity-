@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldToScreen : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float heightplus;
     void Start()
     {
         
@@ -14,5 +15,6 @@ public class WorldToScreen : MonoBehaviour
     void Update()
     {
         transform.position=Camera.main.WorldToScreenPoint(WorldObject.transform.position);
+        transform.position += new Vector3(0, heightplus, 0);
     }
 }

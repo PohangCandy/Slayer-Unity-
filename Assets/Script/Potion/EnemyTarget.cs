@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
-public class EnemyTarget : MonoBehaviour, Potion
+public class EnemyTarget : MonoBehaviour, PotionInterface
 {
     public Text description;
     State currentState;
