@@ -7,7 +7,7 @@ using StatusAdjustmentInformationNameSpace;
 public class CardTarget :MonoBehaviour , PotionInterface
 {
     public Text description;
-    public Text Cardname;
+    public Text potionname;
     int rarity;
     State currentState;
     Collider2D collider;
@@ -16,12 +16,12 @@ public class CardTarget :MonoBehaviour , PotionInterface
     SpriteRenderer potionsprite;
     public GameObject button;
     public SAInformation saInformation;
-    public Player player;
+    public Object player;
 
     public void setUp(Potion potion)
     {
         description.text = potion.description.ToString();
-        Cardname.text = potion.name.ToString();
+        potionname.text = potion.name.ToString();
         rarity = potion.rarity;
         potionsprite.sprite = potion.sprite;
         saInformation = new SAInformation(potion.target, potion.turn, potion.category, potion.amount);
@@ -40,6 +40,7 @@ public class CardTarget :MonoBehaviour , PotionInterface
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         currentState = State.Idle;
         collider=GetComponent<Collider2D>();
         saInformation =new SAInformation("defense",3,"Defense",10);
@@ -101,7 +102,7 @@ public class CardTarget :MonoBehaviour , PotionInterface
         else if( currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-             StatusAdjustment.SetFunction(player, saInformation);
+             StatusAdjustment.SetFunction(player, saInformation); 
             Destroy(this.gameObject);
         }
     }
