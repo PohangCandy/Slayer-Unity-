@@ -47,6 +47,7 @@ public static class StatusAdjustment
     public static void SetFunction(Object gameObject,SAInformation sAInformation)
     {
         Player a = (Player)gameObject; //왜 안넘어가지?
+        
         switch (sAInformation.category)
         {
             case "attack":

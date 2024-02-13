@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StatusAdjustmentInformationNameSpace;
+using TMPro;
 
 public class CardTarget :MonoBehaviour , PotionInterface
 {
-    public Text description;
-    public Text potionname;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI potionname;
     int rarity;
     State currentState;
     Collider2D collider;
@@ -86,14 +87,16 @@ public class CardTarget :MonoBehaviour , PotionInterface
         //print("current state %s", currentState);
         handleinput();
 
-        if(currentState == State.Idle)
+        if (currentState == State.Idle)
         {
             button.SetActive(false);
             description.enabled = false;
+            potionname.enabled = false;
         }
-        else if(currentState == State.Hover) 
+        else if (currentState == State.Hover)
         {
             description.enabled = true;
+            potionname.enabled = true;
         }
         else if(currentState == State.Select)
         {

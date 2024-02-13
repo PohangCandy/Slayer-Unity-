@@ -21,7 +21,7 @@ MonoBehaviour:
     target: defense
     turn: 0
     category: defense
-    amount: 0
+    amount: 12
   - sprite: {fileID: 21300000, guid: b08298ea4422e8047a754c489dacdf5d, type: 3}
     name: "\uBCD1 \uC18D\uC758 \uC694\uC815"
     description: "\uC0AC\uB9DD \uC2DC \uC774 \uD3EC\uC158\uC744 \uBC84\uB9AC\uB294
@@ -32,7 +32,7 @@ MonoBehaviour:
     target: rebirth
     turn: 0
     category: rebirth
-    amount: 0
+    amount: 30
   - sprite: {fileID: 21300000, guid: 215f090fa0fbaa3498c5bd116bcc36ea, type: 3}
     name: "\uC57D\uD654 \uD3EC\uC158"
     description: "\uC57D\uD654\uB97C 3 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
@@ -41,7 +41,7 @@ MonoBehaviour:
     target: attackdamagenuff
     turn: 0
     category: attackdamagenuff
-    amount: 0
+    amount: 3
   - sprite: {fileID: 21300000, guid: 7f1b443f24faf8241996644a9920f9cd, type: 3}
     name: "\uC7AC\uC0DD \uD3EC\uC158"
     description: "\uC7AC\uC0DD\uC744 5 \uC5BB\uC2B5\uB2C8\uB2E4."
@@ -50,4 +50,4 @@ MonoBehaviour:
     target: slowrecovery
     turn: 0
     category: slowrecovery
-    amount: 0
+    amount: 5

@@ -2,14 +2,15 @@ using StatusAdjustmentInformationNameSpace;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 public class EnemyTarget : MonoBehaviour, PotionInterface
 {
-    public Text description;
-    public Text potionname;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI potionname;
     int rarity;
     State currentState;
     Collider2D collider;
@@ -102,10 +103,11 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
             case State.Apply:
                 break;
         }
-    }
+    }        
+    
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
@@ -114,10 +116,12 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
             visualizerLine.enabled = false;
             button.SetActive(false);
             description.enabled = false;
+            potionname.enabled = false;
         }
         else if (currentState == State.Hover)
         {
             description.enabled = true;
+            potionname.enabled = true;
         }
         else if (currentState == State.Select)
         {
