@@ -11,7 +11,7 @@ public class Potion
     public string description;
     public int rarity;
     public string targetType;
-    public string target;
+    public string target;                                           
     public int turn;
     public string category;
     public int amount;

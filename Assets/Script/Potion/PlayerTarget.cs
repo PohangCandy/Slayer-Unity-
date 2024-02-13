@@ -5,11 +5,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using StatusAdjustmentInformationNameSpace;
+using TMPro;
 
 public class PlayerTarget :MonoBehaviour, PotionInterface
 {
-    public Text description;
-    public Text potionname;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI potionname;
     int rarity;
     State currentState;
     Collider2D collider;
@@ -90,10 +91,12 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             button.SetActive(false);
             description.enabled = false;
+            potionname.enabled = false;
         }
         else if (currentState == State.Hover)
         {
             description.enabled = true;
+            potionname.enabled = true;
         }
         else if (currentState == State.Select)
         {
