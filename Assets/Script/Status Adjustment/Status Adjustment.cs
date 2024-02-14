@@ -84,6 +84,16 @@ public static class StatusAdjustment
     //}
     
 
-    
+    public enum AdjustmentType
+    {
+        None,
+        PowerUp,
+        GetDefence,
+    }
+
+    public static void EnemypowerUp(EnemyBase enemy)
+    {
+        enemy.power += 10;
+    }
 
 }
