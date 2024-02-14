@@ -7,6 +7,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     public enum TurnType { Playerturn, Enemyturn }
     public TurnType Curturn;
+    public EnemyBase Enemy;
     void Start()
     {
         Curturn = TurnType.Playerturn;
@@ -21,6 +22,7 @@ public class TurnManager : MonoBehaviour
     public void PalyerTurnOver()
     {
         Curturn = TurnType.Enemyturn;
+        Enemy.GetCurAction();
     }
     public void EnemyTurnOver()
     {
