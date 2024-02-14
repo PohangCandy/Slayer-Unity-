@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6182620236190073865}
   - component: {fileID: 4854730953160374898}
   - component: {fileID: 7418492092613205327}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: cancle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 270361350330738624}
   - component: {fileID: 7095856843733955052}
   - component: {fileID: 2474248134954727142}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 6318563880719272719}
   - component: {fileID: 8022317859334174353}
   - component: {fileID: 2262928137729577846}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5014718027943554267}
   - component: {fileID: 7886714632241414127}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Buttoncontroller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: 0
+  widthplus: 0
   WorldObject: {fileID: 6352200876079754373}
 --- !u!1 &5743981185071981416
 GameObject:
@@ -435,7 +436,7 @@ GameObject:
   - component: {fileID: 4753768951540353432}
   - component: {fileID: 3111368521672897003}
   - component: {fileID: 781067086763568729}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: -30
+  widthplus: 0
   WorldObject: {fileID: 6352200876079754373}
 --- !u!114 &781067086763568729
 MonoBehaviour:
@@ -584,7 +586,7 @@ GameObject:
   - component: {fileID: 3547646522489021006}
   - component: {fileID: 7792797865763599900}
   - component: {fileID: 2429912083623605957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 6352200876079754373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.65, y: 2.04, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -647,7 +649,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -723,7 +725,7 @@ GameObject:
   - component: {fileID: 3368621686136913504}
   - component: {fileID: 6602370296828590681}
   - component: {fileID: 3492179625354130970}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: apply
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +858,7 @@ GameObject:
   - component: {fileID: 4890737162581623468}
   - component: {fileID: 6545480891315363740}
   - component: {fileID: 4443824769974736568}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,6 +905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: -50
+  widthplus: 0
   WorldObject: {fileID: 6352200876079754373}
 --- !u!114 &4443824769974736568
 MonoBehaviour:
@@ -1004,7 +1007,7 @@ GameObject:
   - component: {fileID: 4475673295380658947}
   - component: {fileID: 5113980087720118370}
   - component: {fileID: 3240104786262657308}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4012807865829420045}
   - component: {fileID: 2161395083140058458}
   - component: {fileID: 9197382832775813464}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: -50
+  widthplus: 0
   WorldObject: {fileID: 2644877888372179210}
 --- !u!1 &1224698385211629008
 GameObject:
@@ -161,7 +162,7 @@ GameObject:
   - component: {fileID: 9140423125360612764}
   - component: {fileID: 3631205221596068279}
   - component: {fileID: 2076487721732345336}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: cancle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +294,7 @@ GameObject:
   - component: {fileID: 1730848715691494614}
   - component: {fileID: 7560845562230630246}
   - component: {fileID: 7151997976201326022}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +428,7 @@ GameObject:
   - component: {fileID: 7473554624408100651}
   - component: {fileID: 4476182529022186342}
   - component: {fileID: 356932226432008074}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +564,7 @@ GameObject:
   - component: {fileID: 6743030262933449061}
   - component: {fileID: 6409354420306823180}
   - component: {fileID: 3732570399100286623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +580,7 @@ Transform:
   m_GameObject: {fileID: 2644877888372179210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 2.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -626,7 +627,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -805,7 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2323163422825285166}
   - component: {fileID: 5884540587852205203}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Buttoncontroller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,6 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: 0
+  widthplus: 0
   WorldObject: {fileID: 2644877888372179210}
 --- !u!1 &4199272182959196642
 GameObject:
@@ -859,7 +861,7 @@ GameObject:
   - component: {fileID: 5748318212477620868}
   - component: {fileID: 2444675834080316361}
   - component: {fileID: 2383546814631784391}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +965,7 @@ GameObject:
   - component: {fileID: 3432059087392947618}
   - component: {fileID: 7511248183213090300}
   - component: {fileID: 4310614974485191577}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: potionname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,6 +1101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightplus: -30
+  widthplus: 0
   WorldObject: {fileID: 2644877888372179210}
 --- !u!1 &9189101701803399372
 GameObject:
@@ -1112,7 +1115,7 @@ GameObject:
   - component: {fileID: 8515798541895028451}
   - component: {fileID: 6619424059326901061}
   - component: {fileID: 8233532730916400985}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: apply
   m_TagString: Untagged
   m_Icon: {fileID: 0}

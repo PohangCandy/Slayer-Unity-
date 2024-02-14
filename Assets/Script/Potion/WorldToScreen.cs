@@ -16,6 +16,6 @@ public class WorldToScreen : MonoBehaviour
     void Update()
     {
         transform.position=Camera.main.WorldToScreenPoint(WorldObject.transform.position);
-        transform.position += new Vector3(widthplus, heightplus, 0);
+        transform.position += new Vector3(widthplus, heightplus, -5);
     }
 }
