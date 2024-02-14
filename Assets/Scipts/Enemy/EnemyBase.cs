@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StatusAdjustmentInformationNameSpace;
+using TMPro;
 
 public class EnemyBase : MonoBehaviour
 {
-    int hp;
+    int Curhp;
+    int Maxhp;
     int RandomNumber;
     int AttackPercentage;
     int SkillPercentage;
@@ -22,15 +24,22 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     public Player target;
     public Sprite[] NextAction;
-    
+    public GameObject PowertxtObj;
+    public TextMeshProUGUI hptxt;
+    private TextMeshProUGUI powertext;
+
+
     enum EnemyPatternType { ChargeSkill, ReadyAttack };
     EnemyPatternType CurPattern;
     void Start()
     {
-        
-        hp = 100;
+        PowertxtObj.SetActive(false);
+        powertext = PowertxtObj.GetComponent<TextMeshProUGUI>();
+        Maxhp = 100;
+        Curhp = Maxhp;
+        hptxt.text = Maxhp.ToString();
         power = 10;
-        slider.value = hp;
+        slider.value = Maxhp;
         AttackPercentage = 60;
         SkillPercentage = 40;
         RandomNumber = Random.Range(0, 99);
@@ -43,26 +52,28 @@ public class EnemyBase : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.V))
         {
             Debug.Log("v");
-            Attack(); }
+            Attack(10); }
     }
 
     public void Attack(int damage)
     {
-        if (hp > 0)
+        if (Curhp > 0)
         {
-            hp -= damage;
-            slider.value = hp;
+            Debug.Log("hp>0");
+            Curhp -= damage;
+            slider.value = Curhp;
+            hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
     }
 
     public void SetPercentagetoValue(int randomNumber)
     {
         
-        if (randomNumber - SkillPercentage < 0)
+        if (randomNumber < SkillPercentage)
         {
             SwitchNumber = 1;
         }
-        else if(randomNumber - AttackPercentage < 0)
+        else if(randomNumber  < SkillPercentage + AttackPercentage)
         {
             SwitchNumber = 2;
         }
@@ -79,6 +90,8 @@ public class EnemyBase : MonoBehaviour
                 break;
             case 2:
                 SetNextAction(EnemyPatternType.ReadyAttack, NextAction[1]);
+                PowertxtObj.SetActive(true);
+                powertext.text = power.ToString();
                 this.CurPattern = EnemyPatternType.ReadyAttack;
                 break;
             default:
@@ -106,6 +119,7 @@ public class EnemyBase : MonoBehaviour
         else if(CurPattern == EnemyPatternType.ReadyAttack)
         {
             Attack();
+            PowertxtObj.SetActive(false);
         }
         //현재 적의 턴이라면, 지금 패턴 수행하기
         //적의 턴이 끝나면 다시 다음 행동 패턴 정하기
