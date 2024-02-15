@@ -27,12 +27,14 @@ public class EnemyBase : MonoBehaviour
     public GameObject PowertxtObj;
     public TextMeshProUGUI hptxt;
     private TextMeshProUGUI powertext;
+    private Animator EnemyAnim;
 
 
     enum EnemyPatternType { ChargeSkill, ReadyAttack };
     EnemyPatternType CurPattern;
     void Start()
     {
+        EnemyAnim = GetComponent<Animator>();
         PowertxtObj.SetActive(false);
         powertext = PowertxtObj.GetComponent<TextMeshProUGUI>();
         Maxhp = 100;
@@ -119,21 +121,29 @@ public class EnemyBase : MonoBehaviour
         else if(CurPattern == EnemyPatternType.ReadyAttack)
         {
             Attack();
-            PowertxtObj.SetActive(false);
         }
         //현재 적의 턴이라면, 지금 패턴 수행하기
         //적의 턴이 끝나면 다시 다음 행동 패턴 정하기
-        RandomNumber = Random.Range(0, 99);
-        SetPercentagetoValue(RandomNumber);
-        turnManager.EnemyTurnOver();
+        //StartCoroutine(ResetEnemyBehaviour());
     }
     void Skill()
     {
+        EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemypowerUp(this);
     }
 
     void Attack()
     {
+        EnemyAnim.SetTrigger("StartAttack");
         target.takeDamage(this.power);
     }
+
+    public void ResetEnemyBehaviour()
+    {
+        RandomNumber = Random.Range(0, 99);
+        PowertxtObj.SetActive(false);
+        SetPercentagetoValue(RandomNumber);
+        turnManager.EnemyTurnOver();
+    }
 }
+

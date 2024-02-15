@@ -8,7 +8,7 @@ public class PalyBtn : MonoBehaviour
     private Button button;
     private Animator animator;
 
-    private ColorBlock normalColors; // 원래의 색상을 저장하기 위한 변수
+    private Color normalColors; // 원래의 색상을 저장하기 위한 변수
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PalyBtn : MonoBehaviour
         animator = GetComponent < Animator>();
 
         // 현재 버튼의 색상을 저장
-        normalColors = button.colors;
+        normalColors = button.GetComponent<Image>().color;
     }
 
     public void ResetButtonState()
@@ -29,6 +29,6 @@ public class PalyBtn : MonoBehaviour
         animator.SetBool("Highlighted", false);
 
         // 버튼의 색상을 원래의 색상으로 설정
-        button.colors = normalColors;
+        button.GetComponent<Image>().color = Color.red;
     }
 }
