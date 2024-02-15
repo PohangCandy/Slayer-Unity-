@@ -22,10 +22,13 @@ public class CardManager : MonoBehaviour
     List<Card> DrawPile;
     
     public Transform CardSpawnPoint;
+    public Transform CardLeft;
+    public Transform CardRight;
 
     List<GameObject> HandOfCards;
     State CurrentState;
     int MaxHandleCardCount;
+    public bool istriggered;
     enum State
     {
         NonShuffle
@@ -34,6 +37,7 @@ public class CardManager : MonoBehaviour
     }
     private void Start()
     {
+        istriggered = false;
         MaxHandleCardCount = 10;
         FirstSetup();
         DeckShuffle();
@@ -46,7 +50,7 @@ public class CardManager : MonoBehaviour
         DrawPile = new List<Card>();
         DiscardPile = new List<Card>();
 
-        HandOfCards = new List<GameObject>();
+        HandOfCards = new List<GameObject>(10);
         for(int i=0;i<4;i++)
         {
             Deck.Add(CardSO.cards[0]);
@@ -112,7 +116,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-        if(Input.GetKeyDown(KeyCode.A)) { CardInstance(Deck[0]); }
+        if(Input.GetKeyDown(KeyCode.A)) { CardInstance(Deck[0]); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
     }
     void ChangeState()
     {
@@ -178,8 +182,10 @@ public class CardManager : MonoBehaviour
                 break;
         }
         SetOriginOrder();
-
+        CardAlignment();
     }
+
+
     void SetOriginOrder()
     {
         int count = HandOfCards.Count;
@@ -187,6 +193,65 @@ public class CardManager : MonoBehaviour
         {
             HandOfCards[i].GetComponent<Order>().SetOriginOrder(i);
         }
+    }
+
+
+    void CardAlignment()
+    { 
+        List<PRS> originCardPRSs=new List<PRS>();
+        originCardPRSs = RoundAlignment(CardLeft, CardRight, HandOfCards.Count, 0.5f, Vector3.one * 0.9f);
+        for(int i=0;i<HandOfCards.Count;i++) 
+        {
+            var card = HandOfCards[i].GetComponent<AttackCard>();
+            card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
+            card.MoveTransform(card.originPRS,true,0.7f);
+        }
+    }
+
+    List<PRS> RoundAlignment(Transform left,Transform right,int count,float height, Vector3 scale)
+    {
+        float[]objLerps=new float[count];
+        List<PRS>results=new List<PRS>(count);//케퍼시티
+        switch (count)
+        {
+            case 1: objLerps = new float[] { 0.5f };break;
+            case 2: objLerps = new float[] { 0.27f, 0.73f }; break;
+            case 3: objLerps = new float[] { 0.1f, 0.5f, 0.9f }; break;
+            default:
+                float interval = 1f / (count - 1);
+                for (int i = 0; i < count; i++)
+                    objLerps[i] = interval * i;
+                break;
+        }
+        //원 방정식
+        for(int i = 0; i < count;i++)
+        {
+            var pos = Vector3.Lerp(left.position, right.position, objLerps[i]);
+            var rot = Quaternion.identity;
+            if(count>=3)
+            {
+                float curve = Mathf.Sqrt(Mathf.Pow(height, 2)) - Mathf.Pow(objLerps[i]-0.5f,2);
+                curve=height>=0?curve:-curve;
+                pos.y += curve;
+                rot = Quaternion.Slerp(left.rotation, right.rotation, objLerps[i]);
+            }
+            results.Add(new PRS(pos, rot, scale));
+        }
+        return results;
+    }
+
+    
+    public void LagerCard(AttackCard card)
+    {
+        Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y, -50f);
+        card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 1.3f), false);
+        card.GetComponent<Order>().SetMostFrontOrder(true);
+    }
+    public  void SmallerCard(AttackCard card)
+    {
+        
+        card.MoveTransform(card.originPRS, false);
+        card.GetComponent<Order>().SetMostFrontOrder(false);
     }
     public void drawCard(int drawcount)
     {
