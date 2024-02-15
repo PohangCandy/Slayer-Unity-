@@ -44,7 +44,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
     {
         currentState = State.Idle;
         collider = GetComponent<Collider2D>();
-        saInformation = new SAInformation("defense", 3, "Defense", 10);
+        saInformation = new SAInformation("defense", 3, "DefenseValue", 10);
         //saInformation = new SAInformation();    데이터베이스로 부터 가져옴
     }
     public void handleinput()//상태를 바꾸는 함수

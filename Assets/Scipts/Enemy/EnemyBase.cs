@@ -10,8 +10,6 @@ public class EnemyBase : MonoBehaviour
     int Curhp;
     int Maxhp;
     int RandomNumber;
-    int AttackPercentage;
-    int SkillPercentage;
 
     int SwitchNumber;
     [SerializeField]
@@ -28,24 +26,50 @@ public class EnemyBase : MonoBehaviour
     public TextMeshProUGUI hptxt;
     private TextMeshProUGUI powertext;
     private Animator EnemyAnim;
+    private float VulnerableValue;
+    private float WeakValue;
+    private float DefenseValue;
+    private float PowerUpValue;
 
-
-    enum EnemyPatternType { ChargeSkill, ReadyAttack };
+    enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff};
     EnemyPatternType CurPattern;
+    EnemyPatternType NextPattern;
+    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 20, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
         PowertxtObj.SetActive(false);
         powertext = PowertxtObj.GetComponent<TextMeshProUGUI>();
+        VulnerableValue = 1f;
+        WeakValue = 1f;
+        DefenseValue = 0;
+        PowerUpValue = 0;
+
         Maxhp = 100;
         Curhp = Maxhp;
         hptxt.text = Maxhp.ToString();
         power = 10;
         slider.value = Maxhp;
-        AttackPercentage = 60;
-        SkillPercentage = 40;
         RandomNumber = Random.Range(0, 99);
-        SetPercentagetoValue(RandomNumber);
+        SetNextActionWithPercentage(RandomNumber);
+    }
+
+    public void SetVulnerable(int vulnerablepercentage)
+    {
+        VulnerableValue = vulnerablepercentage / 100;
+    }
+    public void SetWeak(int WeakPercentage)
+    {
+        WeakValue = 1 - (WeakPercentage / 100);
+    }
+
+    public void SetDefense(int value)
+    {
+        DefenseValue += value;
+    }
+    public void SetPowerUP(int value)
+    {
+        PowerUpValue += value;
     }
 
     // Update is called once per frame
@@ -61,40 +85,63 @@ public class EnemyBase : MonoBehaviour
     {
         if (Curhp > 0)
         {
-            Curhp -= damage;
+            Curhp -= (int)(damage * VulnerableValue);
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
     }
 
-    public void SetPercentagetoValue(int randompercentage)
+    public void SetNextActionWithPercentage(int randompercentage)
     {
         
-        if (randompercentage < SkillPercentage)
+        if (randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent)
         {
-            SwitchNumber = 1;
+            NextPattern = EnemyPatternType.ChargeDefense;
         }
-        else if(randompercentage < SkillPercentage + AttackPercentage)
+        else if(randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent)
         {
-            SwitchNumber = 2;
+            NextPattern = EnemyPatternType.ReadyAttack;
         }
+        else if (randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent + 
+            (int)EnemyPatternPercent.ChargeDeBuffPercent)
+        {
+            NextPattern = EnemyPatternType.ChargeDeBuff;
+        }
+        else if(randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent + 
+            (int)EnemyPatternPercent.ChargeDeBuffPercent + (int)EnemyPatternPercent.ChargeBuffPercent)
+        {
+            NextPattern = EnemyPatternType.ChargeBuff;
+        }
+
         pattern();
     }
 
     void pattern()
     {
-        switch(SwitchNumber)
+        switch(NextPattern)
+        //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
         {
-            case 1:
-                SetNextAction(EnemyPatternType.ChargeSkill, NextAction[0]);
-                this.CurPattern = EnemyPatternType.ChargeSkill;
-                break;
-            case 2:
+            case EnemyPatternType.ChargeDefense:
                 SetNextAction(EnemyPatternType.ReadyAttack, NextAction[1]);
                 PowertxtObj.SetActive(true);
                 powertext.text = power.ToString();
                 this.CurPattern = EnemyPatternType.ReadyAttack;
                 break;
+            case EnemyPatternType.ReadyAttack:
+                SetNextAction(EnemyPatternType.ReadyAttack, NextAction[1]);
+                PowertxtObj.SetActive(true);
+                powertext.text = power.ToString();
+                this.CurPattern = EnemyPatternType.ReadyAttack;
+                break;
+            case EnemyPatternType.ChargeDeBuff:
+                SetNextAction(EnemyPatternType.ChargeBuff, NextAction[0]);
+                this.CurPattern = EnemyPatternType.ChargeBuff;
+                break;
+            case EnemyPatternType.ChargeBuff:
+                SetNextAction(EnemyPatternType.ChargeBuff, NextAction[0]);
+                this.CurPattern = EnemyPatternType.ChargeBuff;
+                break;
+            
             default:
                 Debug.Log("Wrong Percentage Value in EnemyPattern");
                 Debug.Log(SwitchNumber);
@@ -113,9 +160,9 @@ public class EnemyBase : MonoBehaviour
 
     public void GetNextAction()
     {
-        if(CurPattern == EnemyPatternType.ChargeSkill)
+        if(CurPattern == EnemyPatternType.ChargeBuff)
         {
-            Skill();
+            ChargeBuff();
         }
         else if(CurPattern == EnemyPatternType.ReadyAttack)
         {
@@ -125,23 +172,23 @@ public class EnemyBase : MonoBehaviour
         //적의 턴이 끝나면 다시 다음 행동 패턴 정하기
         //StartCoroutine(ResetEnemyBehaviour());
     }
-    void Skill()
+    void ChargeBuff()
     {
         EnemyAnim.SetTrigger("ChargingSkill");
-        StatusAdjustment.EnemypowerUp(this);
+        StatusAdjustment.EnemyGetpowerUp(this,5,10);
     }
 
     void Attack()
     {
         EnemyAnim.SetTrigger("StartAttack");
-        target.takeDamage(this.power);
+        target.takeDamage((this.power + PowerUpValue) * WeakValue);
     }
 
     public void ResetEnemyBehaviour()
     {
         RandomNumber = Random.Range(0, 99);
         PowertxtObj.SetActive(false);
-        SetPercentagetoValue(RandomNumber);
+        SetNextActionWithPercentage(RandomNumber);
         turnManager.EnemyTurnOver();
     }
 }
