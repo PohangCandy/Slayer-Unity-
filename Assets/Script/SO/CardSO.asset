@@ -22,7 +22,9 @@ MonoBehaviour:
     turn: 0
     category: attack
     amount: 6
-    level: 0
+    reinforcelevel: 0
+    cost: 0
+    isdiscarding: 0
   - sprite: {fileID: 0}
     name: "\uC218\uBE44"
     description: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4"
@@ -32,7 +34,9 @@ MonoBehaviour:
     turn: 0
     category: defenseplus
     amount: 5
-    level: 0
+    reinforcelevel: 0
+    cost: 0
+    isdiscarding: 0
   - sprite: {fileID: 0}
     name: "\uAC15\uD0C0"
     description: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. \uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4"
@@ -42,4 +46,18 @@ MonoBehaviour:
     turn: 2
     category: attack weakness
     amount: 8
-    level: 0
+    reinforcelevel: 0
+    cost: 0
+    isdiscarding: 0
+  - sprite: {fileID: 0}
+    name: "\uAC15\uD0C0"
+    description: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. \uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4"
+    rarity: 0
+    targetType: Enemy
+    target: 
+    turn: 2
+    category: attack weakness
+    amount: 8
+    reinforcelevel: 0
+    cost: 0
+    isdiscarding: 0
