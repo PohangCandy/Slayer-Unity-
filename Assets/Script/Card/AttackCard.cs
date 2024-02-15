@@ -9,7 +9,7 @@ public class AttackCard : MonoBehaviour
     public TextMeshPro description;
     public TextMeshPro cardnname;
     int rarity;
-    public string targetType;
+    public string targetTag;
     public int reinforcelevel;
     public int cost;
     public bool isdiscarding;
@@ -31,7 +31,7 @@ public class AttackCard : MonoBehaviour
         description.text = card.description.ToString();
         cardnname.text = card.name.ToString();
         rarity = card.rarity;
-        targetType = card.targetType;
+        targetTag = card.targetTag;
         reinforcelevel = card.reinforcelevel;
         cost = card.cost;
         isdiscarding = card.isdiscarding;
