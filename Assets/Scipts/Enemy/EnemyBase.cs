@@ -53,29 +53,28 @@ public class EnemyBase : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
-            Debug.Log("v");
-            Attack(10); }
+            
+            GetAttack(10); }
     }
 
-    public void Attack(int damage)
+    public void GetAttack(int damage)
     {
         if (Curhp > 0)
         {
-            Debug.Log("hp>0");
             Curhp -= damage;
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
     }
 
-    public void SetPercentagetoValue(int randomNumber)
+    public void SetPercentagetoValue(int randompercentage)
     {
         
-        if (randomNumber < SkillPercentage)
+        if (randompercentage < SkillPercentage)
         {
             SwitchNumber = 1;
         }
-        else if(randomNumber  < SkillPercentage + AttackPercentage)
+        else if(randompercentage < SkillPercentage + AttackPercentage)
         {
             SwitchNumber = 2;
         }
@@ -112,7 +111,7 @@ public class EnemyBase : MonoBehaviour
         //다음 행동이 버프일 때 이미지 표시하기
     }
 
-    public void GetCurAction()
+    public void GetNextAction()
     {
         if(CurPattern == EnemyPatternType.ChargeSkill)
         {
