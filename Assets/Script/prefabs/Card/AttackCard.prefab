@@ -540,6 +540,10 @@ MonoBehaviour:
   isdiscarding: 0
   attackcardsprite: {fileID: 1037212541141346834}
   player: {fileID: 0}
+  originPRS:
+    pos: {x: 0, y: 0, z: 0}
+    rot: {x: 0, y: 0, z: 0, w: 0}
+    scale: {x: 0, y: 0, z: 0}
   visualizerLine: {fileID: 1153752874583341736}
 --- !u!114 &1764133902287809364
 MonoBehaviour:
@@ -594,7 +598,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.057512462, y: 0.0073617697}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -605,7 +609,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8, y: 3.76}
+  m_Size: {x: 1.0749925, y: 3.7452762}
   m_EdgeRadius: 0
 --- !u!120 &1153752874583341736
 LineRenderer:
@@ -697,7 +701,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

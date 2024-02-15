@@ -11,7 +11,7 @@ public class Order : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetOrder(0);
+        //SetOrder(0);
     }
     public void SetOriginOrder(int originOrder)
     {

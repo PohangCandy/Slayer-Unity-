@@ -1,11 +1,15 @@
+using DG.Tweening;
 using StatusAdjustmentInformationNameSpace;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class AttackCard : MonoBehaviour
 {
+    
     public TextMeshPro description;
     public TextMeshPro cardnname;
     int rarity;
@@ -20,12 +24,27 @@ public class AttackCard : MonoBehaviour
     SpriteRenderer attackcardsprite;
     public SAInformation saInformation;
     public Player player;
+    public PRS originPRS;//원래의 위치로 되돌아 가도록
 
     //public GameObject dot;
     //GameObject []dots;
     //public int numberOfDot;
     //public float spaceBetweenPoints;
-
+    public void MoveTransform(PRS prs,bool useDotween, float dotweenTime=0)
+    {
+        if (useDotween)
+        {
+            transform.DOMove(prs.pos, dotweenTime);
+            transform.DORotateQuaternion(prs.rot,dotweenTime);
+            transform.DOScale(prs.scale, dotweenTime);
+        }
+        else
+        {
+            transform.position = prs.pos;
+            transform.rotation = prs.rot;
+            transform.localScale = prs.scale;
+        }
+    }
     public void setUp(Card card)
     {
         description.text = card.description.ToString();
@@ -53,7 +72,7 @@ public class AttackCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        description.enabled = false;
+        description.enabled = true;
         collider = GetComponent<Collider2D>();
         currentState = State.Idle;
     }
@@ -77,13 +96,30 @@ public class AttackCard : MonoBehaviour
                     if (!isInside(point))
                     {
                         currentState = State.Idle;
+                        CardManager.Inst.SmallerCard(this);
                         break;
                     }
                 }
                 break;
             case State.Select:
                 {
-
+                    if(Input.GetMouseButtonUp(0))
+                    {
+                        currentState = State.Idle;
+                        CardManager.Inst.SmallerCard(this);
+                    }
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        currentState = State.Idle;
+                        CardManager.Inst.SmallerCard(this);
+                        //dotsVisibleSetting(0,numberOfDot, false);
+                        break;
+                    }
+                    if(checkCardBoundary())
+                    {
+                        currentState = State.Drag;
+                        break;
+                    }
                 }
                 break;
             case State.Drag:
@@ -91,6 +127,7 @@ public class AttackCard : MonoBehaviour
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
+                        CardManager.Inst.SmallerCard(this);
                         //dotsVisibleSetting(0,numberOfDot, false);
                         break;
                     }
@@ -109,27 +146,25 @@ public class AttackCard : MonoBehaviour
         handleinput();
         if (currentState == State.Idle)
         {
+            //CardManager.Inst.SmallerCard(this);
             visualizerLine.enabled = false;
             //button.SetActive(false);
-            description.enabled = false;
+            
         }
         else if (currentState == State.Hover)
         {
-            description.enabled = true;
+            CardManager.Inst.LagerCard(this);
+            Debug.Log("mouse on");
         }
         else if (currentState == State.Select)
         {
             //button.SetActive(true);
-            description.enabled = false;
+            //description.enabled = false;
         }
         else if (currentState == State.Drag)
         {
             calculate();
-            //visualizerLine.enabled = true;
-            //visualizerLine.positionCount = 10;
-            //visualizerLine.SetPosition(0, new Vector3(transform.position.x,transform.position.y,-1f));
-            //visualizerLine.SetPosition(1, new Vector3((point.x- transform.position.x)/2,(point.y-transform.position.y)/2,-1f));
-            //visualizerLine.SetPosition(2, new Vector3(point.x,point.y,-1f));
+           
         }
         else if (currentState == State.Apply)
         {
@@ -142,11 +177,34 @@ public class AttackCard : MonoBehaviour
 
     bool isInside(Vector2 mousepoint)
     {
+        //Ray ray = Camera.main.ScreenPointToRay(mousepoint);
+        //RaycastHit2D hit= Physics2D.Raycast(mousepoint, transform.forward, 100f);
+        //if(hit)
+        //{
+        //    if (hit.collider.gameObject.layer == 6)
+        //    {
+        //        CardManager.Inst.LagerCard(hit.collider.gameObject.GetComponent<AttackCard>());
+        //        return true;
+        //    }
+        //    return false;
+        //}
+        //return false;
         if (collider.OverlapPoint(mousepoint))
+        {
+            //CardManager.Inst.istriggered
+            return true;
+        }
+        return false;
+    }
+    bool checkCardBoundary()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(point, Vector3.forward,200f,LayerMask.GetMask("CardArea"));
+        if(hit)
         {
             return true;
         }
         return false;
+        
     }
 
     public void applyEvent()
@@ -161,9 +219,9 @@ public class AttackCard : MonoBehaviour
 
     void calculate()
     {
-        Vector3 directionnormal = (point - this.gameObject.transform.position).normalized;
+        Vector3 directionnormal = (new Vector3(point.x,point.y,0) - new Vector3(transform.position.x,transform.position.y,0)).normalized;
         int count = 0;
-        while ((directionnormal * count).sqrMagnitude <= (point - transform.position).sqrMagnitude)
+        while ((directionnormal * count).sqrMagnitude <= (new Vector3(point.x,point.y,0) - new Vector3(transform.position.x, transform.position.y, 0)).sqrMagnitude)
         {
             count++;
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,9 +20,15 @@ public class CardManager : MonoBehaviour
     List<Card> BurnPile;//소멸
     List<Card> DiscardPile;//사용한 카드
     List<Card> DrawPile;
-    Card[] CurrentHandPile;
+    
+    public Transform CardSpawnPoint;
+    public Transform CardLeft;
+    public Transform CardRight;
+
+    List<GameObject> HandOfCards;
     State CurrentState;
-    int HandleCardCount;
+    int MaxHandleCardCount;
+    public bool istriggered;
     enum State
     {
         NonShuffle
@@ -30,7 +37,8 @@ public class CardManager : MonoBehaviour
     }
     private void Start()
     {
-        HandleCardCount = 0;
+        istriggered = false;
+        MaxHandleCardCount = 10;
         FirstSetup();
         DeckShuffle();
         CurrentState = State.Shuffled;
@@ -42,7 +50,7 @@ public class CardManager : MonoBehaviour
         DrawPile = new List<Card>();
         DiscardPile = new List<Card>();
 
-        CurrentHandPile = new Card[10];
+        HandOfCards = new List<GameObject>(10);
         for(int i=0;i<4;i++)
         {
             Deck.Add(CardSO.cards[0]);
@@ -72,7 +80,7 @@ public class CardManager : MonoBehaviour
         {
             int random = Random.Range(i, DrawPile.Count);
             Card flash = DrawPile[i];
-            DrawPile[i] = Deck[random];
+            DrawPile[i] = DrawPile[random];
             DrawPile[random] = flash;
         }
     }
@@ -108,7 +116,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-        if(Input.GetKeyDown(KeyCode.A)) { AddCard(); }
+        if(Input.GetKeyDown(KeyCode.A)) { CardInstance(Deck[0]); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
     }
     void ChangeState()
     {
@@ -134,70 +142,143 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public Card PopCard()
+    //public Card PopCard()
+    //{
+    //    //if (Deck.Count <= 0)
+    //    //{
+    //    //    SetupBuffer();
+    //    //}
+    //    Card card = Deck[0];
+    //    Deck.RemoveAt(0);
+    //    return card;
+    //}
+    void CardInstance(Card card)
     {
-        //if (Deck.Count <= 0)
-        //{
-        //    SetupBuffer();
-        //}
-        Card card = Deck[0];
-        Deck.RemoveAt(0);
-        return card;
-    }
-    void AddCard()
-    {
-        switch (Deck[0].type)
+        switch (card.type)
         {
             case "Attack":
                 {
-                    var cardObject = Instantiate(AttackCardPrefeb, Vector3.zero, Quaternion.identity);
-                    var Attackcard = cardObject.GetComponent<AttackCard>();
-                    Attackcard.setUp(PopCard());
+                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
+                    var Attackcard = CardObject.GetComponent<AttackCard>();
+                    Attackcard.setUp(card);
+                    HandOfCards.Add(CardObject);
                 }
                 break;
-            //case "Skill":
-            //    {
-            //        var potionObject = Instantiate(potionPrefab[1], new Vector3(3, 0, 0), Quaternion.identity);
-            //        var playerTarget = potionObject.GetComponent<PlayerTarget>();
-            //        playerTarget.setUp(PopPotion());
-            //    }
-            //    break;
-            //case "Power":
-            //    {
-            //        var potionObject = Instantiate(potionPrefab[2], new Vector3(-3, 0, 0), Quaternion.identity);
-            //        var enemyTarget = potionObject.GetComponent<EnemyTarget>();
-            //        enemyTarget.setUp(PopPotion());
-            //    }
+            case "Skill":
+                {
+                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
+                    var Skillcard = CardObject.GetComponent<SkillCard>();
+                    //Skillcard.setUp(card);
+                    HandOfCards.Add(CardObject);
+                }
+                break;
+            case "Power":
+                {
+                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
+                    var PowerCard = CardObject.GetComponent<PowerCard>();
+                    //PowerCard.setUp(card);
+                    HandOfCards.Add(CardObject);
+                }
                 break;
         }
+        SetOriginOrder();
+        CardAlignment();
+    }
 
+
+    void SetOriginOrder()
+    {
+        int count = HandOfCards.Count;
+        for(int i=0; i<count; i++) 
+        {
+            HandOfCards[i].GetComponent<Order>().SetOriginOrder(i);
+        }
+    }
+
+
+    void CardAlignment()
+    { 
+        List<PRS> originCardPRSs=new List<PRS>();
+        originCardPRSs = RoundAlignment(CardLeft, CardRight, HandOfCards.Count, 0.5f, Vector3.one * 0.9f);
+        for(int i=0;i<HandOfCards.Count;i++) 
+        {
+            var card = HandOfCards[i].GetComponent<AttackCard>();
+            card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
+            card.MoveTransform(card.originPRS,true,0.7f);
+        }
+    }
+
+    List<PRS> RoundAlignment(Transform left,Transform right,int count,float height, Vector3 scale)
+    {
+        float[]objLerps=new float[count];
+        List<PRS>results=new List<PRS>(count);//케퍼시티
+        switch (count)
+        {
+            case 1: objLerps = new float[] { 0.5f };break;
+            case 2: objLerps = new float[] { 0.27f, 0.73f }; break;
+            case 3: objLerps = new float[] { 0.1f, 0.5f, 0.9f }; break;
+            default:
+                float interval = 1f / (count - 1);
+                for (int i = 0; i < count; i++)
+                    objLerps[i] = interval * i;
+                break;
+        }
+        //원 방정식
+        for(int i = 0; i < count;i++)
+        {
+            var pos = Vector3.Lerp(left.position, right.position, objLerps[i]);
+            var rot = Quaternion.identity;
+            if(count>=3)
+            {
+                float curve = Mathf.Sqrt(Mathf.Pow(height, 2)) - Mathf.Pow(objLerps[i]-0.5f,2);
+                curve=height>=0?curve:-curve;
+                pos.y += curve;
+                rot = Quaternion.Slerp(left.rotation, right.rotation, objLerps[i]);
+            }
+            results.Add(new PRS(pos, rot, scale));
+        }
+        return results;
+    }
+
+    
+    public void LagerCard(AttackCard card)
+    {
+        Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y, -50f);
+        card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 1.3f), false);
+        card.GetComponent<Order>().SetMostFrontOrder(true);
+    }
+    public  void SmallerCard(AttackCard card)
+    {
+        
+        card.MoveTransform(card.originPRS, false);
+        card.GetComponent<Order>().SetMostFrontOrder(false);
     }
     public void drawCard(int drawcount)
     {
-        int i = 0;
-        if (HandleCardCount == 10) return;
-        for (; i < drawcount; i++)
-        {
-            CurrentHandPile[HandleCardCount] = DrawPile[i];
-            if (HandleCardCount > 10)
-                HandleCardCount++;
-        }
-        if (HandleCardCount <= 10)
-        {
-            for (int j = 0; j < drawcount; j++)
-                DrawPile.RemoveAt(j);
-        }
-        else
-        {
-            for (int j = 0; j < drawcount; j++)
-            {
-                if(j>=i)
-                {
-                    DiscardPile.Add(DrawPile[j]);
-                }
-                DrawPile.RemoveAt(j);
-            }
-        }
+        //int i = 0;
+        //if (HandleCardCount == 10) return;
+        //for (; i < drawcount; i++)
+        //{
+        //    CurrentHandPile[HandleCardCount] = DrawPile[i];
+        //    if (HandleCardCount > 10)
+        //        HandleCardCount++;
+        //}
+        //if (HandleCardCount <= 10)
+        //{
+        //    for (int j = 0; j < drawcount; j++)
+        //        DrawPile.RemoveAt(j);
+        //}
+        //else
+        //{
+        //    for (int j = 0; j < drawcount; j++)
+        //    {
+        //        if(j>=i)
+        //        {
+        //            DiscardPile.Add(DrawPile[j]);
+        //        }
+        //        DrawPile.RemoveAt(j);
+        //    }
+        //}
 
     }
 }
