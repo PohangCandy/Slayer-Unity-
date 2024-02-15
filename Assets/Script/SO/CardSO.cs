@@ -10,8 +10,9 @@ public class Card
     public string name;
     public string description;
     public int rarity;
-    public string targetType;
+    public string targetTag;
     public string target;
+    public string type;
     public int turn;
     public string category;
     public int amount;

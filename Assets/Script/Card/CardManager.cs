@@ -108,7 +108,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-        if(Input.GetKeyDown(KeyCode.A)) { Instantiate(AttackCardPrefeb, Vector3.zero, Quaternion.identity); }
+        if(Input.GetKeyDown(KeyCode.A)) { AddCard(); }
     }
     void ChangeState()
     {
@@ -132,6 +132,45 @@ public class CardManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public Card PopCard()
+    {
+        //if (Deck.Count <= 0)
+        //{
+        //    SetupBuffer();
+        //}
+        Card card = Deck[0];
+        Deck.RemoveAt(0);
+        return card;
+    }
+    void AddCard()
+    {
+        switch (Deck[0].type)
+        {
+            case "Attack":
+                {
+                    var cardObject = Instantiate(AttackCardPrefeb, Vector3.zero, Quaternion.identity);
+                    var Attackcard = cardObject.GetComponent<AttackCard>();
+                    Attackcard.setUp(PopCard());
+                }
+                break;
+            //case "Skill":
+            //    {
+            //        var potionObject = Instantiate(potionPrefab[1], new Vector3(3, 0, 0), Quaternion.identity);
+            //        var playerTarget = potionObject.GetComponent<PlayerTarget>();
+            //        playerTarget.setUp(PopPotion());
+            //    }
+            //    break;
+            //case "Power":
+            //    {
+            //        var potionObject = Instantiate(potionPrefab[2], new Vector3(-3, 0, 0), Quaternion.identity);
+            //        var enemyTarget = potionObject.GetComponent<EnemyTarget>();
+            //        enemyTarget.setUp(PopPotion());
+            //    }
+                break;
+        }
+
     }
     public void drawCard(int drawcount)
     {
