@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class AttackCard : MonoBehaviour
 {
-    public TextMeshProUGUI description;
-    public TextMeshProUGUI cardnname;
+    public TextMeshPro description;
+    public TextMeshPro cardnname;
     int rarity;
     public string targetType;
     public int reinforcelevel;
