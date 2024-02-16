@@ -19,6 +19,7 @@ public class Card
     public int reinforcelevel;
     public int cost;
     public bool isdiscarding;
+    public string mode;
 
 }
 [CreateAssetMenu(fileName = "CardSO", menuName = "Scriptable Object/CardSO")]

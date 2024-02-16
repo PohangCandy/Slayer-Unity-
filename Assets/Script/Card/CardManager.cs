@@ -13,9 +13,12 @@ public class CardManager : MonoBehaviour
         Inst = this;
     }
     [SerializeField] CardSO CardSO;
-    [SerializeField] GameObject AttackCardPrefeb;
-    [SerializeField] GameObject SkillCardPrefeb;
-    [SerializeField] GameObject PowerCardPrefeb;
+    //[SerializeField] GameObject AttackCardPrefeb;
+    //[SerializeField] GameObject SkillCardPrefeb;
+    //[SerializeField] GameObject PowerCardPrefeb;
+    [SerializeField] GameObject TargetCardPrefeb;
+    [SerializeField] GameObject NonTargetCardPrefeb;
+
     List<Card> Deck;
     List<Card> BurnPile;//소멸
     List<Card> DiscardPile;//사용한 카드
@@ -25,14 +28,13 @@ public class CardManager : MonoBehaviour
     public Transform CardLeft;
     public Transform CardRight;
 
-    List<GameObject> HandOfCards;
+    List<Object> HandOfCards;
     State CurrentState;
     int MaxHandleCardCount;
     public bool istriggered;
     enum State
     {
-        NonShuffle
-        ,Shuffled
+        Normal
         ,Battle
     }
     private void Start()
@@ -41,7 +43,7 @@ public class CardManager : MonoBehaviour
         MaxHandleCardCount = 10;
         FirstSetup();
         DeckShuffle();
-        CurrentState = State.Shuffled;
+        CurrentState = State.Normal;
     }
     void FirstSetup() 
     {
@@ -50,7 +52,7 @@ public class CardManager : MonoBehaviour
         DrawPile = new List<Card>();
         DiscardPile = new List<Card>();
 
-        HandOfCards = new List<GameObject>(10);
+        HandOfCards = new List<Object>(10);
         for(int i=0;i<4;i++)
         {
             Deck.Add(CardSO.cards[0]);
@@ -95,15 +97,9 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangeState();
         switch (CurrentState)
         {
-            case State.NonShuffle:
-                {
-                    
-                }
-                break;
-            case State.Shuffled:
+            case State.Normal:
                 break;
             case State.Battle:
                 {
@@ -115,31 +111,38 @@ public class CardManager : MonoBehaviour
                 }
                 break;
         }
+        if (Input.GetKeyDown(KeyCode.A)) { if(HandOfCards.Count<10)CardInstance(DrawPile[0]); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
+        if (Input.GetKeyDown(KeyCode.S)) { BattleStart(); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
+        if (Input.GetKeyDown(KeyCode.D)) { PartialShuffle(); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
 
-        if(Input.GetKeyDown(KeyCode.A)) { CardInstance(Deck[0]); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
     }
-    void ChangeState()
+    public void BattleStart()
     {
-        switch (CurrentState) 
+        DeckShuffle();
+        for(int i=0; i < Deck.Count; i++) 
         {
-            case State.NonShuffle:
-                {
-                    DeckShuffle();
-                    CurrentState = State.Shuffled;
-                }
-                break;
-            case State.Shuffled:
-                {
-                    //if() 적 이벤트 발생시에 battle로 전환
-                }
-                break;
-            case State.Battle:
-                {
-                    //전투 끝나면 종료
-                    CurrentState = State.NonShuffle;
-                }
-                break;
+            DrawPile.Add(Deck[i]);
         }
+        CurrentState= State.Battle;
+    }
+
+    public void BattleEnd() 
+    {
+        
+    }
+    public void SwapPop(Object _card)
+    {
+        int index=HandOfCards.FindIndex(card => card == _card);
+        if(index+1==HandOfCards.Count)
+        {
+            HandOfCards.RemoveAt(index);
+        }
+        else
+        {
+            HandOfCards[index] = HandOfCards[HandOfCards.Count-1];
+            HandOfCards.RemoveAt(HandOfCards.Count-1);
+        }
+
     }
 
     //public Card PopCard()
@@ -154,30 +157,22 @@ public class CardManager : MonoBehaviour
     //}
     void CardInstance(Card card)
     {
-        switch (card.type)
+        switch (card.mode)
         {
-            case "Attack":
+            case "Target":
                 {
-                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
-                    var Attackcard = CardObject.GetComponent<TargetCard>();
-                    Attackcard.setUp(card);
-                    HandOfCards.Add(CardObject);
+                    var CardObject = Instantiate(TargetCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
+                    var  TargetCard= CardObject.GetComponent<TargetCard>();
+                    TargetCard.setUp(card);
+                    HandOfCards.Add(TargetCard);
                 }
                 break;
-            case "Skill":
+            case "NonTarget":
                 {
-                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
-                    var Skillcard = CardObject.GetComponent<SkillCard>();
-                    //Skillcard.setUp(card);
-                    HandOfCards.Add(CardObject);
-                }
-                break;
-            case "Power":
-                {
-                    var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
-                    var PowerCard = CardObject.GetComponent<PowerCard>();
-                    //PowerCard.setUp(card);
-                    HandOfCards.Add(CardObject);
+                    var CardObject = Instantiate(NonTargetCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
+                    var nonTargetCard = CardObject.GetComponent<NonTargetCard>();
+                    nonTargetCard.setUp(card);
+                    HandOfCards.Add(nonTargetCard);
                 }
                 break;
         }
@@ -185,26 +180,44 @@ public class CardManager : MonoBehaviour
         CardAlignment();
     }
 
-
+    
     void SetOriginOrder()
     {
         int count = HandOfCards.Count;
         for(int i=0; i<count; i++) 
         {
+            //bool isTargetCard = IsTargetCard(HandOfCards[i]);
+            //if (isTargetCard)
+            //{
+            //    var ma=ga as TargetCard;
+            //    var card = HandOfCards[i] as GameObject;
+            //    card.
+            //}
             HandOfCards[i].GetComponent<Order>().SetOriginOrder(i);
         }
     }
 
 
-    void CardAlignment()
+    public void CardAlignment()
     { 
         List<PRS> originCardPRSs=new List<PRS>();
         originCardPRSs = RoundAlignment(CardLeft, CardRight, HandOfCards.Count, 0.5f, Vector3.one * 0.9f);
         for(int i=0;i<HandOfCards.Count;i++) 
         {
-            var card = HandOfCards[i].GetComponent<TargetCard>();
-            card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
-            card.MoveTransform(card.originPRS,true,0.7f);
+            bool isTargetCard = IsTargetCard(HandOfCards[i] as CardInterface);
+            if (isTargetCard)
+            {
+                var card = HandOfCards[i].GetComponent<TargetCard>();
+                card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
+                card.MoveTransform(card.originPRS, true, 0.7f);
+            }
+            else
+            {
+                var card = HandOfCards[i].GetComponent<NonTargetCard>();
+                card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
+                card.MoveTransform(card.originPRS, true, 0.7f);
+            }
+                
         }
     }
 
@@ -241,16 +254,48 @@ public class CardManager : MonoBehaviour
     }
 
     
-    public void LagerCard(TargetCard card)
+    public void LagerCard(CardInterface cardinstance)
     {
-        Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y, -50f);
-        card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 1.3f), false);
-        card.GetComponent<Order>().SetMostFrontOrder(true);
+        bool isTargetCard = IsTargetCard(cardinstance);
+        //var card = isTargetCard ? cardinstance as TargetCard : cardinstance as NonTargetCard;
+
+        if (isTargetCard) 
+        {
+            var card = cardinstance as TargetCard;        
+            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -50f);
+            card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 2.3f), false);
+            card.GetComponent<Order>().SetMostFrontOrder(true);
+        }
+        else
+        {
+            var card = cardinstance as NonTargetCard;
+            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -50f);
+            card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 2.3f), false);
+            card.GetComponent<Order>().SetMostFrontOrder(true);
+        }
+
     }
-    public  void SmallerCard(TargetCard card)
+    public bool IsTargetCard(CardInterface cardinstance)
+    { return cardinstance is TargetCard; }
+    public  void SmallerCard(CardInterface cardinstance)
     {
-        card.MoveTransform(card.originPRS, false);
-        card.GetComponent<Order>().SetMostFrontOrder(false);
+        bool isTargetCard =IsTargetCard(cardinstance);
+        //var card = isTargetCard ? cardinstance as TargetCard : cardinstance as NonTargetCard;
+
+        if (isTargetCard)
+        {
+            var card = cardinstance as TargetCard;
+            card.MoveTransform(card.originPRS, false);
+            card.GetComponent<Order>().SetMostFrontOrder(false);
+        }
+        else
+        {
+            var card = cardinstance as NonTargetCard;
+            card.MoveTransform(card.originPRS, false);
+            card.GetComponent<Order>().SetMostFrontOrder(false);
+        }
+
+       
     }
     public void drawCard(int drawcount)
     {

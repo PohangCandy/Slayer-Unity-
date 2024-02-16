@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NonTargetCard : MonoBehaviour,CardInstance
+public class NonTargetCard : MonoBehaviour,CardInterface
 {
     public TextMeshPro description;
     public TextMeshPro cardnname;
@@ -92,7 +92,7 @@ public class NonTargetCard : MonoBehaviour,CardInstance
                     if (!isInside(point))
                     {
                         currentState = State.Idle;
-                        //CardManager.Inst.SmallerCard(this);
+                        CardManager.Inst.SmallerCard(this);
                         break;
                     }
                 }
@@ -102,12 +102,12 @@ public class NonTargetCard : MonoBehaviour,CardInstance
                     if (Input.GetMouseButtonUp(0))
                     {
                         currentState = State.Idle;
-                        //CardManager.Inst.SmallerCard(this);
+                        CardManager.Inst.SmallerCard(this);
                     }
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
-                        //CardManager.Inst.SmallerCard(this);
+                        CardManager.Inst.SmallerCard(this);
                         //dotsVisibleSetting(0,numberOfDot, false);
                         break;
                     }
@@ -123,7 +123,7 @@ public class NonTargetCard : MonoBehaviour,CardInstance
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
-                        //CardManager.Inst.SmallerCard(this);
+                        CardManager.Inst.SmallerCard(this);
                         //dotsVisibleSetting(0,numberOfDot, false);
                         break;
                     }
@@ -154,7 +154,7 @@ public class NonTargetCard : MonoBehaviour,CardInstance
         }
         else if (currentState == State.Hover)
         {
-            //CardManager.Inst.LagerCard(this);
+            CardManager.Inst.LagerCard(this);
             Debug.Log("mouse on");
         }
         else if (currentState == State.Select)
@@ -171,6 +171,18 @@ public class NonTargetCard : MonoBehaviour,CardInstance
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(player, saInformation);
+            //CardManager.Inst.CardAlignment();
+            //int index = CardManager.Inst.GetHandOfCard().FindIndex(card => card == this);//람다 방정식
+            //if(index == CardManager.Inst.GetHandOfCard().Count) 
+            //{
+            //    CardManager.Inst.GetHandOfCard().RemoveAt(index);
+            //}
+            //else
+            //{
+            //    CardManager.Inst.GetHandOfCard()[index]=
+            //}
+            CardManager.Inst.SwapPop(this);
+            CardManager.Inst.CardAlignment();
             Destroy(this.gameObject);
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface CardInstance
+public interface CardInterface
 {
     public abstract void handleinput();
 }
