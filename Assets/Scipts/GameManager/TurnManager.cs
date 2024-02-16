@@ -22,7 +22,7 @@ public class TurnManager : MonoBehaviour
     public void PalyerTurnOver()
     {
         Curturn = TurnType.Enemyturn;
-        Enemy.SetCurAction();
+        Enemy.EnemyTurnStart();
     }
     public void EnemyTurnOver()
     {

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using StatusAdjustmentInformationNameSpace;
 using TMPro;
 
 public class EnemyBase : MonoBehaviour
@@ -24,8 +23,9 @@ public class EnemyBase : MonoBehaviour
     public SA_UI EnemySA;
     public TextMeshProUGUI hptxt;
     private Animator EnemyAnim;
+    private float VulnerablePercent_to_float;
     private float VulnerableValue;
-    private float WeakValue;
+    private float WeakPercent_to_float;
     private float DefenseValue;
     private int PowerUpValue;
 
@@ -36,8 +36,8 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
-        VulnerableValue = 1f;
-        WeakValue = 1f;
+        VulnerablePercent_to_float = 1f;
+        WeakPercent_to_float = 1f;
         DefenseValue = 0;
         PowerUpValue = 0;
 
@@ -56,11 +56,11 @@ public class EnemyBase : MonoBehaviour
 
     public void SetVulnerable(int vulnerablepercentage)
     {
-        VulnerableValue = vulnerablepercentage / 100;
+        VulnerablePercent_to_float = vulnerablepercentage / 100;
     }
     public void SetWeak(int WeakPercentage)
     {
-        WeakValue = 1 - (WeakPercentage / 100);
+        WeakPercent_to_float = 1 - (WeakPercentage / 100);
     }
 
     public void SetDefense(int value)
@@ -86,7 +86,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (Curhp > 0)
         {
-            Curhp -= (int)(damage * VulnerableValue);
+            Curhp -= (int)(damage * VulnerablePercent_to_float);
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
@@ -156,8 +156,11 @@ public class EnemyBase : MonoBehaviour
         //몬스터의 다음 행동에 저장되어있는 이미지 가지고오기
         //다음 행동의 패턴 이미지 넣기
     }
-
-    public void SetCurAction()
+    public void EnemyTurnStart()
+    {
+        SetCurAction();
+    }
+    void SetCurAction()
     {
         CurPattern = NextPattern;
         DoCurPattern(CurPattern);
@@ -168,16 +171,16 @@ public class EnemyBase : MonoBehaviour
         //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
         {
             case EnemyPatternType.ChargeDefense:
-                Do_Defense();
+                EnemyAnim.SetTrigger("ChargingDefense");//Do_Defense() is in event at anim
                 break;
             case EnemyPatternType.ReadyAttack:
                 Do_Attack();
                 break;
             case EnemyPatternType.ChargeDeBuff:
-                Do_DeBuff();
+                EnemyAnim.SetTrigger("ChargingDeBuff");
                 break;
             case EnemyPatternType.ChargeBuff:
-                Do_Buff();
+                EnemyAnim.SetTrigger("ChargingBuff");
                 break;
 
             default:
@@ -190,27 +193,30 @@ public class EnemyBase : MonoBehaviour
 
     void Do_Defense()
     {
-        EnemyAnim.SetTrigger("ChargingSkill");
+        //EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetDefense(this, 5);
-        StatusAdjustment.Set_EnemySA_UI_Defense(EnemySA, 5);
+        EnemySA.Set_UI_Defense(5);
+        ResetEnemyBehaviour(); // Set Next Pattern
     }
     void Do_DeBuff()
     {
-        EnemyAnim.SetTrigger("ChargingSkill");
+        //EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
-        StatusAdjustment.Set_EnemySA_UI_Vulnerable(EnemySA, 5);
+        EnemySA.Set_UI_Vulnerable(5);
+        ResetEnemyBehaviour();
     }
     void Do_Buff()
     {
-        EnemyAnim.SetTrigger("ChargingSkill");
+        //EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetpowerUp(this,5,10);
-        StatusAdjustment.Set_EnemySA_UI_powerUp(EnemySA, PowerUpValue);
+        EnemySA.Set_UI_strength(PowerUpValue);
+        ResetEnemyBehaviour();
     }
 
     void Do_Attack()
     {
         EnemyAnim.SetTrigger("StartAttack");
-        target.takeDamage(this.power * WeakValue);
+        target.takeDamage(this.power * WeakPercent_to_float);
     }
 
     public void ResetEnemyBehaviour()

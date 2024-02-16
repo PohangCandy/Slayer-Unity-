@@ -136,7 +136,7 @@ public class CardManager : MonoBehaviour
 
     public void MyTurn()
     {
-        DrawPile
+        //DrawPile
     }
     public void SwapPop(Object _card)
     {
