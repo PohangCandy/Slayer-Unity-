@@ -5,8 +5,8 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField]
-    public enum TurnType { Playerturn, Enemyturn }
-    public TurnType Curturn;
+    enum TurnType { Playerturn, Enemyturn }
+    TurnType Curturn;
     public EnemyBase Enemy;
     void Start()
     {
