@@ -114,7 +114,12 @@ public enum AdjustmentType
 
     public static void EnemyGetpowerUp(EnemyBase enemy,int Maxpower,int Minpower)
     {
-        enemy.SetPowerUP(Random.Range(Minpower, Maxpower));
+        int EnemyPowerUPValue = Random.Range(Minpower, Maxpower);
+        enemy.SetPowerUP(EnemyPowerUPValue);
+    }
+    public static void Set_EnemySA_UI_powerUp(SA_UI enemyIcon, int value)
+    {
+
     }
 
 
