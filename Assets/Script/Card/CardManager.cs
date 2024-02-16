@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public static CardManager Inst { get;private set;}
+    public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,12 +18,12 @@ public class CardManager : MonoBehaviour
     //[SerializeField] GameObject PowerCardPrefeb;
     [SerializeField] GameObject TargetCardPrefeb;
     [SerializeField] GameObject NonTargetCardPrefeb;
-
+    int Enegy;
     List<Card> Deck;
     List<Card> BurnPile;//소멸
     List<Card> DiscardPile;//사용한 카드
     List<Card> DrawPile;
-    
+
     public Transform CardSpawnPoint;
     public Transform CardLeft;
     public Transform CardRight;
@@ -35,17 +35,18 @@ public class CardManager : MonoBehaviour
     enum State
     {
         Normal
-        ,Battle
+        , Battle
     }
     private void Start()
     {
+        Enegy = 3;
         istriggered = false;
         MaxHandleCardCount = 10;
         FirstSetup();
         DeckShuffle();
         CurrentState = State.Normal;
     }
-    void FirstSetup() 
+    void FirstSetup()
     {
         Deck = new List<Card>();
         BurnPile = new List<Card>();
@@ -53,7 +54,7 @@ public class CardManager : MonoBehaviour
         DiscardPile = new List<Card>();
 
         HandOfCards = new List<Object>(10);
-        for(int i=0;i<4;i++)
+        for (int i = 0; i < 4; i++)
         {
             Deck.Add(CardSO.cards[0]);
         }
@@ -64,6 +65,8 @@ public class CardManager : MonoBehaviour
         Deck.Add(CardSO.cards[2]);
 
     }
+    public  int  GetEnegy(){ return Enegy; }
+    public void PlusEnegy(int plus) { Enegy += plus; }
 
     void DeckShuffle()
     {
@@ -129,6 +132,11 @@ public class CardManager : MonoBehaviour
     public void BattleEnd() 
     {
         
+    }
+
+    public void MyTurn()
+    {
+        DrawPile
     }
     public void SwapPop(Object _card)
     {

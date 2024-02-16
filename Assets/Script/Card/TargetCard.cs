@@ -117,15 +117,24 @@ public class TargetCard : MonoBehaviour,CardInterface
                         //dotsVisibleSetting(0,numberOfDot, false);
                         break;
                     }
-                    if(checkCardBoundary())
+                    if(!checkCardBoundary())
                     {
                         currentState = State.Drag;
+                        Vector3 cardlt = CardManager.Inst.CardLeft.position;
+                        Vector3 cardrt = CardManager.Inst.CardRight.position;
+                        MoveTransform(new PRS(new Vector3((cardlt.x + cardrt.x) / 2, 1.5f, -3), Quaternion.identity, Vector3.one * 1.7f), true, 0.5f);
                         break;
                     }
                 }
                 break;
             case State.Drag:
                 {
+                    //if (checkCardBoundary())
+                    //{
+                    //    currentState = State.Select;
+                    //    CardManager.Inst.LagerCard(this);
+                    //    break;
+                    //}
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
@@ -134,11 +143,19 @@ public class TargetCard : MonoBehaviour,CardInterface
                         break;
                     }
 
-                    if(detectEnemy(point))
+                    if(Input.GetMouseButtonUp(0))
                     {
-                        currentState=State.Apply; 
+                        if (detectEnemy(point))
+                        {
+                            currentState = State.Apply;
+                            break;
+                        }
+                        currentState=State.Idle;
+                        CardManager.Inst.SmallerCard(this);
                         break;
                     }
+
+                    
 
                 }
                 break;
@@ -150,6 +167,7 @@ public class TargetCard : MonoBehaviour,CardInterface
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentState);
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
         if (currentState == State.Idle)
@@ -162,15 +180,18 @@ public class TargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Hover)
         {
             CardManager.Inst.LagerCard(this);
-            Debug.Log("mouse on");
+            //Debug.Log("mouse on");
         }
         else if (currentState == State.Select)
         {
+            
             //button.SetActive(true);
             //description.enabled = false;
         }
         else if (currentState == State.Drag)
         {
+            //카드가 중앙으로 이동하도록
+            
             calculate();
            
         }
@@ -187,10 +208,10 @@ public class TargetCard : MonoBehaviour,CardInterface
     bool detectEnemy(Vector2 mousePoint)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePoint);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePoint, transform.forward, 200f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePoint, transform.forward, 400f);
         for(int i=0;i<hits.Length; i++)
         {
-            if (hits[i].collider.gameObject.layer == 6)
+            if (hits[i].collider.gameObject.tag == "Enemy")
             {           
                 enemy = hits[i].collider.gameObject.GetComponent<EnemyBase>();
                 return true;
@@ -229,7 +250,6 @@ public class TargetCard : MonoBehaviour,CardInterface
             return true;
         }
         return false;
-        
     }
 
     public void applyEvent()
