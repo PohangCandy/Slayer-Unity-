@@ -192,11 +192,13 @@ public class EnemyBase : MonoBehaviour
     {
         EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetDefense(this, 5);
+        StatusAdjustment.Set_EnemySA_UI_Defense(EnemySA, 5);
     }
     void Do_DeBuff()
     {
         EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
+        StatusAdjustment.Set_EnemySA_UI_Vulnerable(EnemySA, 5);
     }
     void Do_Buff()
     {

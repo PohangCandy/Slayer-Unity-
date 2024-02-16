@@ -44,18 +44,18 @@ public class SA_UI : MonoBehaviour
     }
     public void Set_UI_Weak(int powervalue)
     {
-        SA_UI_Obj[2].SetActive(true);
-        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+        SA_UI_Obj[5].SetActive(true);
+        SA_UI_Obj[5].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
     }
     public void Set_UI_Vulnerable(int powervalue)
     {
-        SA_UI_Obj[2].SetActive(true);
-        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+        SA_UI_Obj[4].SetActive(true);
+        SA_UI_Obj[4].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
     }
     public void Set_UI_Defense(int powervalue)
     {
-        SA_UI_Obj[2].SetActive(true);
-        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+        SA_UI_Obj[6].SetActive(true);
+        SA_UI_Obj[6].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
     }
 
 }
