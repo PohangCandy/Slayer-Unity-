@@ -26,12 +26,12 @@ public class EnemyBase : MonoBehaviour
     private float VulnerableValue;
     private float WeakValue;
     private float DefenseValue;
-    private float PowerUpValue;
+    private int PowerUpValue;
 
     public enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff};
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
-    enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 20, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
+    enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -44,9 +44,13 @@ public class EnemyBase : MonoBehaviour
         Curhp = Maxhp;
         hptxt.text = Maxhp.ToString();
         power = 10;
+        EnemyActionIcon.GetEnemyPower(power);
         slider.value = Maxhp;
-        RandomNumber = Random.Range(0, 99);
-        SetNextActionWithPercentage(RandomNumber);
+        ResetEnemyBehaviour();
+    }
+    public int GetEnemyPower(int enemypower)
+    {
+        return enemypower;
     }
 
     public void SetVulnerable(int vulnerablepercentage)
@@ -64,7 +68,8 @@ public class EnemyBase : MonoBehaviour
     }
     public void SetPowerUP(int value)
     {
-        PowerUpValue += value;
+        PowerUpValue = value;
+        power += PowerUpValue;
     }
 
     // Update is called once per frame
@@ -86,47 +91,51 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    public void SetNextActionWithPercentage(int randompercentage)
+    public void PickNextActionWithPercentage(int randompercentage)
     {
         
         if (randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent)
         {
+            
             NextPattern = EnemyPatternType.ChargeDefense;
         }
         else if(randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent)
         {
+            
             NextPattern = EnemyPatternType.ReadyAttack;
         }
         else if (randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent + 
             (int)EnemyPatternPercent.ChargeDeBuffPercent)
         {
+            
             NextPattern = EnemyPatternType.ChargeDeBuff;
         }
         else if(randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent + 
             (int)EnemyPatternPercent.ChargeDeBuffPercent + (int)EnemyPatternPercent.ChargeBuffPercent)
         {
+           
             NextPattern = EnemyPatternType.ChargeBuff;
         }
 
-        pattern();
+        SetNextpattern();
     }
 
-    void pattern()
+    void SetNextpattern()
     {
         switch(NextPattern)
         //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
         {
             case EnemyPatternType.ChargeDefense:
-                SetNextAction(EnemyPatternType.ChargeDefense);               
+                SetNextActionUI(EnemyPatternType.ChargeDefense);               
                 break;
             case EnemyPatternType.ReadyAttack:
-                SetNextAction(EnemyPatternType.ReadyAttack);
+                SetNextActionUI(EnemyPatternType.ReadyAttack);
                 break;
             case EnemyPatternType.ChargeDeBuff:
-                SetNextAction(EnemyPatternType.ChargeDeBuff);
+                SetNextActionUI(EnemyPatternType.ChargeDeBuff);
                 break;
             case EnemyPatternType.ChargeBuff:
-                SetNextAction(EnemyPatternType.ChargeBuff);
+                SetNextActionUI(EnemyPatternType.ChargeBuff);
                 break;
             
             default:
@@ -135,7 +144,7 @@ public class EnemyBase : MonoBehaviour
                 break;
             }
     }
-    void SetNextAction(EnemyPatternType nextpattern)
+    void SetNextActionUI(EnemyPatternType nextpattern)
     {
         if(nextpattern == EnemyPatternType.ReadyAttack)
         {
@@ -197,13 +206,13 @@ public class EnemyBase : MonoBehaviour
     void Do_Attack()
     {
         EnemyAnim.SetTrigger("StartAttack");
-        target.takeDamage((this.power + PowerUpValue) * WeakValue);
+        target.takeDamage(this.power * WeakValue);
     }
 
     public void ResetEnemyBehaviour()
     {
         RandomNumber = Random.Range(0, 99);
-        SetNextActionWithPercentage(RandomNumber);
+        PickNextActionWithPercentage(RandomNumber);
         turnManager.EnemyTurnOver();
     }
 }

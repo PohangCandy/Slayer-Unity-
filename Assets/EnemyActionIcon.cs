@@ -18,6 +18,7 @@ public class EnemyActionIcon : MonoBehaviour
     void Start()
     {
         PowertxtObj.SetActive(false);
+        Enemypower = 0;
         powertext = PowertxtObj.GetComponent<TextMeshProUGUI>();
     }
 
@@ -35,7 +36,10 @@ public class EnemyActionIcon : MonoBehaviour
             case EnemyPatternType.ReadyAttack:
                 ChangeImage(NextAction[1]);
                 PowertxtObj.SetActive(true);
-                powertext.text = Enemypower.ToString();
+                Debug.Log("why null");
+                //powertext.text = Enemypower.ToString();
+                SetPowerTxt();
+                Debug.Log("here?");
                 break;
             case EnemyPatternType.ChargeDeBuff:
                 PowertxtObj.SetActive(false);
@@ -57,6 +61,11 @@ public class EnemyActionIcon : MonoBehaviour
         Enemypower = enemypower;
     }
 
+    void SetPowerTxt()
+    {
+        PowertxtObj.SetActive(true);
+        powertext.text = Enemypower.ToString();
+    }
     void ChangeImage(Texture2D NextImage)
     {
         NextActionIcon.GetComponent<RawImage>().texture = NextImage;
