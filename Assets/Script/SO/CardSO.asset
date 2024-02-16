@@ -26,6 +26,7 @@ MonoBehaviour:
     reinforcelevel: 0
     cost: 0
     isdiscarding: 0
+    mode: Target
   - sprite: {fileID: 21300000, guid: a7a729112c7b20641857d3e3f198efb8, type: 3}
     name: "\uC218\uBE44"
     description: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4"
@@ -39,6 +40,7 @@ MonoBehaviour:
     reinforcelevel: 0
     cost: 0
     isdiscarding: 0
+    mode: NonTarget
   - sprite: {fileID: 21300000, guid: 7dcac4921019ec84196fd9932cb119b2, type: 3}
     name: "\uAC15\uD0C0"
     description: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4. \uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4"
@@ -52,3 +54,4 @@ MonoBehaviour:
     reinforcelevel: 0
     cost: 0
     isdiscarding: 0
+    mode: Target

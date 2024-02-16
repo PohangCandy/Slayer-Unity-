@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8253381763834509416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &878383193035578989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8960803484233007981
 Transform:
   m_ObjectHideFlags: 0
@@ -437,12 +437,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2413557040562985624}
   - component: {fileID: 1778305769147898308}
-  - component: {fileID: 7584743806707188554}
+  - component: {fileID: 3740489030205825852}
   - component: {fileID: 1764133902287809364}
   - component: {fileID: 8073191768484596461}
   - component: {fileID: 1153752874583341736}
   m_Layer: 6
-  m_Name: AttackCard
+  m_Name: 'NonTargetCard '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,7 +509,7 @@ SpriteRenderer:
   m_SortingLayerID: -17837769
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d25a1585e2aac95478b0b04423dce3bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87e6e713d748edf43acdfceb26ce6727, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -520,7 +520,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7584743806707188554
+--- !u!114 &3740489030205825852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6457242200426887880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001ea85f03f144d4a8ffdde0772a95ba, type: 3}
+  m_Script: {fileID: 11500000, guid: a40a74fdfb9ff5d4fa18931cf78ba962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   description: {fileID: 753126098905150761}
@@ -544,7 +544,6 @@ MonoBehaviour:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
-  visualizerLine: {fileID: 1153752874583341736}
 --- !u!114 &1764133902287809364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,18 +597,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.057512462, y: 0.0073617697}
+  m_Offset: {x: -0.03850551, y: -0.377658}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.8, y: 3.76}
+    oldSize: {x: 1.68, y: 2.08}
     newSize: {x: 2.8, y: 3.76}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0749925, y: 3.7452762}
+  m_Size: {x: 0.8342377, y: 2.8373187}
   m_EdgeRadius: 0
 --- !u!120 &1153752874583341736
 LineRenderer:
@@ -732,7 +731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1470611537597131953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -903,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1835609847501338513
 RectTransform:
   m_ObjectHideFlags: 0

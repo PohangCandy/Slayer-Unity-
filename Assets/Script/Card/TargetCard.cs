@@ -3,11 +3,12 @@ using StatusAdjustmentInformationNameSpace;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class TargetCard : MonoBehaviour,CardInstance
+public class TargetCard : MonoBehaviour,CardInterface
 {
     
     public TextMeshPro description;
@@ -26,6 +27,7 @@ public class TargetCard : MonoBehaviour,CardInstance
     public Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
 
+    public EnemyBase enemy;
     //public GameObject dot;
     //GameObject []dots;
     //public int numberOfDot;
@@ -132,6 +134,12 @@ public class TargetCard : MonoBehaviour,CardInstance
                         break;
                     }
 
+                    if(detectEnemy(point))
+                    {
+                        currentState=State.Apply; 
+                        break;
+                    }
+
                 }
                 break;
             case State.Apply:
@@ -170,11 +178,28 @@ public class TargetCard : MonoBehaviour,CardInstance
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(player, saInformation);
+            CardManager.Inst.SwapPop(this);
+            CardManager.Inst.CardAlignment();
             Destroy(this.gameObject);
         }
     }
 
+    bool detectEnemy(Vector2 mousePoint)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePoint);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePoint, transform.forward, 200f);
+        for(int i=0;i<hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.layer == 6)
+            {           
+                enemy = hits[i].collider.gameObject.GetComponent<EnemyBase>();
+                return true;
+            }
+            return false;
+        }
 
+        return false;
+    }
     bool isInside(Vector2 mousepoint)
     {
         //Ray ray = Camera.main.ScreenPointToRay(mousepoint);
