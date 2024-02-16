@@ -34,6 +34,7 @@ public class EnemyBase : MonoBehaviour
     enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
     void Start()
     {
+        Debug.Log("Parent's Start Fun");
         EnemyAnim = GetComponent<Animator>();
         VulnerableValue = 1f;
         WeakValue = 1f;
