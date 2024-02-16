@@ -12,6 +12,7 @@ public class PotionManager : MonoBehaviour
     [SerializeField] PotionSO potionSO;
     [SerializeField] List<GameObject> potionPrefab;
 
+
     List<Potion> potionBuffer;
     List<CardTarget> cardPotionbuffer;
     List<PlayerTarget> playerPotionbuffer;

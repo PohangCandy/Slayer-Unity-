@@ -159,7 +159,7 @@ public class CardManager : MonoBehaviour
             case "Attack":
                 {
                     var CardObject = Instantiate(AttackCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
-                    var Attackcard = CardObject.GetComponent<AttackCard>();
+                    var Attackcard = CardObject.GetComponent<TargetCard>();
                     Attackcard.setUp(card);
                     HandOfCards.Add(CardObject);
                 }
@@ -202,7 +202,7 @@ public class CardManager : MonoBehaviour
         originCardPRSs = RoundAlignment(CardLeft, CardRight, HandOfCards.Count, 0.5f, Vector3.one * 0.9f);
         for(int i=0;i<HandOfCards.Count;i++) 
         {
-            var card = HandOfCards[i].GetComponent<AttackCard>();
+            var card = HandOfCards[i].GetComponent<TargetCard>();
             card.originPRS = originCardPRSs[i];//new PRS(Vector3.zero, Quaternion.identity, Vector3.one * 1.9f);
             card.MoveTransform(card.originPRS,true,0.7f);
         }
@@ -241,15 +241,14 @@ public class CardManager : MonoBehaviour
     }
 
     
-    public void LagerCard(AttackCard card)
+    public void LagerCard(TargetCard card)
     {
         Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y, -50f);
         card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 1.3f), false);
         card.GetComponent<Order>().SetMostFrontOrder(true);
     }
-    public  void SmallerCard(AttackCard card)
+    public  void SmallerCard(TargetCard card)
     {
-        
         card.MoveTransform(card.originPRS, false);
         card.GetComponent<Order>().SetMostFrontOrder(false);
     }
