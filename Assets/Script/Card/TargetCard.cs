@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class AttackCard : MonoBehaviour
+public class TargetCard : MonoBehaviour,CardInstance
 {
     
     public TextMeshPro description;
