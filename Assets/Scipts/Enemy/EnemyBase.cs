@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     public Player target;
     public EnemyActionIcon EnemyActionIcon;
+    public SA_UI EnemySA;
     public TextMeshProUGUI hptxt;
     private Animator EnemyAnim;
     private float VulnerableValue;
@@ -34,7 +35,6 @@ public class EnemyBase : MonoBehaviour
     enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
     void Start()
     {
-        Debug.Log("Parent's Start Fun");
         EnemyAnim = GetComponent<Animator>();
         VulnerableValue = 1f;
         WeakValue = 1f;
@@ -202,6 +202,7 @@ public class EnemyBase : MonoBehaviour
     {
         EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetpowerUp(this,5,10);
+        StatusAdjustment.Set_EnemySA_UI_powerUp(EnemySA, PowerUpValue);
     }
 
     void Do_Attack()

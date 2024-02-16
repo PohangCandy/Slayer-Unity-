@@ -119,7 +119,7 @@ public enum AdjustmentType
     }
     public static void Set_EnemySA_UI_powerUp(SA_UI enemyIcon, int value)
     {
-
+        enemyIcon.Set_UI_strength(value);
     }
 
 
@@ -127,15 +127,27 @@ public enum AdjustmentType
     {
         enemy.SetWeak(WeakPercentage);
     }
+    public static void Set_EnemySA_UI_Weak(SA_UI enemyIcon, int value)
+    {
+        enemyIcon.Set_UI_Weak(value);
+    }
 
     public static void EnemyGetVulnerable(EnemyBase enemy, int lastTurn)
     {
         enemy.SetVulnerable(VulnerablePercentage);
     }
+    public static void Set_EnemySA_UI_Vulnerable(SA_UI enemyIcon, int value)
+    {
+        enemyIcon.Set_UI_Vulnerable(value);
+    }
 
     public static void EnemyGetDefense(EnemyBase enemy, int value)
     {
         enemy.SetDefense(value);
+    }
+    public static void Set_EnemySA_UI_Defense(SA_UI enemyIcon, int value)
+    {
+        enemyIcon.Set_UI_Defense(value);
     }
 
 }

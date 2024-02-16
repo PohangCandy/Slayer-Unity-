@@ -17,7 +17,6 @@ public class EnemyActionIcon : MonoBehaviour
     int Enemypower;
     void Start()
     {
-        Debug.Log("Children's Start Fun");
         //start를 통해서 text 내용을 초기화 시켜주려고 했더니 
         //부모 객체의 Start함수가 끝난뒤에 해당 함수가 실행되는 듯 하다.
         //그래서 먼저 초기화를 하는게 아닌 나중에 초기화가 되면서 값이 날아간다. 
@@ -39,7 +38,6 @@ public class EnemyActionIcon : MonoBehaviour
                 PowertxtObj.SetActive(true);
                 //powertext.text = Enemypower.ToString();
                 SetPowerTxt(Enemypower);
-                Debug.Log("Children's method Fun");
                 break;
             case EnemyPatternType.ChargeDeBuff:
                 PowertxtObj.SetActive(false);
@@ -65,10 +63,8 @@ public class EnemyActionIcon : MonoBehaviour
     void SetPowerTxt(int enemypower)
     {
         PowertxtObj.SetActive(true);
-        Debug.Log("Enemypower is" + enemypower);
         powertext = PowertxtObj.GetComponent<TextMeshProUGUI>();
         powertext.text = enemypower.ToString();
-        Debug.Log(powertext.text);
     }
     void ChangeImage(Texture2D NextImage)
     {

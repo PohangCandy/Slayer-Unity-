@@ -9,11 +9,14 @@ using static UnityEditor.Progress;
 [System.Serializable]
 public class SA_UI_Data
 {
-    public String SA_Name;
+
+    public SA_UI_Data(string _SA_Name, string _SA_Value, Texture2D _SAIconImg, bool _isExist)
+    {SA_Name = _SA_Name; SA_Value = _SA_Value; SAIconImg = _SAIconImg; isExist = _isExist; }
+
+    public string SA_Name;
     string SA_Value;
     public Texture2D SAIconImg;
-    bool isExist = false;
-    //public TextMeshProUGUI Txt_SA_UIValue;
+    public bool isExist;
 
 }
 public class SA_UI : MonoBehaviour
@@ -26,13 +29,33 @@ public class SA_UI : MonoBehaviour
     {
         for(int i = 0; i < SA_UI_Obj.Length ;i++)
         {
-
+            SA_UI_Obj[i].SetActive(false);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Set_UI_feail(int feailvalue)
     {
-        
+        SA_UI_Obj[0].SetActive(true);
+        SA_UI_Obj[0].GetComponentInChildren<TextMeshProUGUI>().text = feailvalue.ToString();
     }
+    public void Set_UI_strength(int powervalue)
+    {
+        SA_UI_Obj[2].SetActive(true);
+        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+    }
+    public void Set_UI_Weak(int powervalue)
+    {
+        SA_UI_Obj[2].SetActive(true);
+        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+    }
+    public void Set_UI_Vulnerable(int powervalue)
+    {
+        SA_UI_Obj[2].SetActive(true);
+        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+    }
+    public void Set_UI_Defense(int powervalue)
+    {
+        SA_UI_Obj[2].SetActive(true);
+        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+    }
+
 }
