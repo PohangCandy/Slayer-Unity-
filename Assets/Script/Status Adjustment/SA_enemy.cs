@@ -19,8 +19,9 @@ public static class SA_enemy
     //}
     //때문에 델리게이트를 이용해서 플레이어와 적을 위한 버프 작업 따로 진행
 
-    public static int VulnerablePercentage = 50;
-    public static int WeakPercentage = 25;
+    public static int t_VulnerablePercentage = 50;
+    public static int t_WeakPercentage = 25;
+    public static int t_DefaultDefenseLaseturn = 1;
 
     //public enum AdjustmentType
     //    {
@@ -31,29 +32,29 @@ public static class SA_enemy
 
     //    delegate void EnemyDelegate(EnemyBase a, int min, int max);
 
-    public static void EnemyGetpowerUp(EnemyBase enemy, int Maxpower, int Minpower)
+    public static void t_EnemyGetpowerUp(EnemyBase enemy, int Maxpower, int Minpower)
     {
         int EnemyPowerUPValue = Random.Range(Minpower, Maxpower);
         enemy.SetPowerUP(EnemyPowerUPValue);
     }
 
 
-    public static void EnemyGetWeak(EnemyBase enemy, int lastTurn)
+    public static void t_EnemyGetWeak(EnemyBase enemy, int lastTurn)
     {
-        enemy.SetWeak(WeakPercentage);
+        enemy.SetWeak(t_WeakPercentage);
     }
 
 
-    public static void EnemyGetVulnerable(EnemyBase enemy, int lastturn)
+    public static void t_EnemyGetVulnerable(EnemyBase enemy, int lastturn)
     {
-        float VulnerablePercent_float = (float)(VulnerablePercentage / 100);
+        float VulnerablePercent_float = (float)(t_VulnerablePercentage / 100);
         enemy.ApplyVulnerable(VulnerablePercent_float, lastturn);
     }
 
 
-    public static void EnemyGetDefense(EnemyBase enemy, int value)
+    public static void t_EnemyGetDefense(EnemyBase enemy, int value, int lastturn)
     {
-        enemy.SetDefense(value);
+        enemy.SetDefense(value, lastturn);
     }
 
 

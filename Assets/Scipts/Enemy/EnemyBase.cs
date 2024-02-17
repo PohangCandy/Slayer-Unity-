@@ -65,14 +65,22 @@ public class EnemyBase : MonoBehaviour
         WeakPercent_to_float = 1 - (WeakPercentage / 100);
     }
 
-    public void SetDefense(int value)
+    public void SetDefense(int value) //for SA
     {
-        DefenseValue += value;
+        DefenseValue = 0;
+    }
+    public void SetDefense(int value, int lastturn) // for SA test
+    {
+        if(lastturn > 0)
+        {
+            DefenseValue += value;
+        }
+        DefenseValue = 0;
     }
     public void SetPowerUP(int value)
     {
-        PowerUpValue = value;
-        power += PowerUpValue;
+        PowerUpValue += value;
+        power += value;
     }
 
     // Update is called once per frame
@@ -160,8 +168,17 @@ public class EnemyBase : MonoBehaviour
     }
     public void EnemyTurnStart()
     {
+        int Updateturn = turnManager.GetEnemyTurnCount();
+        turnManager.StartCountEnemyTurn();
+        UpdateEnemySA_turnvalue(Updateturn);
         SetCurAction();
     }
+
+    void UpdateEnemySA_turnvalue(int updateturn)
+    {
+        Remove_Defense(-updateturn);
+    }
+
     void SetCurAction()
     {
         CurPattern = NextPattern;
@@ -195,23 +212,29 @@ public class EnemyBase : MonoBehaviour
 
     void Do_Defense()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
-        StatusAdjustment.EnemyGetDefense(this, 5);
-        EnemySA.Set_UI_Defense(5);
+        //StatusAdjustment.EnemyGetDefense(this, 5);
+        SA_enemy.t_EnemyGetDefense(this, 5 , 1); //(target, value, lastturn)
+        EnemySA.Set_UI_Defense(5,1);//(value,lastturn)
         ResetEnemyBehaviour(); // Set Next Pattern
+    }
+
+    void Remove_Defense(int updateturn)
+    {
+        SA_enemy.t_EnemyGetDefense(this, 5, updateturn); //(target, value, lastturn)
+        EnemySA.Set_UI_Defense(5, updateturn);//(value,lastturn)
     }
     void Do_DeBuff()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
-        StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
-        
+        //StatusAdjustment.PlayerGetVulnerable(this, 5);
+        //StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
+        SA_enemy.t_EnemyGetVulnerable(this, 5);
         EnemySA.Set_UI_Vulnerable(5);
         ResetEnemyBehaviour();
     }
     void Do_Buff()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
-        StatusAdjustment.EnemyGetpowerUp(this,5,10);
+        //StatusAdjustment.EnemyGetpowerUp(this,5,10);
+        SA_enemy.t_EnemyGetpowerUp(this, 5, 10);
         EnemySA.Set_UI_strength(PowerUpValue);
         ResetEnemyBehaviour();
     }
