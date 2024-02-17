@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using StatusAdjustmentInformationNameSpace;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public static class StatusAdjustment
 {
@@ -29,47 +30,125 @@ public static class StatusAdjustment
     //    Obj = obj;
     //    sai = _sai;
     //}
-    static void reverse()
-    {
-        
-    }
-
-    static void Weaknesee()
-    {
-
-    }
-
     
-    static void defense(Player game,SAInformation sAInformation)
-    {
-        game.setDefense(sAInformation.amount);
-    }
 
-    public static void SetFunction(Object gameObject,SAInformation sAInformation)
+    static bool IsPlayer(Object targetObject) { return targetObject is Player; }
+    static bool IsEnemy(Object targetObject) { return targetObject is EnemyBase; }
+
+    public static void SetFunction(Object targetObject,SAInformation sAInformation)
     {
-        Player a = (Player)gameObject; //왜 안넘어가지?
-        
-        switch (sAInformation.category)
+        string[] effects = sAInformation.category.Split(' ');
+        foreach (string word in effects)
         {
-            case "attack":
-                {
-                    Debug.Log("공격");
-                }
-                break;
-            case "DefenseValue":
-                {
-                    Debug.Log("방어력 상승");
-                    defense(a, sAInformation);
-                }
-                break;
-            case "WEAKNESS":
-                {
-                    //Weaknesee(d, sAInformation);
-                    
-                }
-                break;
+            switch (word)
+            {
+                case "attack":
+                    {
+                        Attack(targetObject, sAInformation);
+                    }
+                    break;
+                case "defensestatup":
+                    {
+                        Debug.Log("방어력 상승");
+                        DefenseUP(targetObject, sAInformation);
+                    }
+                    break;
+                case "weakness":
+                    {
+                        Weakness(targetObject, sAInformation);
+
+                    }
+                    break;
+                case "defense":
+                    {
+                        Defense(targetObject, sAInformation);
+
+                    }
+                    break;
+                case "drawonce":
+                    {
+                        CardManager.Inst.DrawCard(1);
+                    }
+                    break;
+                case "tempattackstatplus":
+                    {
+                        TempAttackStatPlus(targetObject, sAInformation);
+
+                    }
+                    break;
+                case "discardonce":
+                    {
+
+                        CardManager.Inst.RandomDiscard();
+
+                    }
+                    break;
+                case "playerhpminusone":
+                    {
+                        //Weaknesee(d, sAInformation);
+
+                    }
+                    break;
+                case "allenemydamage":
+                    {
+                        //Weaknesee(d, sAInformation);
+
+                    }
+                    break;
+                case "drawcardcount":
+                    {
+                        //Weaknesee(d, sAInformation);
+
+                    }
+                    break;
+                case "putbackone":
+                    {
+                        //Weaknesee(d, sAInformation);
+
+                    }
+                    break;
+            }
         }
     }
+
+    private static void TempAttackStatPlus(Object targetObject, SAInformation sAInformation)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private static void DefenseUP(Object targetObject, SAInformation sAInformation)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private static void Weakness(Object targetObject, SAInformation sAInformation)
+    {
+        if (IsEnemy(targetObject))
+        {
+            EnemyBase enemy = targetObject as EnemyBase;
+            enemy.SetWeak(50);
+        }
+    }
+
+    static void Defense(Object targetObject, SAInformation sAInformation)
+    {
+         
+        if (IsPlayer(targetObject))
+        {
+            Player player = targetObject as Player;
+            player.setDefense(sAInformation.amount);
+        }
+    }
+
+    private static void Attack(Object targetObject, SAInformation sAInformation)
+    {
+        if(IsEnemy(targetObject))
+        {
+            EnemyBase enemy=targetObject as EnemyBase;
+            enemy.GetAttack(sAInformation.amount);
+        }
+    }
+
     //void sdf()
     //{
     //    switch(sai.category)

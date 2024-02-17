@@ -349,5 +349,9 @@ public class CardManager : MonoBehaviour
 
        
     }
-   
+
+    public void RandomDiscard()
+    {
+        
+    }
 }
