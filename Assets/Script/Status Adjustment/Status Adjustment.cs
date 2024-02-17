@@ -125,9 +125,10 @@ public static class StatusAdjustment
     }
 
 
-    public static void EnemyGetVulnerable(EnemyBase enemy, int lastTurn)
+    public static void EnemyGetVulnerable(EnemyBase enemy, int lastturn)
     {
-        enemy.SetVulnerable(VulnerablePercentage);
+        float VulnerablePercent_float = (float)(VulnerablePercentage / 100);
+        enemy.ApplyVulnerable(VulnerablePercent_float,lastturn);
     }
 
 
