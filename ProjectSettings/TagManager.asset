@@ -45,3 +45,6 @@ TagManager:
   - name: Card
     uniqueID: 4277129527
     locked: 0
+  - name: Map
+    uniqueID: 1255873269
+    locked: 0
