@@ -9,12 +9,13 @@ public class TurnManager : MonoBehaviour
     TurnType Curturn;
     public EnemyBase Enemy;
     int turnCount;
-    int t_turnCount;
+    int t_curCount;
     int t_AllturnCount;
     void Start()
     {
         turnCount = 0;
         t_AllturnCount = 0;
+        t_curCount = 0;
         Curturn = TurnType.Playerturn;
     }
     public int GetTurnCount()
@@ -30,36 +31,32 @@ public class TurnManager : MonoBehaviour
     {
         return t_AllturnCount;
     }
-    public void t_GetTurnCount(TurnType curturn)
-    {
-        curturn = Curturn;
-        if(curturn == TurnType.Playerturn)
-        {
-            int allturncount = t_GetAllTurnCount();
-            if(allturncount % 2 == 0 && turnCount != 0)
-            {
-                turnCount++;
-            }
-        }
-        else if(curturn == TurnType.Enemyturn)
-        {
-            int allturncount = t_GetAllTurnCount();
-            if (allturncount % 2 == 1 && turnCount != 0)
-            {
-                turnCount++;
-            }
-        }
 
-    }
+
     void t_AddTurnCount()
     {
         t_AllturnCount++;
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartCountTurn()
     {
-        
+        t_curCount = t_AllturnCount;
+    }
+
+
+
+    int GetCurcount()
+    {
+        int countturn = 0;
+        if (t_curCount % 2 == t_AllturnCount % 2)
+        {
+            countturn = (t_AllturnCount - t_curCount) / 2;
+        }
+        else
+        {
+            Debug.Log("Enemyturn or Playerturn is Left");
+        }
+        return countturn;
     }
 
     public void PalyerTurnOver()
@@ -68,10 +65,24 @@ public class TurnManager : MonoBehaviour
         Enemy.EnemyTurnStart();
         t_AddTurnCount();
     }
+
+
     public void EnemyTurnOver()
     {
         Curturn = TurnType.Playerturn;
         turnCount++;
         t_AddTurnCount();
+    }
+
+    public void StartCountEnemyTurn()
+    {
+        StartCountTurn();
+    }
+
+    public int GetEnemyTurnCount()
+    {
+        int UpdateEnemyturnCount = 0;
+        UpdateEnemyturnCount = GetCurcount();
+        return UpdateEnemyturnCount;
     }
 }
