@@ -22,8 +22,8 @@ public class CardManager : MonoBehaviour
     int MaxEnergy;
     int Energy;
     List<Card> Deck;
-    List<Card> BurnPile;//¼Ò¸ê
-    List<Card> DiscardPile;//»ç¿ëÇÑ Ä«µå
+    List<Card> BurnPile;//ï¿½Ò¸ï¿½
+    List<Card> DiscardPile;//ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½
     List<Card> DrawPile;
 
     public Transform CardSpawnPoint;
@@ -118,12 +118,12 @@ public class CardManager : MonoBehaviour
                 break;
         }
         if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
-        if (Input.GetKeyDown(KeyCode.S)) { BattleStart(); }//ÀÌ°Ô µ¦¿¡¼­ ³ª¿À´Â°Ô ¾Æ´Ï¶ó »ÌÈú Ä«µå¿¡¼­ ³ª¿À°Ô ÇØ¾ßÇÔ.
+        if (Input.GetKeyDown(KeyCode.S)) { BattleStart(); }//ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½.
         if (Input.GetKeyDown(KeyCode.D)) 
         {
             DrawPileRestart();
             PartialShuffle();
-        }//ÀÌ°Ô µ¦¿¡¼­ ³ª¿À´Â°Ô ¾Æ´Ï¶ó »ÌÈú Ä«µå¿¡¼­ ³ª¿À°Ô ÇØ¾ßÇÔ.
+        }//ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½.
 
     }
     public void BattleStart()
@@ -165,12 +165,8 @@ public class CardManager : MonoBehaviour
     }
     public void MyTurn()
     {
-<<<<<<< HEAD
-        //DrawPile
-=======
         DrawCard(5);
         Energy = MaxEnergy;
->>>>>>> b6a5c35b467294dc7779f1d27aea1cfff6101705
     }
     public void SwapPop(Object _card)
     {
@@ -266,7 +262,7 @@ public class CardManager : MonoBehaviour
     List<PRS> RoundAlignment(Transform left,Transform right,int count,float height, Vector3 scale)
     {
         float[]objLerps=new float[count];
-        List<PRS>results=new List<PRS>(count);//ÄÉÆÛ½ÃÆ¼
+        List<PRS>results=new List<PRS>(count);//ï¿½ï¿½ï¿½Û½ï¿½Æ¼
         switch (count)
         {
             case 1: objLerps = new float[] { 0.5f };break;
@@ -278,7 +274,7 @@ public class CardManager : MonoBehaviour
                     objLerps[i] = interval * i;
                 break;
         }
-        //¿ø ¹æÁ¤½Ä
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         for(int i = 0; i < count;i++)
         {
             var pos = Vector3.Lerp(left.position, right.position, objLerps[i]);
