@@ -65,10 +65,17 @@ public class EnemyBase : MonoBehaviour
         WeakPercent_to_float = 1 - (WeakPercentage / 100);
     }
 
-    public void SetDefense(int value)
+    public void SetDefense(int value) //for SA
     {
-        int Lastturn = 1;
-        DefenseValue += value;
+        DefenseValue = 0;
+    }
+    public void SetDefense(int value, int lastturn) // for SA test
+    {
+        if(lastturn > 0)
+        {
+            DefenseValue += value;
+        }
+        DefenseValue = 0;
     }
     public void SetPowerUP(int value)
     {
@@ -197,8 +204,8 @@ public class EnemyBase : MonoBehaviour
     void Do_Defense()
     {
         StatusAdjustment.EnemyGetDefense(this, 5);
-        //SA_enemy.t_EnemyGetDefense(this, 5);
-        EnemySA.Set_UI_Defense(5,1);
+        //SA_enemy.t_EnemyGetDefense(this, 5 , 1); //(target, value, lastturn)
+        EnemySA.Set_UI_Defense(5,1);//(value,lastturn)
         ResetEnemyBehaviour(); // Set Next Pattern
     }
     void Do_DeBuff()

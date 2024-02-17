@@ -52,9 +52,9 @@ public static class SA_enemy
     }
 
 
-    public static void t_EnemyGetDefense(EnemyBase enemy, int value)
+    public static void t_EnemyGetDefense(EnemyBase enemy, int value, int lastturn)
     {
-        enemy.SetDefense(value);
+        enemy.SetDefense(value, lastturn);
     }
 
 
