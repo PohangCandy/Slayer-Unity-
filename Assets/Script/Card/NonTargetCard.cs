@@ -10,15 +10,17 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     public TextMeshPro description;
     public TextMeshPro cardnname;
     int rarity;
-    public string targetTag;
-    public int reinforcelevel;
-    public int cost;
-    public bool isdiscarding;
+    string targetTag;
+    int reinforcelevel;
+    int cost;
+    bool isdiscarding;
+    string type;
+    string mode;
     State currentState;
     Collider2D collider;
     Vector3 point;
     [SerializeField]
-    SpriteRenderer attackcardsprite;
+    SpriteRenderer  cardsprite;
     public SAInformation saInformation;
     public Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
@@ -48,14 +50,20 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         cardnname.text = card.name.ToString();
         rarity = card.rarity;
         targetTag = card.targetTag;
+        type = card.type;
+        mode = card.mode;
         reinforcelevel = card.reinforcelevel;
         cost = card.cost;
         isdiscarding = card.isdiscarding;
-        attackcardsprite.sprite = card.sprite;
+        cardsprite.sprite = card.sprite;
         saInformation = new SAInformation(card.target, card.turn, card.category, card.amount);
     }
+    public Card getCard()
+    {
+        Card card = new Card(cardsprite.sprite, cardnname.text, description.text, rarity, targetTag, saInformation.target, type, saInformation.turn, saInformation.category, saInformation.amount, reinforcelevel, cost, isdiscarding, mode);
+        return card;
+    }
 
-  
 
     enum State
     {
@@ -120,6 +128,12 @@ public class NonTargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Drag:
                 {
+                    if (CardManager.Inst.GetEnegy() < cost)
+                    {
+                        Debug.Log("에너지가 부족합니다");
+                        currentState = State.Idle;
+                        break;
+                    }
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
@@ -181,8 +195,14 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             //{
             //    CardManager.Inst.GetHandOfCard()[index]=
             //}
+            CardManager.Inst.PlusEnergy(-cost);
             CardManager.Inst.SwapPop(this);
             CardManager.Inst.CardAlignment();
+            if (isdiscarding)
+                CardManager.Inst.GotoBurnPile(this);
+            else
+                CardManager.Inst.GotoDiscardPile(this);
+
             Destroy(this.gameObject);
         }
     }

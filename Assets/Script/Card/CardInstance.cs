@@ -5,4 +5,5 @@ using UnityEngine;
 public interface CardInterface
 {
     public abstract void handleinput();
+    public abstract Card getCard();
 }
