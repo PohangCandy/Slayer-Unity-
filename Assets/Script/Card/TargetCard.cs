@@ -114,7 +114,13 @@ public class TargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Select:
                 {
-                    if(Input.GetMouseButtonUp(0))
+                    if (CardManager.Inst.GetEnegy() < cost)
+                    {
+                        Debug.Log("에너지가 부족합니다");
+                        currentState = State.Idle;
+                        break;
+                    }
+                    if (Input.GetMouseButtonUp(0))
                     {
                         currentState = State.Idle;
                         CardManager.Inst.SmallerCard(this);
@@ -138,12 +144,7 @@ public class TargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Drag:
                 {
-                    if(CardManager.Inst.GetEnegy()<cost)
-                    {
-                        Debug.Log("에너지가 부족합니다");
-                        currentState = State.Idle;
-                        break;
-                    }
+                    
                     if (Input.GetMouseButtonDown(1))
                     {
                         currentState = State.Idle;
@@ -207,7 +208,7 @@ public class TargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(player, saInformation);
+            StatusAdjustment.SetFunction(enemy, saInformation);
             CardManager.Inst.PlusEnergy(-cost);
             CardManager.Inst.SwapPop(this);
             CardManager.Inst.CardAlignment();
@@ -215,7 +216,9 @@ public class TargetCard : MonoBehaviour,CardInterface
                 CardManager.Inst.GotoBurnPile(this); 
             else
                 CardManager.Inst.GotoDiscardPile(this);
+            //시작 턴과 현재 턴의 차이가 amount일때 효과가 취소되도록 설정.
             Destroy(this.gameObject);
+            //턴 차이가 -1이라면 visible 처리만 안보이게
         }
     }
 

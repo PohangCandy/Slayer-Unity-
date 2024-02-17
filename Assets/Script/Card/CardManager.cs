@@ -165,12 +165,9 @@ public class CardManager : MonoBehaviour
     }
     public void MyTurn()
     {
-<<<<<<< HEAD
-        //DrawPile
-=======
         DrawCard(5);
         Energy = MaxEnergy;
->>>>>>> b6a5c35b467294dc7779f1d27aea1cfff6101705
+
     }
     public void SwapPop(Object _card)
     {
@@ -353,5 +350,9 @@ public class CardManager : MonoBehaviour
 
        
     }
-   
+
+    public void RandomDiscard()
+    {
+        
+    }
 }
