@@ -45,9 +45,15 @@ public class CardManager : MonoBehaviour
         Energy = MaxEnergy;
         istriggered = false;
         MaxHandleCardCount = 10;
-        FirstSetup();
-        DeckShuffle();
-        CurrentState = State.Normal;
+        //FirstSetup();
+        //DeckShuffle();
+        //CurrentState = State.Normal;
+        Deck = new List<Card>();
+        BurnPile = new List<Card>();
+        DrawPile = new List<Card>();
+        DiscardPile = new List<Card>();
+
+        HandOfCards = new List<Object>(10);
     }
     void FirstSetup()
     {
@@ -124,6 +130,46 @@ public class CardManager : MonoBehaviour
             DrawPileRestart();
             PartialShuffle();
         }//�̰� ������ �����°� �ƴ϶� ���� ī�忡�� ������ �ؾ���.
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Deck.Add(CardSO.cards[0]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Deck.Add(CardSO.cards[1]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Deck.Add(CardSO.cards[2]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Deck.Add(CardSO.cards[3]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Deck.Add(CardSO.cards[4]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Deck.Add(CardSO.cards[5]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            Deck.Add(CardSO.cards[6]);
+            CardInstance(Deck[0]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            Deck.Add(CardSO.cards[7]);
+            CardInstance(Deck[0]);
+        }
 
     }
     public void BattleStart()
@@ -314,14 +360,14 @@ public class CardManager : MonoBehaviour
         if (isTargetCard) 
         {
             var card = cardinstance as TargetCard;        
-            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -50f);
+            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -5f);
             card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 2.3f), false);
             card.GetComponent<Order>().SetMostFrontOrder(true);
         }
         else
         {
             var card = cardinstance as NonTargetCard;
-            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -50f);
+            Vector3 large = new Vector3(card.originPRS.pos.x, card.originPRS.pos.y + 2f, -5f);
             card.MoveTransform(new PRS(large, Quaternion.identity, Vector3.one * 2.3f), false);
             card.GetComponent<Order>().SetMostFrontOrder(true);
         }
@@ -350,8 +396,12 @@ public class CardManager : MonoBehaviour
        
     }
 
-    public void RandomDiscard()
+    public void RandomDiscard() 
     {
-        
+        int value=Random.RandomRange(0, HandOfCards.Count);//하나 만큼 빼고해야함
+        Object temp = HandOfCards[value];
+        HandOfCards[value] = HandOfCards[HandOfCards.Count - 1];
+        DiscardPile.Add(temp.GetComponent<CardInterface>().getCard());
+        HandOfCards.RemoveAt(HandOfCards.Count - 1);
     }
 }

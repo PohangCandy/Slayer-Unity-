@@ -9,11 +9,11 @@ public class Player : MonoBehaviour
     int additionalDefense;
     float maxHp;
     float currenthp;
+
     int drawPerTurn;
     //추가 공격력
     int extraAttackStatus;
     
-    float givedamagepercent;
     float takedamagepercent;
 
 
@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
         additionalDefense = 0;
         defense = 0;
         extraAttackStatus = 0;
-        givedamagepercent = 1.0f;
         takedamagepercent = 1.0f;
         playerColor = gameObject.GetComponent<Renderer>();
     }
@@ -47,15 +46,28 @@ public class Player : MonoBehaviour
     }
     public void takeDamage(float damage)
     {
+        int temp = defense - (int)(damage * takedamagepercent);
+        if(temp > 0) 
+        {
+            defense -= (int)(damage * takedamagepercent);
+            return;
+        }
+        defense = 0;
+        currenthp += temp;
+    }
+
+    public void pureHptakeDamage(float damage)
+    {
         currenthp -= (int)(damage * takedamagepercent);
     }
 
-    public void attack()
+    public void setAddtionalDefense(int amount)
     {
-        //takeDamage()
+        additionalDefense+= amount;
     }
 
     public float getMaxHp() { return maxHp; }
     public float getCurrentHp() { return currenthp; }
     public int getDefense() { return defense; }
+    public int getDrawPerturn() { return drawPerTurn; }
 }

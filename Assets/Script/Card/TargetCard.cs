@@ -26,7 +26,7 @@ public class TargetCard : MonoBehaviour,CardInterface
     [SerializeField]
     SpriteRenderer cardsprite;
     public SAInformation saInformation;
-    public Player player;
+    Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
 
     public EnemyBase enemy;
@@ -83,6 +83,7 @@ public class TargetCard : MonoBehaviour,CardInterface
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         description.enabled = true;
         collider = GetComponent<Collider2D>();
         currentState = State.Idle;
@@ -137,7 +138,7 @@ public class TargetCard : MonoBehaviour,CardInterface
                         currentState = State.Drag;
                         Vector3 cardlt = CardManager.Inst.CardLeft.position;
                         Vector3 cardrt = CardManager.Inst.CardRight.position;
-                        MoveTransform(new PRS(new Vector3((cardlt.x + cardrt.x) / 2, 1.5f, -3), Quaternion.identity, Vector3.one * 1.7f), true, 0.5f);
+                        MoveTransform(new PRS(new Vector3((cardlt.x + cardrt.x) / 2, 1.5f, -2), Quaternion.identity, Vector3.one * 1.7f), true, 0.5f);
                         break;
                     }
                 }

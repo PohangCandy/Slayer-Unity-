@@ -22,7 +22,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     [SerializeField]
     SpriteRenderer  cardsprite;
     public SAInformation saInformation;
-    public Player player;
+    Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
 
     //public GameObject dot;
@@ -76,6 +76,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     // Start is called before the first frame update
     void Start()
     {
+        player=GameObject.FindWithTag("Player").GetComponent<Player>();
         description.enabled = true;
         collider = GetComponent<Collider2D>();
         currentState = State.Idle;
