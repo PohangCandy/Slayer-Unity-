@@ -167,10 +167,6 @@ public class CardManager : MonoBehaviour
     {
         DrawCard(5);
         Energy = MaxEnergy;
-<<<<<<< HEAD
-
-=======
->>>>>>> 599f72bc6fffab08db140ebed61dd276f231cfcd
     }
     public void SwapPop(Object _card)
     {
