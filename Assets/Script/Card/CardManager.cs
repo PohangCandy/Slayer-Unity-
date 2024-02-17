@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class CardManager : MonoBehaviour
 {
     public static CardManager Inst { get; private set; }
@@ -18,7 +19,8 @@ public class CardManager : MonoBehaviour
     //[SerializeField] GameObject PowerCardPrefeb;
     [SerializeField] GameObject TargetCardPrefeb;
     [SerializeField] GameObject NonTargetCardPrefeb;
-    int Enegy;
+    int MaxEnergy;
+    int Energy;
     List<Card> Deck;
     List<Card> BurnPile;//소멸
     List<Card> DiscardPile;//사용한 카드
@@ -39,7 +41,8 @@ public class CardManager : MonoBehaviour
     }
     private void Start()
     {
-        Enegy = 3;
+        MaxEnergy = 3;
+        Energy = MaxEnergy;
         istriggered = false;
         MaxHandleCardCount = 10;
         FirstSetup();
@@ -65,8 +68,8 @@ public class CardManager : MonoBehaviour
         Deck.Add(CardSO.cards[2]);
 
     }
-    public  int  GetEnegy(){ return Enegy; }
-    public void PlusEnegy(int plus) { Enegy += plus; }
+    public  int  GetEnegy(){ return Energy; }
+    public void PlusEnergy(int plus) { Energy += plus; }
 
     void DeckShuffle()
     {
@@ -106,17 +109,21 @@ public class CardManager : MonoBehaviour
                 break;
             case State.Battle:
                 {
-                    if (DrawPile.Count == 0)
-                    {
-                        DrawPileRestart();
-                        PartialShuffle();
-                    }
+                    //if (DrawPile.Count == 0)
+                    //{
+                    //    DrawPileRestart();
+                    //    PartialShuffle();
+                    //}
                 }
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.A)) { if(HandOfCards.Count<10)CardInstance(DrawPile[0]); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
+        if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
         if (Input.GetKeyDown(KeyCode.S)) { BattleStart(); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
-        if (Input.GetKeyDown(KeyCode.D)) { PartialShuffle(); }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
+        if (Input.GetKeyDown(KeyCode.D)) 
+        {
+            DrawPileRestart();
+            PartialShuffle();
+        }//이게 덱에서 나오는게 아니라 뽑힐 카드에서 나오게 해야함.
 
     }
     public void BattleStart()
@@ -131,12 +138,35 @@ public class CardManager : MonoBehaviour
 
     public void BattleEnd() 
     {
-        
+        DrawPile.Clear();
+        BurnPile.Clear();
+        DiscardPile.Clear();
+        HandOfCards.Clear();
     }
 
+    public void DrawCard(int count)
+    {
+        if (DrawPile.Count == 0)
+        {
+            DrawPileRestart();
+            PartialShuffle();
+        }
+        for ( int i=0;i<count;i++)
+        {
+            if (HandOfCards.Count >= 10)
+            {
+                DrawPileGotoDiscardPile(DrawPile[DrawPile.Count - 1]);
+                DrawPile.RemoveAt(DrawPile.Count - 1);
+                continue; 
+            }
+            CardInstance(DrawPile[DrawPile.Count-1]);
+            DrawPile.RemoveAt(DrawPile.Count-1);
+        }
+    }
     public void MyTurn()
     {
-        DrawPile
+        DrawCard(5);
+        Energy = MaxEnergy;
     }
     public void SwapPop(Object _card)
     {
@@ -261,7 +291,21 @@ public class CardManager : MonoBehaviour
         return results;
     }
 
-    
+    void DrawPileGotoDiscardPile(Card card)
+    {
+        DiscardPile.Add(card);
+        DrawPile.RemoveAt(0);
+    }
+    public void GotoDiscardPile(CardInterface card)
+    {
+        Card temp=card.getCard();
+        DiscardPile.Add(temp);
+    }
+    public void GotoBurnPile(CardInterface card)
+    {
+        Card temp = card.getCard();
+        BurnPile.Add(temp);
+    }
     public void LagerCard(CardInterface cardinstance)
     {
         bool isTargetCard = IsTargetCard(cardinstance);
@@ -305,32 +349,5 @@ public class CardManager : MonoBehaviour
 
        
     }
-    public void drawCard(int drawcount)
-    {
-        //int i = 0;
-        //if (HandleCardCount == 10) return;
-        //for (; i < drawcount; i++)
-        //{
-        //    CurrentHandPile[HandleCardCount] = DrawPile[i];
-        //    if (HandleCardCount > 10)
-        //        HandleCardCount++;
-        //}
-        //if (HandleCardCount <= 10)
-        //{
-        //    for (int j = 0; j < drawcount; j++)
-        //        DrawPile.RemoveAt(j);
-        //}
-        //else
-        //{
-        //    for (int j = 0; j < drawcount; j++)
-        //    {
-        //        if(j>=i)
-        //        {
-        //            DiscardPile.Add(DrawPile[j]);
-        //        }
-        //        DrawPile.RemoveAt(j);
-        //    }
-        //}
-
-    }
+   
 }

@@ -534,11 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: {fileID: 753126098905150761}
   cardnname: {fileID: 2660911827814927150}
-  targetTag: 
-  reinforcelevel: 0
-  cost: 0
-  isdiscarding: 0
-  attackcardsprite: {fileID: 1037212541141346834}
+  cardsprite: {fileID: 1037212541141346834}
   player: {fileID: 0}
   originPRS:
     pos: {x: 0, y: 0, z: 0}
