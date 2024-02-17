@@ -8,9 +8,19 @@ public class TurnManager : MonoBehaviour
     enum TurnType { Playerturn, Enemyturn }
     TurnType Curturn;
     public EnemyBase Enemy;
+    int turnCount;
     void Start()
     {
+        turnCount = 0;
         Curturn = TurnType.Playerturn;
+    }
+    public int GetTurnCount()
+    {
+        return turnCount;
+    }
+    public void SetTurnCount(int newturnCount)
+    {
+        turnCount = newturnCount;
     }
 
     // Update is called once per frame
@@ -27,5 +37,6 @@ public class TurnManager : MonoBehaviour
     public void EnemyTurnOver()
     {
         Curturn = TurnType.Playerturn;
+        turnCount++;
     }
 }
