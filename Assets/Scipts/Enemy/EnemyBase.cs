@@ -67,12 +67,13 @@ public class EnemyBase : MonoBehaviour
 
     public void SetDefense(int value)
     {
+        int Lastturn = 1;
         DefenseValue += value;
     }
     public void SetPowerUP(int value)
     {
-        PowerUpValue = value;
-        power += PowerUpValue;
+        PowerUpValue += value;
+        power += value;
     }
 
     // Update is called once per frame
@@ -195,23 +196,23 @@ public class EnemyBase : MonoBehaviour
 
     void Do_Defense()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetDefense(this, 5);
-        EnemySA.Set_UI_Defense(5);
+        //SA_enemy.t_EnemyGetDefense(this, 5);
+        EnemySA.Set_UI_Defense(5,1);
         ResetEnemyBehaviour(); // Set Next Pattern
     }
     void Do_DeBuff()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
+        //StatusAdjustment.PlayerGetVulnerable(this, 5);
         StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
-        
+        //SA_enemy.t_EnemyGetVulnerable(this, 5);
         EnemySA.Set_UI_Vulnerable(5);
         ResetEnemyBehaviour();
     }
     void Do_Buff()
     {
-        //EnemyAnim.SetTrigger("ChargingSkill");
         StatusAdjustment.EnemyGetpowerUp(this,5,10);
+        //SA_enemy.t_EnemyGetpowerUp(this, 5, 10);
         EnemySA.Set_UI_strength(PowerUpValue);
         ResetEnemyBehaviour();
     }

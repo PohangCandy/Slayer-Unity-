@@ -3457,6 +3457,7 @@ MonoBehaviour:
   player: {fileID: 347745246}
   hpText: {fileID: 1884586127}
   defenseText: {fileID: 405257868}
+  EnergyText: {fileID: 0}
   stateImage: {fileID: 976790218}
 --- !u!114 &347745246
 MonoBehaviour:
@@ -4176,7 +4177,7 @@ GameObject:
   - component: {fileID: 447919058}
   - component: {fileID: 447919057}
   m_Layer: 5
-  m_Name: Energy
+  m_Name: Energy_btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5159,7 +5160,7 @@ GameObject:
   - component: {fileID: 525822882}
   - component: {fileID: 525822881}
   m_Layer: 5
-  m_Name: Btn
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
