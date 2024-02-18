@@ -94,7 +94,7 @@ MonoBehaviour:
     target: defense
     type: Skill
     turn: 0
-    category: defense && discardonce
+    category: defense discardonce
     amount: 7
     reinforcelevel: 0
     cost: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
     target: card
     type: Skill
     turn: 0
-    category: drawcardcount && putbackone
+    category: drawcardcount&putbackone
     amount: 2
     reinforcelevel: 0
     cost: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     target: hp
     type: Power
     turn: -1
-    category: playerhpminusone && allenemydamage
+    category: playerhpminusone allenemydamage
     amount: 5
     reinforcelevel: 0
     cost: 1

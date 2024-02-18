@@ -35,7 +35,7 @@ public static class StatusAdjustment
     static bool IsPlayer(Object targetObject) { return targetObject is Player; }
     static bool IsEnemy(Object targetObject) { return targetObject is EnemyBase; }
 
-    public static void SetFunction(Object targetObject,SAInformation sAInformation)
+    public static void SetFunction(CardInterface card,Object targetObject,SAInformation sAInformation)
     {
         string[] effects = sAInformation.category.Split(' ');
         foreach (string word in effects)
@@ -56,13 +56,11 @@ public static class StatusAdjustment
                 case "weakness":
                     {
                         Weakness(targetObject, sAInformation);
-
                     }
                     break;
                 case "defense":
                     {
                         Defense(targetObject, sAInformation);
-
                     }
                     break;
                 case "drawonce":
@@ -73,42 +71,101 @@ public static class StatusAdjustment
                 case "tempattackstatplus":
                     {
                         TempAttackStatPlus(targetObject, sAInformation);
-
                     }
                     break;
                 case "discardonce":
                     {
-
-                        CardManager.Inst.RandomDiscard();
-
+                        CardManager.Inst.RandomDiscard(card);
                     }
                     break;
                 case "playerhpminusone":
                     {
-                        //Weaknesee(d, sAInformation);
-
+                        PlayerHpMinusOne(targetObject, sAInformation);
                     }
                     break;
                 case "allenemydamage":
                     {
                         //Weaknesee(d, sAInformation);
-
+                        //AllEnemyDamage()
                     }
                     break;
-                case "drawcardcount":
+                case "drawcardcount&putbackone":
                     {
                         //Weaknesee(d, sAInformation);
-
-                    }
-                    break;
-                case "putbackone":
-                    {
-                        //Weaknesee(d, sAInformation);
-
+                        CardManager.Inst.DrawCard(sAInformation.amount);
                     }
                     break;
             }
         }
+    }
+    public static void SetFunction(PotionInterface potion, Object targetObject, SAInformation sAInformation)
+    {
+        string[] effects = sAInformation.category.Split(' ');
+        foreach (string word in effects)
+        {
+            switch (word)
+            {
+                case "attack":
+                    {
+                        Attack(targetObject, sAInformation);
+                    }
+                    break;
+                case "defensestatup":
+                    {
+                        Debug.Log("¹æ¾î·Â »ó½Â");
+                        DefenseUP(targetObject, sAInformation);
+                    }
+                    break;
+                case "weakness":
+                    {
+                        Weakness(targetObject, sAInformation);
+                    }
+                    break;
+                case "defense":
+                    {
+                        Defense(targetObject, sAInformation);
+                    }
+                    break;
+                case "drawonce":
+                    {
+                        CardManager.Inst.DrawCard(1);
+                    }
+                    break;
+                case "tempattackstatplus":
+                    {
+                        TempAttackStatPlus(targetObject, sAInformation);
+                    }
+                    break;
+                case "discardonce":
+                    {
+                        //CardManager.Inst.RandomDiscard();
+                    }
+                    break;
+                case "playerhpminusone":
+                    {
+                        PlayerHpMinusOne(targetObject, sAInformation);
+                    }
+                    break;
+                case "allenemydamage":
+                    {
+                        //Weaknesee(d, sAInformation);
+                        //AllEnemyDamage()
+                    }
+                    break;
+                case "drawcardcount&putbackone":
+                    {
+                        //Weaknesee(d, sAInformation);
+                        CardManager.Inst.DrawCard(sAInformation.amount);
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    private static void PlayerHpMinusOne(Object targetObject, SAInformation sAInformation)
+    {
+        throw new System.NotImplementedException();
     }
 
     private static void TempAttackStatPlus(Object targetObject, SAInformation sAInformation)
@@ -118,7 +175,11 @@ public static class StatusAdjustment
 
     private static void DefenseUP(Object targetObject, SAInformation sAInformation)
     {
-        throw new System.NotImplementedException();
+        if (IsPlayer(targetObject))
+        {
+            Player player = targetObject as Player;
+            player.setAddtionalDefense(sAInformation.amount);
+        }
     }
 
     private static void Weakness(Object targetObject, SAInformation sAInformation)
@@ -126,7 +187,7 @@ public static class StatusAdjustment
         if (IsEnemy(targetObject))
         {
             EnemyBase enemy = targetObject as EnemyBase;
-            enemy.SetWeak(50);
+            //enemy.SetWeak(50);
         }
     }
 

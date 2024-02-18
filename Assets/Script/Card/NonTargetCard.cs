@@ -22,7 +22,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     [SerializeField]
     SpriteRenderer  cardsprite;
     public SAInformation saInformation;
-    public Player player;
+    Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
 
     //public GameObject dot;
@@ -44,6 +44,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             transform.localScale = prs.scale;
         }
     }
+    
     public void setUp(Card card)
     {
         description.text = card.description.ToString();
@@ -71,15 +72,18 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         Hover,
         Select,
         Drag,
-        Apply
+        Apply,
+        Destroyed
     }
     // Start is called before the first frame update
     void Start()
     {
+        player=GameObject.FindWithTag("Player").GetComponent<Player>();
         description.enabled = true;
         collider = GetComponent<Collider2D>();
         currentState = State.Idle;
     }
+    public void SetStateDestroy() { currentState = State.Destroyed; }
     public void handleinput()
     {
         switch (currentState)
@@ -157,6 +161,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     // Update is called once per frame
     void Update()
     {
+        if (currentState == State.Destroyed) { Destroy(this.gameObject); }
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
         if (currentState == State.Idle)
@@ -184,7 +189,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(player, saInformation);
+            StatusAdjustment.SetFunction(this,player, saInformation);
             //CardManager.Inst.CardAlignment();
             //int index = CardManager.Inst.GetHandOfCard().FindIndex(card => card == this);//람다 방정식
             //if(index == CardManager.Inst.GetHandOfCard().Count) 
@@ -205,6 +210,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
 
             Destroy(this.gameObject);
         }
+        
     }
 
 
