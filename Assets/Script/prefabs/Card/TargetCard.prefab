@@ -228,7 +228,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1176723260450584033, guid: 14473ad6ea2be304da19b3a1b1dc270a, type: 2}
+  - {fileID: 2032334824829835164, guid: 02d65db2e6423ad408f0502c84bea30d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,8 +273,8 @@ MonoBehaviour:
   m_text: "\uD53C\uD574\uB97C 3\uBC88 \uC90D\uB2C8\uB2E4 \\n\uC774\uBC88 \uC804\uD22C\uB3D9\uC548
     \uBAA8\uB4E0 \uD6C4\uBCBC\uD30C\uAE30\uC758 \\n \uD53C\uD574\uB7C9\uC774 2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14473ad6ea2be304da19b3a1b1dc270a, type: 2}
-  m_sharedMaterial: {fileID: 1176723260450584033, guid: 14473ad6ea2be304da19b3a1b1dc270a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 02d65db2e6423ad408f0502c84bea30d, type: 2}
+  m_sharedMaterial: {fileID: 2032334824829835164, guid: 02d65db2e6423ad408f0502c84bea30d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

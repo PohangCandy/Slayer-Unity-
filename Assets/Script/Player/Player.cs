@@ -38,8 +38,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) { takeDamage(10); }
+        if(Input.GetKeyDown(KeyCode.Space)) 
+        {
+            takeDamage(10); Debug.Log("Pressed"); 
+        }
         if (Input.GetKeyDown(KeyCode.I)) { defense -= 10; }
+        if(getDefense() <= 0) { playerColor.material.color = Color.white; }
     }
     public void setDefense(int amount)
     {
