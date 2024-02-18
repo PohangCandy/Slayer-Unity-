@@ -52,26 +52,25 @@ public class SA_UI : MonoBehaviour
     }
     public void Set_UI_Vulnerable(int lastturn)
     {
-        UpdateUIwithTurn(SA_UI_Obj[6], lastturn, lastturn); //Vulnerable's lasttrun don't need value
+        
+        UpdateUIwithTurn(SA_UI_Obj[4], lastturn, lastturn); //Vulnerable's lasttrun don't need value
     }
     public void Set_UI_Defense(int defensevalue, int lastturn)
     {
+        
         UpdateUIwithTurn(SA_UI_Obj[6], defensevalue, lastturn);
     }
     void UpdateUIwithTurn(GameObject uiobj, int value, int lastturn)
     {
-        if (lastturn == 1)
+        if (lastturn > 0)
         {
+            Debug.Log("lastturn is "+value);
             uiobj.SetActive(true);
-            //SA_anim.SetTrigger("SetSA");
-            uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
-        }
-        else if (lastturn > 1)
-        {
             uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
         }
         else
         {
+           
             SA_anim = uiobj.GetComponent<Animator>();
             SA_anim.SetTrigger("RemoveSa");
         }
