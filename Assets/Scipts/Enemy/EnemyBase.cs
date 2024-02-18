@@ -55,16 +55,30 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    public void ApplyVulnerable(float vulnerablepercentage,int lastturn)
+    public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 0.5,2
     {
-        power = (int)(power * vulnerablepercentage);
+        SetVulnerablePercent(vulnerablepercentage, lastturn);
         EnemySA.Set_UI_Vulnerable(lastturn);
     }
-
-    public void SetWeak(int WeakPercentage)
+    void SetVulnerablePercent(float vulnerable, int lastturn)
     {
-        WeakPercent_to_float = 1 - (WeakPercentage / 100);
+        if (lastturn > 0)
+        {
+            VulnerablePercent_to_float = vulnerable;
+        }
+        else VulnerablePercent_to_float = 1f;
     }
+    float GetVunlerablePercent()
+    {
+        return VulnerablePercent_to_float;
+    }
+
+    public void ApplyWeak(float weakpercentage, int lastturn)
+    {
+        power = (int)(power * weakpercentage);
+        EnemySA.Set_UI_Weak(lastturn);
+    }
+
 
     public void SetDefense(int value) //for SA
     {
@@ -97,11 +111,12 @@ public class EnemyBase : MonoBehaviour
     {
         if (Curhp > 0)
         {
-            Curhp -= (int)(damage * VulnerablePercent_to_float);
+            Curhp -= (int)(damage * GetVunlerablePercent());
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
     }
+
 
     public void PickNextActionWithPercentage(int randompercentage)
     {

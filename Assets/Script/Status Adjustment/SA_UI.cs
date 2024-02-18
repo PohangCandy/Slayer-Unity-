@@ -29,7 +29,7 @@ public class SA_UI : MonoBehaviour
     void Start()
     {
 
-        SA_anim = GetComponentInChildren<Animator>();
+       
         for(int i = 0; i < SA_UI_Obj.Length ;i++)
         {
             SA_UI_Obj[i].SetActive(false);
@@ -54,7 +54,6 @@ public class SA_UI : MonoBehaviour
     {
         
         SA_UI_Obj[4].SetActive(true);
-        SA_anim.SetTrigger("SetSA");
         Debug.Log("here act");
         SA_UI_Obj[4].GetComponentInChildren<TextMeshProUGUI>().text = vnlnerablevalue.ToString();
     }
@@ -68,19 +67,18 @@ public class SA_UI : MonoBehaviour
         }
         else if (lastturn > 1)
         {   
-            SA_anim.SetTrigger("SetSA");
             SA_UI_Obj[6].GetComponentInChildren<TextMeshProUGUI>().text = defensevalue.ToString();
         }
         else
         {
-            //SA_anim.SetTrigger("SetSA");
-            SA_UI_Obj[6].SetActive(false);
+            SA_anim = SA_UI_Obj[6].GetComponent<Animator>();
+            SA_anim.SetTrigger("RemoveSa");
         }
     }
 
-    void UIBlur()
+    void RemoveUIObj(GameObject removeobj)
     {
-
+        removeobj.SetActive(false);
     }
 
 }
