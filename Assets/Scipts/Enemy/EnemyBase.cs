@@ -55,7 +55,7 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 0.5,2
+    public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 1.5,2
     {
         SetVulnerablePercent(vulnerablepercentage, lastturn);
         EnemySA.Set_UI_Vulnerable(lastturn);
@@ -68,6 +68,7 @@ public class EnemyBase : MonoBehaviour
         }
         else VulnerablePercent_to_float = 1f;
     }
+
     float GetVunlerablePercent()
     {
         return VulnerablePercent_to_float;
@@ -79,7 +80,9 @@ public class EnemyBase : MonoBehaviour
         EnemySA.Set_UI_Weak(lastturn);
     }
 
-
+    public void SetWeak(int value) //for SA
+    {
+    }
     public void SetDefense(int value) //for SA
     {
         DefenseValue = 0;
@@ -186,13 +189,25 @@ public class EnemyBase : MonoBehaviour
     {
         int Updateturn = turnManager.GetEnemyTurnCount();
         turnManager.StartCountEnemyTurn();
-        UpdateEnemySA_turnvalue(Updateturn);
+        UpdateEnemySA_Enemyturnvalue(Updateturn);
         SetCurAction();
     }
 
-    void UpdateEnemySA_turnvalue(int updateturn)
+    public void EnemyTurnOver()
+    {
+        int Updateturn = turnManager.GetEnemyTurnCount();
+        turnManager.StartCountEnemyTurn();
+        UpdateEnemySA_Playerturnvalue(Updateturn);
+    }
+
+    void UpdateEnemySA_Enemyturnvalue(int updateturn)
     {
         GetDown_DefenseLastTurn(-updateturn);
+    }
+
+    void UpdateEnemySA_Playerturnvalue(int updateturn)
+    {
+        GetDown_VulnerableLastTurn(-updateturn);
     }
 
     void SetCurAction()
@@ -236,8 +251,13 @@ public class EnemyBase : MonoBehaviour
 
     void GetDown_DefenseLastTurn(int updateturn)
     {
-        SA_enemy.t_EnemyGetDefense(this, 5, updateturn); //(target, value, lastturn)
-        EnemySA.Set_UI_Defense(5, updateturn);//(value,lastturn)
+        SA_enemy.t_EnemyGetDefense(this, 0, updateturn); //(target, value, lastturn)
+        EnemySA.Set_UI_Defense(0, updateturn);//(value,lastturn)
+    }
+    void GetDown_VulnerableLastTurn(int updateturn)
+    {
+        SA_enemy.t_EnemyGetVulnerable(this, updateturn); //(target, value, lastturn)
+        EnemySA.Set_UI_Vulnerable(0);//(lastturn)
     }
     void Do_DeBuff()
     {

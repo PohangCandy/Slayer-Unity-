@@ -41,14 +41,15 @@ public static class SA_enemy
 
     public static void t_EnemyGetWeak(EnemyBase enemy, int lastTurn)
     {
-        float WeakPercent_float = 1 - (t_WeakPercentage / 100);
+        float WeakPercent_float = 1f - (t_WeakPercentage / 100f);//0.75
         enemy.ApplyWeak(t_WeakPercentage,lastTurn);
     }
 
 
     public static void t_EnemyGetVulnerable(EnemyBase enemy, int lastturn)
     {
-        float VulnerablePercent_float = (float)(t_VulnerablePercentage + 100 / 100);
+        float VulnerablePercent_float = (float)((t_VulnerablePercentage + 100f) / 100f);//0.5
+        
         enemy.ApplyVulnerable(VulnerablePercent_float, lastturn);
     }
 
