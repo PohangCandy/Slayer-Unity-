@@ -176,7 +176,7 @@ public class EnemyBase : MonoBehaviour
 
     void UpdateEnemySA_turnvalue(int updateturn)
     {
-        Remove_Defense(-updateturn);
+        GetDown_DefenseLastTurn(-updateturn);
     }
 
     void SetCurAction()
@@ -218,7 +218,7 @@ public class EnemyBase : MonoBehaviour
         ResetEnemyBehaviour(); // Set Next Pattern
     }
 
-    void Remove_Defense(int updateturn)
+    void GetDown_DefenseLastTurn(int updateturn)
     {
         SA_enemy.t_EnemyGetDefense(this, 5, updateturn); //(target, value, lastturn)
         EnemySA.Set_UI_Defense(5, updateturn);//(value,lastturn)

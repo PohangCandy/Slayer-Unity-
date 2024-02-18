@@ -28,6 +28,7 @@ public class SA_UI : MonoBehaviour
     private Animator SA_anim;
     void Start()
     {
+
         SA_anim = GetComponentInChildren<Animator>();
         for(int i = 0; i < SA_UI_Obj.Length ;i++)
         {
