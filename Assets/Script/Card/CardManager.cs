@@ -53,7 +53,7 @@ public class CardManager : MonoBehaviour
         CurrentState = State.Normal;
 
         DeckToDraw();
-        MyTurn();
+        //MyTurn();
         curturn = 0;
     }
     void FirstSetup()
@@ -182,6 +182,20 @@ public class CardManager : MonoBehaviour
             DrawPile.Add(Deck[i]);
         }
         CurrentState= State.Battle;
+    }
+
+    public void TurnOver()
+    {
+        for(int i=0;i<HandOfCards.Count;i++) 
+        {
+            GotoDiscardPile(HandOfCards[i].GetComponent<CardInterface>());
+        }
+        int count = HandOfCards.Count;
+        for(int i=0;i<count;i++) 
+        {
+            DestroyHandofCard(HandOfCards[i]);
+        }
+        HandOfCards.Clear();
     }
 
     public void BattleEnd() 
@@ -415,21 +429,23 @@ public class CardManager : MonoBehaviour
 
         BurnPile.Add(HandOfCards[value].GetComponent<CardInterface>().getCard());
         
-        TargetCard obj;
-        NonTargetCard obj1;
-        
-        if (IsTargetCard(HandOfCards[value] as CardInterface))
-        {
-            obj = HandOfCards[value] as TargetCard;
-            HandOfCards.RemoveAt(value);
-            obj.SetStateDestroy();
-        }
-        else
-        {
-            obj1 = HandOfCards[value] as NonTargetCard;
-            HandOfCards.RemoveAt(value);
-            obj1.SetStateDestroy();
-        }
+        DestroyHandofCard(HandOfCards[value]);
+        HandOfCards.RemoveAt(value);
+        //TargetCard obj;
+        //NonTargetCard obj1;
+
+        //if (IsTargetCard(HandOfCards[value] as CardInterface))
+        //{
+        //    obj = HandOfCards[value] as TargetCard;
+        //    HandOfCards.RemoveAt(value);
+        //    obj.SetStateDestroy();
+        //}
+        //else
+        //{
+        //    obj1 = HandOfCards[value] as NonTargetCard;
+        //    HandOfCards.RemoveAt(value);
+        //    obj1.SetStateDestroy();
+        //}
         
 
 
@@ -439,4 +455,20 @@ public class CardManager : MonoBehaviour
 
         //HandOfCards.RemoveAt(HandOfCards.Count - 1);
     }
+    void DestroyHandofCard(Object card)
+    {
+        if (IsTargetCard(card as CardInterface))
+        {
+            TargetCard obj = card as TargetCard;
+            //HandOfCards.Remove(card);
+            obj.SetStateDestroy();
+        }
+        else
+        {
+            NonTargetCard obj1 = card as NonTargetCard;
+            //HandOfCards.Remove(card);
+            obj1.SetStateDestroy();
+        }
+    }
+
 }
