@@ -102,8 +102,11 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
                     }
                     if (detectEnemy(point))
                     {
-                        currentState |= State.Apply;
-                        break;
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            currentState = State.Apply;
+                            break;
+                        }
                     }
                     
                 }

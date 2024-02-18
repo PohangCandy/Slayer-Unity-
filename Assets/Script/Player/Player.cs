@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     public void setAttackstat(int plus) { extraAttackStatus += plus; }
     public void healHp(int plus) 
     {
-        if (currenthp + plus < maxHp)
+        if (currenthp + plus > maxHp)
         {
             currenthp = maxHp;
             return;

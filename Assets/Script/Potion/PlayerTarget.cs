@@ -39,6 +39,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         UnVisibleApply,
         Rest,
         Apply,
+        Check,
         Destroyed
     }
 
@@ -49,7 +50,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
             player = GameObject.FindWithTag("Player").GetComponent<Player>();
         currentState = State.Idle;
         collider = GetComponent<Collider2D>();
-        saInformation = new SAInformation("defense", 3, "DefenseValue", 10);
+        //saInformation = new SAInformation("defense", 3, "DefenseValue", 10);
         //saInformation = new SAInformation();    데이터베이스로 부터 가져옴
     }
     public void handleinput()//상태를 바꾸는 함수
@@ -58,7 +59,6 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             case State.Idle:
                 {
-
                     if (isInside(point))
                         currentState = State.Hover;
                 }
@@ -77,7 +77,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
                     }
                 }
                 break;
-            case State.Apply:
+            case State.Check:
                 {
                     if (saInformation.turn == 0)
                     {
@@ -92,7 +92,6 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
                     }
                     //currentState = State.Destroyed;
                 }
-
             case State.Rest:
                 {
                     if (curturn != CardManager.Inst.turnManager.GetTurnCount())
@@ -144,8 +143,12 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(this, player, saInformation);
-            curturn = CardManager.Inst.turnManager.GetTurnCount();
+            //curturn = CardManager.Inst.turnManager.GetTurnCount();
+            currentState = State.Check;
             //Destroy(this.gameObject);
+
+            gameObject.GetComponent<Renderer>().enabled = false;
+            gameObject.transform.SetParent(null);
         }
         else if (currentState == State.Rest)
         {
