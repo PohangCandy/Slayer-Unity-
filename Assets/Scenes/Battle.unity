@@ -12993,7 +12993,6 @@ MonoBehaviour:
   player: {fileID: 1154429887}
   hpText: {fileID: 1884586127}
   defenseText: {fileID: 405257868}
-  EnergyText: {fileID: 0}
 --- !u!114 &1154429887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20691,7 +20690,7 @@ MonoBehaviour:
   - {fileID: 257536569}
   - {fileID: 2083405566}
   - {fileID: 699432237}
-  - {fileID: 0}
+  - {fileID: 260398423}
 --- !u!114 &2037073173
 MonoBehaviour:
   m_ObjectHideFlags: 0
