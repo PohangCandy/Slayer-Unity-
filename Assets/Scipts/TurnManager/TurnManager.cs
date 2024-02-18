@@ -9,13 +9,15 @@ public class TurnManager : MonoBehaviour
     TurnType Curturn;
     public EnemyBase Enemy;
     int turnCount;
-    int t_curCount;
+    int t_curEnemyturnCount;
+    int t_curPlayerturnCount;
     int t_AllturnCount;
     void Start()
     {
         turnCount = 0;
         t_AllturnCount = 0;
-        t_curCount = 0;
+        t_curEnemyturnCount = 0;
+        t_curPlayerturnCount = 0;
         Curturn = TurnType.Playerturn;
     }
     public int GetTurnCount()
@@ -36,34 +38,37 @@ public class TurnManager : MonoBehaviour
     void t_AddTurnCount()
     {
         t_AllturnCount++;
+        Debug.Log("Allturn : "+t_AllturnCount);
     }
 
-    void StartCountTurn()
+    void StartCountTurn(int turn)
     {
-        t_curCount = t_AllturnCount;
+        turn = t_AllturnCount;
     }
 
 
 
-    int GetCurcount()
+    int GetCurcount(int turn)
     {
         int countturn = 0;
-        if (t_curCount % 2 == t_AllturnCount % 2)
+        if (turn % 2 == t_AllturnCount % 2)
         {
-            countturn = (t_AllturnCount - t_curCount) / 2;
+            countturn = (t_AllturnCount - turn) / 2;
         }
         else
         {
             Debug.Log("Enemyturn or Playerturn is Left");
         }
+        Debug.Log("Curturn" + turn);
+        Debug.Log("Allturn" + t_AllturnCount);
         return countturn;
     }
 
     public void PalyerTurnOver()
     {
         Curturn = TurnType.Enemyturn;
-        Enemy.EnemyTurnStart();
         t_AddTurnCount();
+        Enemy.EnemyTurnStart();
         CardManager.Inst.TurnOver();
     }
 
@@ -71,21 +76,34 @@ public class TurnManager : MonoBehaviour
     public void EnemyTurnOver()
     {
         Curturn = TurnType.Playerturn;
+        t_AddTurnCount();
         Enemy.EnemyTurnOver();
         turnCount++;
-        t_AddTurnCount();
         CardManager.Inst.MyTurn();
     }
 
     public void StartCountEnemyTurn()
     {
-        StartCountTurn();
+        StartCountTurn(t_curEnemyturnCount);
+    }
+
+    public void StartCountPlayerTurn()
+    {
+        StartCountTurn(t_curPlayerturnCount);
     }
 
     public int GetEnemyTurnCount()
     {
         int UpdateEnemyturnCount = 0;
-        UpdateEnemyturnCount = GetCurcount();
+        Debug.Log("Here is Enemy count");
+        UpdateEnemyturnCount = GetCurcount(t_curEnemyturnCount);
+        return UpdateEnemyturnCount;
+    }
+    public int GetPlayerTurnCount()
+    {
+        int UpdateEnemyturnCount = 0;
+        Debug.Log("Here is Player count");
+        UpdateEnemyturnCount = GetCurcount(t_curPlayerturnCount);
         return UpdateEnemyturnCount;
     }
 }
