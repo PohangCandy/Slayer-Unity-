@@ -42,6 +42,8 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.FindWithTag("Player") != null)
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
         currentState = State.Idle;
         collider = GetComponent<Collider2D>();
         saInformation = new SAInformation("defense", 3, "DefenseValue", 10);
@@ -82,6 +84,8 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
     // Update is called once per frame
     void Update()//상태가 바뀌면 처리해야하는 것들을 여기에 넣어둠
     {
+        if (!player && GameObject.FindWithTag("Player") != null)
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         //Debug.Log(currentState);
         //print("current state %s", currentState);

@@ -48,8 +48,8 @@ MonoBehaviour:
     targetTag: Enemy
     target: hp
     type: Attack
-    turn: 2
-    category: attack weakness
+    turn: 0
+    category: weakness attack
     amount: 8
     reinforcelevel: 0
     cost: 2

@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 39.6, y: -28.8}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 50, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &811302904907501184
 CanvasRenderer:
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardTarget, Assembly-CSharp
+      - m_Target: {fileID: 6415924776871464738}
+        m_TargetAssemblyTypeName: EnemyTarget, Assembly-CSharp
         m_MethodName: cancleEvent
         m_Mode: 1
         m_Arguments:
@@ -168,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.2, y: -40.5}
+  m_AnchoredPosition: {x: 0.7, y: -79}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &134645084565642914
@@ -1056,7 +1056,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -39.6, y: -27.1}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 50, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5240697085658227049
 CanvasRenderer:
@@ -1140,8 +1140,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardTarget, Assembly-CSharp
+      - m_Target: {fileID: 6415924776871464738}
+        m_TargetAssemblyTypeName: EnemyTarget, Assembly-CSharp
         m_MethodName: applyEvent
         m_Mode: 1
         m_Arguments:

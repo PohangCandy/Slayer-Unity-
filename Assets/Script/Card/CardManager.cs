@@ -146,26 +146,31 @@ public class CardManager : MonoBehaviour
                 Deck.Add(CardSO.cards[2]);
                 //CardInstance(Deck[0]);
             }
+            //attackdraw
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 Deck.Add(CardSO.cards[3]);
                 //CardInstance(Deck[0]);
             }
+            //tempattackpower
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 Deck.Add(CardSO.cards[4]);
                 //CardInstance(Deck[0]);
             }
+            //defensediscard
             if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 Deck.Add(CardSO.cards[5]);
                 //CardInstance(Deck[0]);
             }
+            //alldamage
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
                 Deck.Add(CardSO.cards[6]);
                 //CardInstance(Deck[0]);
             }
+            //draw two
             if (Input.GetKeyDown(KeyCode.Alpha8))
             {
                 Deck.Add(CardSO.cards[7]);
@@ -209,7 +214,7 @@ public class CardManager : MonoBehaviour
     public void DrawCard(int count)
     {
 
-        if (DrawPile.Count == 0)
+        if (DrawPile.Count == 0||DrawPile.Count<count)
         {
             if (DiscardPile.Count == 0)
                 return;
@@ -226,6 +231,7 @@ public class CardManager : MonoBehaviour
                 DrawPile.RemoveAt(DrawPile.Count - 1);
                 continue; 
             }
+
             CardInstance(DrawPile[DrawPile.Count-1]);
             DrawPile.RemoveAt(DrawPile.Count-1);
         }

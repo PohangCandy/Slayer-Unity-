@@ -18,6 +18,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
     string mode;
     State currentState;
     Collider2D collider;
+    int curturn;
     Vector3 point;
     [SerializeField]
     SpriteRenderer  cardsprite;
@@ -164,12 +165,32 @@ public class NonTargetCard : MonoBehaviour,CardInterface
                     }
                     else
                     {
+                        //saInformation.turn -= 1;
                         currentState = State.Rest;
                         break;
                     }
                     
                 }
                 break;
+            case State.Rest:
+                {
+                    if (curturn != CardManager.Inst.turnManager.GetTurnCount())
+                    {
+                        currentState = State.UnVisibleApply; break;
+                    }
+                }
+                break;
+            case State.UnVisibleApply:
+                {
+                    if (saInformation.turn == 0)
+                    {
+                        currentState = State.Destroyed;
+                        break;
+                    }
+                    else
+                        currentState = State.Rest;
+                    break;
+                }
         }
     }
 
@@ -204,7 +225,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(this,player, saInformation,player);
+            StatusAdjustment.SetFunction(this,player, saInformation,player,true);
             //CardManager.Inst.CardAlignment();
             //int index = CardManager.Inst.GetHandOfCard().FindIndex(card => card == this);//람다 방정식
             //if(index == CardManager.Inst.GetHandOfCard().Count) 
@@ -229,8 +250,15 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             gameObject.GetComponent<Renderer>().enabled = false;
             description.enabled = false;
         }
-        else if (currentState == State.Rest) { }
-        else if (currentState == State.UnVisibleApply) { }
+        else if (currentState == State.Rest)
+        {
+            curturn = CardManager.Inst.turnManager.GetTurnCount();
+        }
+        else if (currentState == State.UnVisibleApply)
+        {
+            saInformation.turn -= 1;
+            StatusAdjustment.SetFunction(this, player, saInformation, player,false);
+        }
         else if(currentState==State.Destroyed) { Destroy(this.gameObject); }
         
     }
