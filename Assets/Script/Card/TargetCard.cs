@@ -189,7 +189,25 @@ public class TargetCard : MonoBehaviour,CardInterface
                     }
                     //currentState = State.Destroyed;
                 }
-                break;
+
+            case State.Rest: 
+                {
+                    if(curturn!=CardManager.Inst.turnManager.GetTurnCount()) 
+                    { 
+                        currentState=State.UnVisibleApply; break;
+                    }
+                }break;
+            case State.UnVisibleApply: 
+                {
+                    if(saInformation.turn==0)
+                    {
+                        currentState = State.Destroyed;
+                        break;
+                    }
+                    else
+                        currentState = State.Rest;
+                    break;
+                }
         }
     }
 
@@ -242,9 +260,19 @@ public class TargetCard : MonoBehaviour,CardInterface
             //saInformation.turn -= 1;
             //턴 차이가 -1이라면 visible 처리만 안보이게
             curturn=CardManager.Inst.turnManager.GetTurnCount();
+            gameObject.GetComponent<Renderer>().enabled = false;
+            gameObject.GetComponent<LineRenderer>().enabled = false;
+            description.enabled = false;
         }
-        else if (currentState == State.Rest) { }
-        else if (currentState == State.UnVisibleApply) { }
+        else if (currentState == State.Rest) 
+        { 
+           
+        }
+        else if (currentState == State.UnVisibleApply) 
+        {
+            saInformation.turn -= 1;
+            StatusAdjustment.SetFunction(this, enemy, saInformation, player);
+        }
         else if (currentState == State.Destroyed) { Destroy(this.gameObject); }
     }
 

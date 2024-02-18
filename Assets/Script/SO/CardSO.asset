@@ -78,7 +78,7 @@ MonoBehaviour:
     targetTag: Player
     target: attackstat
     type: Skill
-    turn: 0
+    turn: 1
     category: tempattackstatplus
     amount: 2
     reinforcelevel: 0
