@@ -53,7 +53,7 @@ public class CardManager : MonoBehaviour
         CurrentState = State.Normal;
 
         DeckToDraw();
-        //MyTurn();
+        MyTurn();
         curturn = 0;
     }
     void FirstSetup()
@@ -213,7 +213,8 @@ public class CardManager : MonoBehaviour
 
     public void DrawCard(int count)
     {
-
+        if (DrawPile == null)
+            return;
         if (DrawPile.Count == 0||DrawPile.Count<count)
         {
             if (DiscardPile.Count == 0)

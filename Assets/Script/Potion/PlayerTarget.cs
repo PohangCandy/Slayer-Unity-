@@ -58,7 +58,6 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             case State.Idle:
                 {
-
                     if (isInside(point))
                         currentState = State.Hover;
                 }
