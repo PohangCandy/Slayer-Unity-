@@ -184,6 +184,7 @@ public class TargetCard : MonoBehaviour,CardInterface
                     }
                     else 
                     {
+                        //saInformation.turn -= 1;
                         currentState = State.Rest;
                         break;
                     }
@@ -247,7 +248,7 @@ public class TargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(this,enemy, saInformation,player);
+            StatusAdjustment.SetFunction(this,enemy, saInformation,player,true);
             CardManager.Inst.PlusEnergy(-cost);
             CardManager.Inst.SwapPop(this);
             CardManager.Inst.CardAlignment();
@@ -265,13 +266,13 @@ public class TargetCard : MonoBehaviour,CardInterface
             description.enabled = false;
         }
         else if (currentState == State.Rest) 
-        { 
-           
+        {
+            curturn = CardManager.Inst.turnManager.GetTurnCount();
         }
         else if (currentState == State.UnVisibleApply) 
         {
             saInformation.turn -= 1;
-            StatusAdjustment.SetFunction(this, enemy, saInformation, player);
+            StatusAdjustment.SetFunction(this, enemy, saInformation, player,false);
         }
         else if (currentState == State.Destroyed) { Destroy(this.gameObject); }
     }

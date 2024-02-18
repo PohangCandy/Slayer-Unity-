@@ -35,7 +35,7 @@ public static class StatusAdjustment
     static bool IsPlayer(Object targetObject) { return targetObject is Player; }
     static bool IsEnemy(Object targetObject) { return targetObject is EnemyBase; }
 
-    public static void SetFunction(CardInterface card,Object targetObject,SAInformation sAInformation,Player player)
+    public static void SetFunction(CardInterface card,Object targetObject,SAInformation sAInformation,Player player,bool onemore)
     {
         string[] effects = sAInformation.category.Split(' ');
         foreach (string word in effects)
@@ -96,6 +96,7 @@ public static class StatusAdjustment
                     }
                     break;
             }
+            if (!onemore) return;
         }
     }
     public static void SetFunction(PotionInterface potion, Object targetObject, SAInformation sAInformation)
@@ -159,6 +160,7 @@ public static class StatusAdjustment
         if (IsEnemy(targetObject))
         {
             EnemyBase enemy = targetObject as EnemyBase;
+            SA_enemy.t_EnemyGetVulnerable(enemy, sAInformation.amount);
             //enemy.SetWeak(50);
         }
     }

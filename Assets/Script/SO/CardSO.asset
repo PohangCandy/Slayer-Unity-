@@ -49,7 +49,7 @@ MonoBehaviour:
     target: hp
     type: Attack
     turn: 2
-    category: attack weakness
+    category: weakness attack
     amount: 8
     reinforcelevel: 0
     cost: 2

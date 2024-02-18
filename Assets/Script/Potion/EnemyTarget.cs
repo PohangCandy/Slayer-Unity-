@@ -50,6 +50,8 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.FindWithTag("Player") != null)
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
         //dots=new GameObject[numberOfDot];
         //for (int i = 0; i < numberOfDot; i++) 
         //{
@@ -109,6 +111,8 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
 // Update is called once per frame
 void Update()
     {
+        if (!player && GameObject.FindWithTag("Player") != null)
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
         if (currentState == State.Idle)
