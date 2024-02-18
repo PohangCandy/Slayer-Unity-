@@ -226,6 +226,8 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             CardManager.Inst.RemoveHandofCard(this);
             
             gameObject.GetComponent<Renderer>().enabled = false;
+            gameObject.GetComponent<Renderer>().enabled = false;
+            description.enabled = false;
         }
         else if (currentState == State.Rest) { }
         else if (currentState == State.UnVisibleApply) { }
