@@ -172,19 +172,31 @@ void Update()
 
     void calculate()
     {
-        Vector3 directionnormal = (point - this.gameObject.transform.position).normalized;
+
+        //Vector3 directionnormal = (point - this.gameObject.transform.position).normalized;
+        //int count = 0;
+        //while((directionnormal * count).sqrMagnitude <= (point-transform.position).sqrMagnitude)
+        //{
+        //    count++;
+        //}
+        //visualizerLine.enabled = true;
+        //visualizerLine.positionCount = count;
+        //for (int i=0; i < count;i++) 
+        //{
+        //    visualizerLine.SetPosition(i,transform.position+directionnormal*i);
+        //}
+        Vector3 directionnormal = (new Vector3(point.x, point.y, 0) - new Vector3(transform.position.x, transform.position.y, -0)).normalized;
         int count = 0;
-        while((directionnormal * count).sqrMagnitude <= (point-transform.position).sqrMagnitude)
+        while ((directionnormal * count).sqrMagnitude <= (new Vector3(point.x, point.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).sqrMagnitude)
         {
             count++;
         }
         visualizerLine.enabled = true;
         visualizerLine.positionCount = count;
-        for (int i=0; i < count;i++) 
+        for (int i = 0; i < count; i++)
         {
-            visualizerLine.SetPosition(i,transform.position+directionnormal*i);
+            visualizerLine.SetPosition(i, transform.position + directionnormal * i);
         }
-
     }
 
     //public void dotsVisibleSetting(int start,int end,bool condition)

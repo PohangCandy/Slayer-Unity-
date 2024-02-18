@@ -120,7 +120,7 @@ public class TargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Select:
                 {
-                    if (CardManager.Inst.GetEnegy() < cost)
+                    if (CardManager.Inst.GetEnergy() < cost)
                     {
                         Debug.Log("에너지가 부족합니다");
                         currentState = State.Idle;
