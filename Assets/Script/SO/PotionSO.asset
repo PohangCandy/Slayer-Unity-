@@ -19,7 +19,7 @@ MonoBehaviour:
     rarity: 0
     targetType: Player
     target: defense
-    turn: 0
+    turn: 1
     category: defense
     amount: 12
   - sprite: {fileID: 21300000, guid: 03d0cc8736ad9a840a81a25a74c7485e, type: 3}
@@ -28,7 +28,7 @@ MonoBehaviour:
     rarity: 0
     targetType: Enemy
     target: attackdamagenuff
-    turn: 0
+    turn: 1
     category: attackdamagenuff
     amount: 3
   - sprite: {fileID: 21300000, guid: 5f9d630e578628643b4163b5ae7d40d4, type: 3}
