@@ -17,8 +17,8 @@ public class HpSlider : MonoBehaviour
     [SerializeField]
     private TextMeshPro EnergyText;
     state currentState;
-    [SerializeField]
-    private Image stateImage;
+   // [SerializeField]
+   // private Image stateImage;
     enum state
     {
         normal,
@@ -34,6 +34,7 @@ public class HpSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(Mathf.Lerp(hpBar.value, (player.getCurrentHp() / player.getMaxHp()), Time.deltaTime * 10));
         changeState();
         setHpText();
         setHpBarValue();
@@ -44,26 +45,26 @@ public class HpSlider : MonoBehaviour
                 {
                     defenseText.enabled = false;
                     //stateImage=Resources.Load("Texture/Icon/heart.png",typeof(Texture2D)) as Image;
-                    Texture2D texture = Resources.Load("Texture/Icon/heart") as Texture2D;
+                    //Texture2D texture = Resources.Load("Texture/Icon/heart") as Texture2D;
 
                     // Texture2D를 Sprite로 변환
-                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    //Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
                     // Sprite를 Image에 할당 (예시로 Image 변수를 만들어야 함)
-                    stateImage.sprite = sprite;
+                    //stateImage.sprite = sprite;
                 }
                 break;
             case state.defense:
                 {
                     defenseText.enabled = true;
                     setDefenseText();
-                    Texture2D texture = Resources.Load("Texture/Icon/heart-shield") as Texture2D;
+                    //Texture2D texture = Resources.Load("Texture/Icon/heart-shield") as Texture2D;
 
                     // Texture2D를 Sprite로 변환
-                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    //Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
                     // Sprite를 Image에 할당 (예시로 Image 변수를 만들어야 함)
-                    stateImage.sprite = sprite;
+                    //stateImage.sprite = sprite;
                     //stateImage = Resources.Load("Icon/heart-shield.png", typeof(Texture2D)) as Texture2D;
                 }
                 break;

@@ -19,12 +19,15 @@ public class Player : MonoBehaviour
 
 
     Renderer playerColor;
+    private void Awake()
+    {
+        maxHp = 80;
+        currenthp = maxHp;
+    }
     // Start is called before the first frame update
     void Start()
     {
         drawPerTurn = 5;
-        maxHp = 80;
-        currenthp = maxHp;
         additionalDefense = 0;
         defense = 0;
         extraAttackStatus = 0;
@@ -70,4 +73,6 @@ public class Player : MonoBehaviour
     public float getCurrentHp() { return currenthp; }
     public int getDefense() { return defense; }
     public int getDrawPerturn() { return drawPerTurn; }
+    public int getAttackstat() { return extraAttackStatus; }
+    public void setAttackstat(int plus) { extraAttackStatus += plus; }
 }

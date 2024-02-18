@@ -35,7 +35,7 @@ public static class StatusAdjustment
     static bool IsPlayer(Object targetObject) { return targetObject is Player; }
     static bool IsEnemy(Object targetObject) { return targetObject is EnemyBase; }
 
-    public static void SetFunction(CardInterface card,Object targetObject,SAInformation sAInformation)
+    public static void SetFunction(CardInterface card,Object targetObject,SAInformation sAInformation,Player player)
     {
         string[] effects = sAInformation.category.Split(' ');
         foreach (string word in effects)
@@ -44,12 +44,11 @@ public static class StatusAdjustment
             {
                 case "attack":
                     {
-                        Attack(targetObject, sAInformation);
+                        Attack(targetObject, sAInformation,player);
                     }
                     break;
                 case "defensestatup":
-                    {
-                        Debug.Log("¹æ¾î·Â »ó½Â");
+                    {                     
                         DefenseUP(targetObject, sAInformation);
                     }
                     break;
@@ -86,13 +85,14 @@ public static class StatusAdjustment
                 case "allenemydamage":
                     {
                         //Weaknesee(d, sAInformation);
-                        //AllEnemyDamage()
+                        AllEnemyDamage(sAInformation);
                     }
                     break;
                 case "drawcardcount&putbackone":
                     {
                         //Weaknesee(d, sAInformation);
                         CardManager.Inst.DrawCard(sAInformation.amount);
+                        
                     }
                     break;
             }
@@ -103,74 +103,46 @@ public static class StatusAdjustment
         string[] effects = sAInformation.category.Split(' ');
         foreach (string word in effects)
         {
-            switch (word)
-            {
-                case "attack":
-                    {
-                        Attack(targetObject, sAInformation);
-                    }
-                    break;
-                case "defensestatup":
-                    {
-                        Debug.Log("¹æ¾î·Â »ó½Â");
-                        DefenseUP(targetObject, sAInformation);
-                    }
-                    break;
-                case "weakness":
-                    {
-                        Weakness(targetObject, sAInformation);
-                    }
-                    break;
-                case "defense":
-                    {
-                        Defense(targetObject, sAInformation);
-                    }
-                    break;
-                case "drawonce":
-                    {
-                        CardManager.Inst.DrawCard(1);
-                    }
-                    break;
-                case "tempattackstatplus":
-                    {
-                        TempAttackStatPlus(targetObject, sAInformation);
-                    }
-                    break;
-                case "discardonce":
-                    {
-                        //CardManager.Inst.RandomDiscard();
-                    }
-                    break;
-                case "playerhpminusone":
-                    {
-                        PlayerHpMinusOne(targetObject, sAInformation);
-                    }
-                    break;
-                case "allenemydamage":
-                    {
-                        //Weaknesee(d, sAInformation);
-                        //AllEnemyDamage()
-                    }
-                    break;
-                case "drawcardcount&putbackone":
-                    {
-                        //Weaknesee(d, sAInformation);
-                        CardManager.Inst.DrawCard(sAInformation.amount);
-                    }
-                    break;
-            }
+
+           
         }
     }
 
+    private static void AllEnemyDamage(SAInformation sAInformation)
+    {
+        GameObject[]enemys =GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemys.Length; i++)
+        {
+            
+            if (enemys[i].GetComponent<EnemyBase>()!=null)
+                enemys[i].GetComponent<EnemyBase>().GetAttack(5);
+        }
+    }
 
     private static void PlayerHpMinusOne(Object targetObject, SAInformation sAInformation)
     {
-        throw new System.NotImplementedException();
+        if (IsPlayer(targetObject))
+        {
+            Player player = targetObject as Player;
+            player.pureHptakeDamage(1);
+        }
     }
 
     private static void TempAttackStatPlus(Object targetObject, SAInformation sAInformation)
     {
-        throw new System.NotImplementedException();
+        if (IsPlayer(targetObject))
+        {
+            if (sAInformation.turn > 0)
+            {
+                Player player = targetObject as Player;
+                player.setAttackstat(2);
+            }
+            else
+            {
+                Player player = targetObject as Player;
+                player.setAttackstat(-2);
+            }
+        }
     }
 
     private static void DefenseUP(Object targetObject, SAInformation sAInformation)
@@ -193,7 +165,6 @@ public static class StatusAdjustment
 
     static void Defense(Object targetObject, SAInformation sAInformation)
     {
-         
         if (IsPlayer(targetObject))
         {
             Player player = targetObject as Player;
@@ -201,12 +172,12 @@ public static class StatusAdjustment
         }
     }
 
-    private static void Attack(Object targetObject, SAInformation sAInformation)
+    private static void Attack(Object targetObject, SAInformation sAInformation, Player p)
     {
         if(IsEnemy(targetObject))
         {
             EnemyBase enemy=targetObject as EnemyBase;
-            enemy.GetAttack(sAInformation.amount);
+            enemy.GetAttack(sAInformation.amount+p.getAttackstat());
         }
     }
 

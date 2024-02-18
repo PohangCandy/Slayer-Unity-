@@ -174,6 +174,9 @@ public class TargetCard : MonoBehaviour,CardInterface
                 }
                 break;
             case State.Apply:
+                {
+                    currentState = State.Destroyed;
+                }
                 break;
         }
     }
@@ -214,7 +217,7 @@ public class TargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(this,enemy, saInformation);
+            StatusAdjustment.SetFunction(this,enemy, saInformation,player);
             CardManager.Inst.PlusEnergy(-cost);
             CardManager.Inst.SwapPop(this);
             CardManager.Inst.CardAlignment();
@@ -222,10 +225,12 @@ public class TargetCard : MonoBehaviour,CardInterface
                 CardManager.Inst.GotoBurnPile(this); 
             else
                 CardManager.Inst.GotoDiscardPile(this);
+            CardManager.Inst.RemoveHandofCard(this);
             //시작 턴과 현재 턴의 차이가 amount일때 효과가 취소되도록 설정.
-            Destroy(this.gameObject);
+            //saInformation.turn -= 1;
             //턴 차이가 -1이라면 visible 처리만 안보이게
         }
+        else if (currentState == State.Destroyed) { Destroy(this.gameObject); }
     }
 
     bool detectEnemy(Vector2 mousePoint)
@@ -246,21 +251,8 @@ public class TargetCard : MonoBehaviour,CardInterface
     }
     bool isInside(Vector2 mousepoint)
     {
-        //Ray ray = Camera.main.ScreenPointToRay(mousepoint);
-        //RaycastHit2D hit= Physics2D.Raycast(mousepoint, transform.forward, 100f);
-        //if(hit)
-        //{
-        //    if (hit.collider.gameObject.layer == 6)
-        //    {
-        //        CardManager.Inst.LagerCard(hit.collider.gameObject.GetComponent<AttackCard>());
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //return false;
         if (collider.OverlapPoint(mousepoint))
         {
-            //CardManager.Inst.istriggered
             return true;
         }
         return false;

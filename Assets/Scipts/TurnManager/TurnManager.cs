@@ -72,6 +72,7 @@ public class TurnManager : MonoBehaviour
         Curturn = TurnType.Playerturn;
         turnCount++;
         t_AddTurnCount();
+        CardManager.Inst.MyTurn();
     }
 
     public void StartCountEnemyTurn()

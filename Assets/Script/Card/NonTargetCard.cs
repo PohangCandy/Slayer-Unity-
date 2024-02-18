@@ -154,6 +154,10 @@ public class NonTargetCard : MonoBehaviour,CardInterface
                 }
                 break;
             case State.Apply:
+                {
+                    if(saInformation.turn==0)
+                    currentState = State.Destroyed;
+                }
                 break;
         }
     }
@@ -189,7 +193,7 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(this,player, saInformation);
+            StatusAdjustment.SetFunction(this,player, saInformation,player);
             //CardManager.Inst.CardAlignment();
             //int index = CardManager.Inst.GetHandOfCard().FindIndex(card => card == this);//람다 방정식
             //if(index == CardManager.Inst.GetHandOfCard().Count) 
@@ -208,8 +212,11 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             else
                 CardManager.Inst.GotoDiscardPile(this);
 
-            Destroy(this.gameObject);
+            CardManager.Inst.RemoveHandofCard(this);
+            
+            gameObject.GetComponent<Renderer>().enabled = false;
         }
+        else if(currentState==State.Destroyed) { Destroy(this.gameObject); }
         
     }
 

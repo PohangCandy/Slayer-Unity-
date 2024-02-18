@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &878383193035578989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8960803484233007981
 Transform:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ SpriteRenderer:
   m_Size: {x: 2.5, y: 1.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6457242200426887880
@@ -517,7 +517,7 @@ SpriteRenderer:
   m_Size: {x: 2.8, y: 3.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7584743806707188554
@@ -534,8 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: {fileID: 753126098905150761}
   cardnname: {fileID: 2660911827814927150}
-  cardsprite: {fileID: 1037212541141346834}
-  player: {fileID: 0}
+  cardsprite: {fileID: 1778305769147898308}
   originPRS:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}

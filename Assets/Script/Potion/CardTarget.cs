@@ -26,7 +26,6 @@ public class CardTarget :MonoBehaviour , PotionInterface
         rarity = potion.rarity;
         potionsprite.sprite = potion.sprite;
         saInformation = new SAInformation(potion.target, potion.turn, potion.category, potion.amount);
-        
     }
     
 
@@ -53,7 +52,6 @@ public class CardTarget :MonoBehaviour , PotionInterface
         {
             case State.Idle:
                 {
-                   
                     if (isInside(point))
                         currentState = State.Hover;
                 }

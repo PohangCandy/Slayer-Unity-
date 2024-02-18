@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField]
-    TurnManager TurnManager;
+    public TurnManager turnManager;
     public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
     private void Awake()
@@ -27,6 +27,7 @@ public class CardManager : MonoBehaviour
     List<Card> BurnPile;//�Ҹ�
     List<Card> DiscardPile;//����� ī��
     List<Card> DrawPile;
+    int curturn;
 
     public Transform CardSpawnPoint;
     public Transform CardLeft;
@@ -50,8 +51,10 @@ public class CardManager : MonoBehaviour
         FirstSetup();
         DeckShuffle();
         CurrentState = State.Normal;
-        
-        
+
+        DeckToDraw();
+        MyTurn();
+        curturn = 0;
     }
     void FirstSetup()
     {
@@ -99,7 +102,7 @@ public class CardManager : MonoBehaviour
 
     void DrawPileRestart()
     {
-        DrawPile.Clear();
+        //DrawPile.Clear();
         for(int i=0;i<DiscardPile.Count;i++)
             DrawPile.Add(DiscardPile[i]);
         DiscardPile.Clear();
@@ -107,6 +110,7 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
         switch (CurrentState)
         {
@@ -114,64 +118,63 @@ public class CardManager : MonoBehaviour
                 break;
             case State.Battle:
                 {
-                    //if (DrawPile.Count == 0)
-                    //{
-                    //    DrawPileRestart();
-                    //    PartialShuffle();
-                    //}
                 }
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
-        if (Input.GetKeyDown(KeyCode.S)) { BattleStart(); }//�̰� ������ �����°� �ƴ϶� ���� ī�忡�� ������ �ؾ���.
-        if (Input.GetKeyDown(KeyCode.D)) 
-        {
-            DrawPileRestart();
-            PartialShuffle();
-        }//�̰� ������ �����°� �ƴ϶� ���� ī�忡�� ������ �ؾ���.
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Deck.Add(CardSO.cards[0]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Deck.Add(CardSO.cards[1]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Deck.Add(CardSO.cards[2]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Deck.Add(CardSO.cards[3]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            Deck.Add(CardSO.cards[4]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            Deck.Add(CardSO.cards[5]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Deck.Add(CardSO.cards[6]);
-            CardInstance(Deck[0]);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            Deck.Add(CardSO.cards[7]);
-            CardInstance(Deck[0]);
+
+        {//if(Input.GetKeyDown(KeyCode.E)) { Debug.Log("E"); }
+            if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
+            if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
+            if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                DrawPileRestart();
+                PartialShuffle();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Deck.Add(CardSO.cards[0]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Deck.Add(CardSO.cards[1]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Deck.Add(CardSO.cards[2]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Deck.Add(CardSO.cards[3]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                Deck.Add(CardSO.cards[4]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                Deck.Add(CardSO.cards[5]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                Deck.Add(CardSO.cards[6]);
+                //CardInstance(Deck[0]);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                Deck.Add(CardSO.cards[7]);
+                //CardInstance(Deck[0]);
+            }
         }
 
     }
-    public void BattleStart()
+    public void DeckToDraw()
     {
         DeckShuffle();
         for(int i=0; i < Deck.Count; i++) 
@@ -191,8 +194,11 @@ public class CardManager : MonoBehaviour
 
     public void DrawCard(int count)
     {
+
         if (DrawPile.Count == 0)
         {
+            if (DiscardPile.Count == 0)
+                return;
             DrawPileRestart();
             PartialShuffle();
         }
@@ -200,6 +206,8 @@ public class CardManager : MonoBehaviour
         {
             if (HandOfCards.Count >= 10)
             {
+                if(DrawPile.Count == 0) { return; }
+                if(DiscardPile.Count == 0) { return;}
                 DrawPileGotoDiscardPile(DrawPile[DrawPile.Count - 1]);
                 DrawPile.RemoveAt(DrawPile.Count - 1);
                 continue; 
@@ -245,7 +253,7 @@ public class CardManager : MonoBehaviour
             case "Target":
                 {
                     var CardObject = Instantiate(TargetCardPrefeb, CardSpawnPoint.position, Quaternion.identity);
-                    var  TargetCard= CardObject.GetComponent<TargetCard>();
+                    var TargetCard= CardObject.GetComponent<TargetCard>();
                     TargetCard.setUp(card);
                     HandOfCards.Add(TargetCard);
                 }
@@ -263,7 +271,7 @@ public class CardManager : MonoBehaviour
         CardAlignment();
     }
 
-    
+    public void RemoveHandofCard(Object card) { HandOfCards.Remove(card); }
     void SetOriginOrder()
     {
         int count = HandOfCards.Count;
@@ -405,21 +413,26 @@ public class CardManager : MonoBehaviour
         while (HandOfCards[value] == card)
             value = Random.RandomRange(0, HandOfCards.Count);//값이 같을경우에 다른값으로 바꾸기
 
-        DiscardPile.Add(HandOfCards[value].GetComponent<CardInterface>().getCard());
-
+        BurnPile.Add(HandOfCards[value].GetComponent<CardInterface>().getCard());
+        
         TargetCard obj;
         NonTargetCard obj1;
+        
         if (IsTargetCard(HandOfCards[value] as CardInterface))
         {
             obj = HandOfCards[value] as TargetCard;
+            HandOfCards.RemoveAt(value);
             obj.SetStateDestroy();
         }
         else
         {
             obj1 = HandOfCards[value] as NonTargetCard;
+            HandOfCards.RemoveAt(value);
             obj1.SetStateDestroy();
         }
         
+
+
         //Destroy(obj);
         //Object temp = HandOfCards[value];
         //HandOfCards[value] = HandOfCards[HandOfCards.Count - 1];
