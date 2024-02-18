@@ -78,4 +78,9 @@ public class SA_UI : MonoBehaviour
         }
     }
 
+    void UIBlur()
+    {
+
+    }
+
 }

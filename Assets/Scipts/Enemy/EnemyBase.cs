@@ -57,7 +57,8 @@ public class EnemyBase : MonoBehaviour
 
     public void ApplyVulnerable(float vulnerablepercentage,int lastturn)
     {
-
+        power = (int)(power * vulnerablepercentage);
+        EnemySA.Set_UI_Vulnerable(lastturn);
     }
 
     public void SetWeak(int WeakPercentage)
@@ -227,6 +228,13 @@ public class EnemyBase : MonoBehaviour
     {
         //StatusAdjustment.PlayerGetVulnerable(this, 5);
         //StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
+        SA_enemy.t_EnemyGetVulnerable(this, 5);
+        EnemySA.Set_UI_Vulnerable(5);
+        ResetEnemyBehaviour();
+    }
+
+    void get_Debuff()
+    {
         SA_enemy.t_EnemyGetVulnerable(this, 5);
         EnemySA.Set_UI_Vulnerable(5);
         ResetEnemyBehaviour();
