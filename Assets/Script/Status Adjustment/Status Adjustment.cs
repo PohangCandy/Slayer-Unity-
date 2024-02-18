@@ -104,9 +104,39 @@ public static class StatusAdjustment
         string[] effects = sAInformation.category.Split(' ');
         foreach (string word in effects)
         {
-
+            switch (word)
+            {
+                case "attackdamagenuff":
+                    {
+                        attackdamagenuff(sAInformation, targetObject);
+                    }
+                    break;
+                case "slowrecovery":
+                    {
+                        slowrecovery(sAInformation,targetObject);
+                    }
+                    break;
+                case "defense":
+                    {
+                        DefenseUP(targetObject, sAInformation);
+                    }break;
+            }
            
         }
+    }
+
+    private static void slowrecovery(SAInformation sAInformation, Object targetObject)
+    {
+        if(IsPlayer(targetObject))
+        {
+            Player p=targetObject as Player;
+            p.healHp(sAInformation.turn);
+        }
+    }
+
+    private static void attackdamagenuff(SAInformation sAInformation, Object targetObject)
+    {
+        SA_enemy.t_EnemyGetWeak(targetObject as EnemyBase, sAInformation.amount);
     }
 
     private static void AllEnemyDamage(SAInformation sAInformation)
@@ -160,7 +190,7 @@ public static class StatusAdjustment
         if (IsEnemy(targetObject))
         {
             EnemyBase enemy = targetObject as EnemyBase;
-            SA_enemy.t_EnemyGetVulnerable(enemy, sAInformation.amount);
+            SA_enemy.t_EnemyGetVulnerable(enemy, 2);
             //enemy.SetWeak(50);
         }
     }

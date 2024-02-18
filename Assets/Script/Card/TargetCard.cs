@@ -217,7 +217,7 @@ public class TargetCard : MonoBehaviour,CardInterface
     {
         if (currentState == State.Destroyed) { Destroy(this.gameObject); }
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
         if (currentState == State.Idle)

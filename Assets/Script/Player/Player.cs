@@ -75,4 +75,13 @@ public class Player : MonoBehaviour
     public int getDrawPerturn() { return drawPerTurn; }
     public int getAttackstat() { return extraAttackStatus; }
     public void setAttackstat(int plus) { extraAttackStatus += plus; }
+    public void healHp(int plus) 
+    {
+        if (currenthp + plus < maxHp)
+        {
+            currenthp = maxHp;
+            return;
+        }
+        currenthp += plus;
+    }
 }
