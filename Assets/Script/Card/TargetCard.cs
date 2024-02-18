@@ -28,7 +28,7 @@ public class TargetCard : MonoBehaviour,CardInterface
     public SAInformation saInformation;
     Player player;
     public PRS originPRS;//원래의 위치로 되돌아 가도록
-
+    int curturn;
     public EnemyBase enemy;
     //public GameObject dot;
     //GameObject []dots;
@@ -80,6 +80,8 @@ public class TargetCard : MonoBehaviour,CardInterface
         Select,
         Drag,
         Apply,
+        UnVisibleApply,
+        Rest,
         Destroyed
     }
     // Start is called before the first frame update
@@ -175,7 +177,17 @@ public class TargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Apply:
                 {
-                    currentState = State.Destroyed;
+                    if(saInformation.turn==0)
+                    {
+                        currentState=State.Destroyed; 
+                        break;
+                    }
+                    else 
+                    {
+                        currentState = State.Rest;
+                        break;
+                    }
+                    //currentState = State.Destroyed;
                 }
                 break;
         }
@@ -229,7 +241,10 @@ public class TargetCard : MonoBehaviour,CardInterface
             //시작 턴과 현재 턴의 차이가 amount일때 효과가 취소되도록 설정.
             //saInformation.turn -= 1;
             //턴 차이가 -1이라면 visible 처리만 안보이게
+            curturn=CardManager.Inst.turnManager.GetTurnCount();
         }
+        else if (currentState == State.Rest) { }
+        else if (currentState == State.UnVisibleApply) { }
         else if (currentState == State.Destroyed) { Destroy(this.gameObject); }
     }
 

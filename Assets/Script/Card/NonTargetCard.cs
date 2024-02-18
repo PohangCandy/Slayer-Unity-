@@ -73,6 +73,8 @@ public class NonTargetCard : MonoBehaviour,CardInterface
         Select,
         Drag,
         Apply,
+        UnVisibleApply,
+        Rest,
         Destroyed
     }
     // Start is called before the first frame update
@@ -155,8 +157,17 @@ public class NonTargetCard : MonoBehaviour,CardInterface
                 break;
             case State.Apply:
                 {
-                    if(saInformation.turn==0)
-                    currentState = State.Destroyed;
+                    if (saInformation.turn == 0)
+                    {
+                        currentState = State.Destroyed;
+                        break;
+                    }
+                    else
+                    {
+                        currentState = State.Rest;
+                        break;
+                    }
+                    
                 }
                 break;
         }
@@ -216,6 +227,8 @@ public class NonTargetCard : MonoBehaviour,CardInterface
             
             gameObject.GetComponent<Renderer>().enabled = false;
         }
+        else if (currentState == State.Rest) { }
+        else if (currentState == State.UnVisibleApply) { }
         else if(currentState==State.Destroyed) { Destroy(this.gameObject); }
         
     }
