@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardTarget, Assembly-CSharp
+      - m_Target: {fileID: 8369030221587095260}
+        m_TargetAssemblyTypeName: PlayerTarget, Assembly-CSharp
         m_MethodName: cancleEvent
         m_Mode: 1
         m_Arguments:
@@ -1034,8 +1034,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardTarget, Assembly-CSharp
+      - m_Target: {fileID: 8369030221587095260}
+        m_TargetAssemblyTypeName: PlayerTarget, Assembly-CSharp
         m_MethodName: applyEvent
         m_Mode: 1
         m_Arguments:
