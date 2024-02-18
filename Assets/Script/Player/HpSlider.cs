@@ -14,8 +14,8 @@ public class HpSlider : MonoBehaviour
     private TextMeshProUGUI hpText;
     [SerializeField]
     private TextMeshProUGUI defenseText;
-    [SerializeField]
-    private TextMeshPro EnergyText;
+    //[SerializeField]
+    //private TextMeshPro EnergyText;
     state currentState;
    // [SerializeField]
    // private Image stateImage;
@@ -38,7 +38,7 @@ public class HpSlider : MonoBehaviour
         changeState();
         setHpText();
         setHpBarValue();
-        setEnergyText();
+        //setEnergyText();
         switch(currentState)
         {
             case state.normal:
@@ -92,8 +92,8 @@ public class HpSlider : MonoBehaviour
                 break;
         }
     }
-    public void setEnergyText()
-    {
-        EnergyText.text = "Energy:" + CardManager.Inst.GetEnegy();
-    }
+    //public void setEnergyText()
+    //{
+    //    EnergyText.text = "Energy:" + CardManager.Inst.GetEnergy();
+    //}
 }

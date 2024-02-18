@@ -75,7 +75,7 @@ public class CardManager : MonoBehaviour
         Deck.Add(CardSO.cards[2]);
 
     }
-    public  int  GetEnegy(){ return Energy; }
+    public  int  GetEnergy(){ return Energy; }
     public void PlusEnergy(int plus) { Energy += plus; }
 
     void DeckShuffle()
@@ -99,7 +99,7 @@ public class CardManager : MonoBehaviour
             DrawPile[random] = flash;
         }
     }
-
+    
     void DrawPileRestart()
     {
         //DrawPile.Clear();

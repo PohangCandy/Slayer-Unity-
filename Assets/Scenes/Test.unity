@@ -2992,7 +2992,6 @@ MonoBehaviour:
   player: {fileID: 344819261}
   hpText: {fileID: 2039616960}
   defenseText: {fileID: 1822805361}
-  EnergyText: {fileID: 1277011801}
 --- !u!212 &344819264
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3985,11 +3984,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab23eedff8fdfda4c937dc09170c0b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnManager: {fileID: 2105895533}
   potionSO: {fileID: 11400000, guid: e966d1e775309214eb97570e1bc9db2a, type: 2}
   potionPrefab:
   - {fileID: 5800376917121058133, guid: f4c822786fb1d6949ae09447e49da407, type: 3}
   - {fileID: 5800376917121058133, guid: 87faca840bda6a24ca364487539d436e, type: 3}
   - {fileID: 5800376917121058133, guid: 64fb3ff8d02add546883a05a1e93ee2e, type: 3}
+  sockect: {fileID: 1131077493}
 --- !u!4 &510739796
 Transform:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
     public GameObject button;
     public SAInformation saInformation;
     public Player player;
+    public EnemyBase enemy;
 
     //public GameObject dot;
     //GameObject []dots;
@@ -99,6 +100,11 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
                         //dotsVisibleSetting(0,numberOfDot, false);
                         break;
                     }
+                    if (detectEnemy(point))
+                    {
+                        currentState |= State.Apply;
+                        break;
+                    }
                     
                 }
                 break;
@@ -150,7 +156,22 @@ void Update()
         }
     }
 
+    bool detectEnemy(Vector2 mousePoint)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePoint);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePoint, transform.forward, 400f);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.tag == "Enemy")
+            {
+                enemy = hits[i].collider.gameObject.GetComponent<EnemyBase>();
+                return true;
+            }
+            return false;
+        }
 
+        return false;
+    }
     bool isInside(Vector2 mousepoint)
     {
         if (collider.OverlapPoint(mousepoint))
@@ -172,19 +193,31 @@ void Update()
 
     void calculate()
     {
-        Vector3 directionnormal = (point - this.gameObject.transform.position).normalized;
+
+        //Vector3 directionnormal = (point - this.gameObject.transform.position).normalized;
+        //int count = 0;
+        //while((directionnormal * count).sqrMagnitude <= (point-transform.position).sqrMagnitude)
+        //{
+        //    count++;
+        //}
+        //visualizerLine.enabled = true;
+        //visualizerLine.positionCount = count;
+        //for (int i=0; i < count;i++) 
+        //{
+        //    visualizerLine.SetPosition(i,transform.position+directionnormal*i);
+        //}
+        Vector3 directionnormal = (new Vector3(point.x, point.y, 0) - new Vector3(transform.position.x, transform.position.y, -0)).normalized;
         int count = 0;
-        while((directionnormal * count).sqrMagnitude <= (point-transform.position).sqrMagnitude)
+        while ((directionnormal * count).sqrMagnitude <= (new Vector3(point.x, point.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).sqrMagnitude)
         {
             count++;
         }
         visualizerLine.enabled = true;
         visualizerLine.positionCount = count;
-        for (int i=0; i < count;i++) 
+        for (int i = 0; i < count; i++)
         {
-            visualizerLine.SetPosition(i,transform.position+directionnormal*i);
+            visualizerLine.SetPosition(i, transform.position + directionnormal * i);
         }
-
     }
 
     //public void dotsVisibleSetting(int start,int end,bool condition)

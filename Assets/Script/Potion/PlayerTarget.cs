@@ -20,7 +20,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
     public GameObject button;
     SAInformation saInformation;
     public Player player;
-
+    int curturn;
     public void setUp(Potion potion)
     {
         description.text = potion.description.ToString();
@@ -36,7 +36,10 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         Idle,
         Hover,
         Select,
-        Apply
+        UnVisibleApply,
+        Rest,
+        Apply,
+        Destroyed
     }
 
     // Start is called before the first frame update
@@ -74,10 +77,41 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
                     }
                 }
                 break;
-            case State.Select:
-                break;
             case State.Apply:
+                {
+                    if (saInformation.turn == 0)
+                    {
+                        currentState = State.Destroyed;
+                        break;
+                    }
+                    else
+                    {
+                        //saInformation.turn -= 1;
+                        currentState = State.Rest;
+                        break;
+                    }
+                    //currentState = State.Destroyed;
+                }
+
+            case State.Rest:
+                {
+                    if (curturn != CardManager.Inst.turnManager.GetTurnCount())
+                    {
+                        currentState = State.UnVisibleApply; break;
+                    }
+                }
                 break;
+            case State.UnVisibleApply:
+                {
+                    if (saInformation.turn == 0)
+                    {
+                        currentState = State.Destroyed;
+                        break;
+                    }
+                    else
+                        currentState = State.Rest;
+                    break;
+                }
         }
     }
 
@@ -110,8 +144,18 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(this, player, saInformation);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
+        else if (currentState == State.Rest)
+        {
+            curturn = CardManager.Inst.turnManager.GetTurnCount();
+        }
+        else if (currentState == State.UnVisibleApply)
+        {
+            saInformation.turn -= 1;
+            StatusAdjustment.SetFunction(this,player, saInformation);
+        }
+        else if (currentState == State.Destroyed) { Destroy(this.gameObject); }
     }
 
     bool isInside(Vector2 mousepoint)
