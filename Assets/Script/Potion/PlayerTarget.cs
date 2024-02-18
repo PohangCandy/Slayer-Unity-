@@ -144,6 +144,7 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(this, player, saInformation);
+            curturn = CardManager.Inst.turnManager.GetTurnCount();
             //Destroy(this.gameObject);
         }
         else if (currentState == State.Rest)
