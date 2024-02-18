@@ -49,6 +49,7 @@ public class TargetCard : MonoBehaviour,CardInterface
             transform.localScale = prs.scale;
         }
     }
+    
     public void setUp(Card card)
     {
         description.text = card.description.ToString();
@@ -78,7 +79,8 @@ public class TargetCard : MonoBehaviour,CardInterface
         Hover,
         Select,
         Drag,
-        Apply
+        Apply,
+        Destroyed
     }
     // Start is called before the first frame update
     void Start()
@@ -88,6 +90,7 @@ public class TargetCard : MonoBehaviour,CardInterface
         collider = GetComponent<Collider2D>();
         currentState = State.Idle;
     }
+    public void SetStateDestroy() {  currentState = State.Destroyed; }
     public void handleinput()
     {
         switch (currentState)
@@ -178,6 +181,8 @@ public class TargetCard : MonoBehaviour,CardInterface
     // Update is called once per frame
     void Update()
     {
+        if (currentState == State.Destroyed) { Destroy(this.gameObject); }
+
         Debug.Log(currentState);
         point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         handleinput();
@@ -209,7 +214,7 @@ public class TargetCard : MonoBehaviour,CardInterface
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(enemy, saInformation);
+            StatusAdjustment.SetFunction(this,enemy, saInformation);
             CardManager.Inst.PlusEnergy(-cost);
             CardManager.Inst.SwapPop(this);
             CardManager.Inst.CardAlignment();

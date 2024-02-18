@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    [SerializeField]
+    TurnManager TurnManager;
     public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
     private void Awake()
@@ -45,15 +47,11 @@ public class CardManager : MonoBehaviour
         Energy = MaxEnergy;
         istriggered = false;
         MaxHandleCardCount = 10;
-        //FirstSetup();
-        //DeckShuffle();
-        //CurrentState = State.Normal;
-        Deck = new List<Card>();
-        BurnPile = new List<Card>();
-        DrawPile = new List<Card>();
-        DiscardPile = new List<Card>();
-
-        HandOfCards = new List<Object>(10);
+        FirstSetup();
+        DeckShuffle();
+        CurrentState = State.Normal;
+        
+        
     }
     void FirstSetup()
     {
@@ -109,6 +107,7 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch (CurrentState)
         {
             case State.Normal:
@@ -396,12 +395,35 @@ public class CardManager : MonoBehaviour
        
     }
 
-    public void RandomDiscard() 
+    public void RandomDiscard(CardInterface card) 
     {
-        int value=Random.RandomRange(0, HandOfCards.Count);//하나 만큼 빼고해야함
-        Object temp = HandOfCards[value];
-        HandOfCards[value] = HandOfCards[HandOfCards.Count - 1];
-        DiscardPile.Add(temp.GetComponent<CardInterface>().getCard());
-        HandOfCards.RemoveAt(HandOfCards.Count - 1);
+        
+        if (HandOfCards.Count == 1)
+            return;
+        int value=Random.RandomRange(0, HandOfCards.Count);
+
+        while (HandOfCards[value] == card)
+            value = Random.RandomRange(0, HandOfCards.Count);//값이 같을경우에 다른값으로 바꾸기
+
+        DiscardPile.Add(HandOfCards[value].GetComponent<CardInterface>().getCard());
+
+        TargetCard obj;
+        NonTargetCard obj1;
+        if (IsTargetCard(HandOfCards[value] as CardInterface))
+        {
+            obj = HandOfCards[value] as TargetCard;
+            obj.SetStateDestroy();
+        }
+        else
+        {
+            obj1 = HandOfCards[value] as NonTargetCard;
+            obj1.SetStateDestroy();
+        }
+        
+        //Destroy(obj);
+        //Object temp = HandOfCards[value];
+        //HandOfCards[value] = HandOfCards[HandOfCards.Count - 1];
+
+        //HandOfCards.RemoveAt(HandOfCards.Count - 1);
     }
 }
