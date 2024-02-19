@@ -4,6 +4,7 @@ using UnityEngine;
 using StatusAdjustmentInformationNameSpace;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using TMPro;
 
 public static class StatusAdjustment
 {
@@ -50,6 +51,7 @@ public static class StatusAdjustment
                 case "defensestatup":
                     {                     
                         DefenseUP(targetObject, sAInformation);
+                       
                     }
                     break;
                 case "weakness":
@@ -131,6 +133,13 @@ public static class StatusAdjustment
         {
             Player p=targetObject as Player;
             p.healHp(sAInformation.turn);
+            if(sAInformation.turn <= 1) 
+            { 
+                p.playerSAUI.SA_UI_Obj[1].SetActive(false);
+                return;
+            }
+            p.playerSAUI.SA_UI_Obj[1].SetActive(true);
+            p.playerSAUI.SA_UI_Obj[1].GetComponentInChildren<TextMeshProUGUI>().text=sAInformation.turn.ToString();
         }
     }
 
@@ -167,11 +176,14 @@ public static class StatusAdjustment
             {
                 Player player = targetObject as Player;
                 player.setAttackstat(2);
+                player.playerSAUI.SA_UI_Obj[3].SetActive(true);
+                player.playerSAUI.SA_UI_Obj[3].GetComponentInChildren<TextMeshProUGUI>().text = sAInformation.amount.ToString();
             }
             else
             {
                 Player player = targetObject as Player;
                 player.setAttackstat(-2);
+                player.playerSAUI.SA_UI_Obj[3].SetActive(false);
             }
         }
     }
@@ -182,6 +194,7 @@ public static class StatusAdjustment
         {
             Player player = targetObject as Player;
             player.setAddtionalDefense(sAInformation.amount);
+            
         }
     }
 
@@ -201,6 +214,7 @@ public static class StatusAdjustment
         {
             Player player = targetObject as Player;
             player.setDefense(sAInformation.amount);
+            player.playerSAUI.Set_UI_Defense(sAInformation.amount, 1);
         }
     }
 

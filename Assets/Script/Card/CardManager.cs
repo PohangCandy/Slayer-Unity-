@@ -202,14 +202,14 @@ public class CardManager : MonoBehaviour
         Drawpiletext.text = DrawPile.Count.ToString();
         Discardpiletext.text= DiscardPile.Count.ToString();
         {//if(Input.GetKeyDown(KeyCode.E)) { Debug.Log("E"); }
-            //if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
-            //if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
-            //if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
-            //if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    DrawPileRestart();
-            //    PartialShuffle();
-            //}
+            if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
+            if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
+            if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                DrawPileRestart();
+                PartialShuffle();
+            }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Deck.Add(CardSO.cards[0]);
