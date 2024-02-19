@@ -214,7 +214,7 @@ public static class StatusAdjustment
         {
             Player player = targetObject as Player;
             player.setDefense(sAInformation.amount);
-            player.playerSAUI.Set_UI_Defense(sAInformation.amount, 1);
+            player.playerSAUI.SA_UI_Obj[6].SetActive(true);
         }
     }
 
