@@ -2949,7 +2949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -13, y: 45}
   m_SizeDelta: {x: 122, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &347043818
@@ -2988,7 +2988,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 120.333336, y: 187}
+    oldSize: {x: 267.33334, y: 294.66666}
     newSize: {x: 3.61, y: 5.61}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3007,7 +3007,7 @@ Animator:
   m_GameObject: {fileID: 347043815}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3f658da4825a574198a95007fec7c77, type: 2}
+  m_Controller: {fileID: 22100000, guid: ff84ab85677ed1245890c39410a629fa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3067,7 +3067,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4e928d00f34e32748ab795df289d4935, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbde207a6764ee44db2a69dea01adb34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7878,7 +7878,7 @@ MonoBehaviour:
   enemySocket: {fileID: 0}
   playerSocket: {fileID: 0}
   battleSocket: {fileID: 1321311725}
-  nextScenename: 
+  nextScenename: tMap2-2
 --- !u!4 &718328586
 Transform:
   m_ObjectHideFlags: 0
@@ -10805,7 +10805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 40}
+  m_AnchoredPosition: {x: -15, y: 124}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &945296749

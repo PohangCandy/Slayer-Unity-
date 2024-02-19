@@ -7878,7 +7878,7 @@ MonoBehaviour:
   enemySocket: {fileID: 0}
   playerSocket: {fileID: 0}
   battleSocket: {fileID: 1321311725}
-  nextScenename: 
+  nextScenename: tMap3-1
 --- !u!4 &718328586
 Transform:
   m_ObjectHideFlags: 0
