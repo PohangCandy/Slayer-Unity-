@@ -30,10 +30,10 @@ public class EnemyBase : MonoBehaviour
     private float DefenseValue;
     private int PowerUpValue;
 
-    public enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff};
+    public enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower};
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
-    enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargeBuffPercent = 20 };
+    enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargePowerPercent = 20 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -158,13 +158,13 @@ public class EnemyBase : MonoBehaviour
             (int)EnemyPatternPercent.ChargeDeBuffPercent)
         {
             
-            NextPattern = EnemyPatternType.ChargeDeBuff;
+            NextPattern = EnemyPatternType.ChargeVulnerable;
         }
         else if(randompercentage < (int)EnemyPatternPercent.ChargeDefensePercent + (int)EnemyPatternPercent.ReadyAttackPercent + 
-            (int)EnemyPatternPercent.ChargeDeBuffPercent + (int)EnemyPatternPercent.ChargeBuffPercent)
+            (int)EnemyPatternPercent.ChargeDeBuffPercent + (int)EnemyPatternPercent.ChargePowerPercent)
         {
            
-            NextPattern = EnemyPatternType.ChargeBuff;
+            NextPattern = EnemyPatternType.ChargePower;
         }
 
         SetNextpattern();
@@ -173,7 +173,7 @@ public class EnemyBase : MonoBehaviour
     void SetNextpattern()
     {
         switch(NextPattern)
-        //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
+        //ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower
         {
             case EnemyPatternType.ChargeDefense:
                 SetNextActionUI(EnemyPatternType.ChargeDefense);               
@@ -181,11 +181,11 @@ public class EnemyBase : MonoBehaviour
             case EnemyPatternType.ReadyAttack:
                 SetNextActionUI(EnemyPatternType.ReadyAttack);
                 break;
-            case EnemyPatternType.ChargeDeBuff:
-                SetNextActionUI(EnemyPatternType.ChargeDeBuff);
+            case EnemyPatternType.ChargeVulnerable:
+                SetNextActionUI(EnemyPatternType.ChargeVulnerable);
                 break;
-            case EnemyPatternType.ChargeBuff:
-                SetNextActionUI(EnemyPatternType.ChargeBuff);
+            case EnemyPatternType.ChargePower:
+                SetNextActionUI(EnemyPatternType.ChargePower);
                 break;
             
             default:
@@ -234,6 +234,7 @@ public class EnemyBase : MonoBehaviour
     {
         Debug.Log("Player's Updateturnvalue is " + updateturn);
         GetDown_VulnerableLastTurn(-updateturn);
+        GetDown_WeakLastTurn(-updateturn);
     }
 
     void SetCurAction()
@@ -244,7 +245,7 @@ public class EnemyBase : MonoBehaviour
     void DoCurPattern(EnemyPatternType curpattern)
     {
         switch (curpattern)
-        //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
+        //ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower
         {
             case EnemyPatternType.ChargeDefense:
                 EnemyAnim.SetTrigger("ChargingDefense");//Do_Defense() is in event at anim
@@ -252,10 +253,10 @@ public class EnemyBase : MonoBehaviour
             case EnemyPatternType.ReadyAttack:
                 Do_Attack();
                 break;
-            case EnemyPatternType.ChargeDeBuff:
+            case EnemyPatternType.ChargeVulnerable:
                 EnemyAnim.SetTrigger("ChargingDeBuff");
                 break;
-            case EnemyPatternType.ChargeBuff:
+            case EnemyPatternType.ChargePower:
                 EnemyAnim.SetTrigger("ChargingBuff");
                 break;
 
@@ -285,13 +286,19 @@ public class EnemyBase : MonoBehaviour
         SA_enemy.t_EnemyGetVulnerable(this, updateturn); //(target, value, lastturn)
         //EnemySA.Set_UI_Vulnerable(0);//(lastturn)
     }
+    void GetDown_WeakLastTurn(int updateturn)
+    {
+        SA_enemy.t_EnemyGetWeak(this, updateturn); //(target, value, lastturn)
+        //EnemySA.Set_UI_Vulnerable(0);//(lastturn)
+    }
     void Do_DeBuff()
     {
         Debug.Log("DoDeuff" );
         //StatusAdjustment.PlayerGetVulnerable(this, 5);
         //StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
-        SA_enemy.t_EnemyGetVulnerable(this, 2);
+        //SA_enemy.t_EnemyGetVulnerable(this, 2);
         //EnemySA.Set_UI_Vulnerable(5);
+        target.settakedamagepercent(1.5f); // Set player get vulnerable
         ResetEnemyBehaviour();
     }
 

@@ -28,8 +28,6 @@ public class SA_UI : MonoBehaviour
     private Animator SA_anim;
     void Start()
     {
-
-       
         for(int i = 0; i < SA_UI_Obj.Length ;i++)
         {
             SA_UI_Obj[i].SetActive(false);
@@ -45,10 +43,9 @@ public class SA_UI : MonoBehaviour
         SA_UI_Obj[2].SetActive(true);
         SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
     }
-    public void Set_UI_Weak(int weakvalue)
+    public void Set_UI_Weak(int lastturn)
     {
-        SA_UI_Obj[5].SetActive(true);
-        SA_UI_Obj[5].GetComponentInChildren<TextMeshProUGUI>().text = weakvalue.ToString();
+        UpdateUIwithTurn(SA_UI_Obj[5], lastturn, lastturn);
     }
     public void Set_UI_Vulnerable(int lastturn)
     {
@@ -76,9 +73,5 @@ public class SA_UI : MonoBehaviour
         }
     }
 
-    void RemoveUIObj(GameObject removeobj)
-    {
-        removeobj.SetActive(false);
-    }
 
 }
