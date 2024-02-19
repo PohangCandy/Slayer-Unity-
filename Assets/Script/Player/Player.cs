@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     float takedamagepercent;
     float attackdamagepercent;
     public TextMeshProUGUI goldtext;
+    public SA_UI player;
 
     Renderer playerColor;
     private void Awake()
