@@ -332,6 +332,7 @@ public class CardManager : MonoBehaviour
     {
         DrawCard(5);
         Energy = MaxEnergy;
+        if(player)
         player.defenseReset();
     }
     public void SwapPop(Object _card)

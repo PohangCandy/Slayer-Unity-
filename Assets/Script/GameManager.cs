@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject enemySocket;
     public GameObject playerSocket;
+    public GameObject battleSocket;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +23,16 @@ public class GameManager : MonoBehaviour
     }
     void PlayerLose()
     {
-        playerSocket.SetActive(false);
+        //playerSocket.SetActive(false);
         defect.SetActive(true);
+        battleSocket.SetActive(false);
         CardManager.Inst.BattleEnd();
     }
     void PlayerWin()
     {
-        enemySocket.SetActive(false);
+        //enemySocket.SetActive(false);
         //enemyBases[i].SetActive(false);
+        battleSocket.SetActive(false);
         victory.SetActive(true);
         CardManager.Inst.BattleEnd();
     }
