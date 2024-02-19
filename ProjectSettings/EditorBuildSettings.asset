@@ -15,6 +15,45 @@ EditorBuildSettings:
     path: Assets/Scenes/Battle.unity
     guid: fa03e0f278389d34a85eacb17deecc1d
   - enabled: 1
+    path: Assets/Scenes/Map/tMap1-1.unity
+    guid: 93c3b28ce01d2e14b905064cfbd56c87
+  - enabled: 1
+    path: Assets/Scenes/Map/tMap1-2.unity
+    guid: d25fd0a02abfaae458bfb5a7930fecca
+  - enabled: 1
+    path: Assets/Scenes/Map/tMap1-3.unity
+    guid: 4a478b27fc2f9824b8a9981be3681534
+  - enabled: 1
+    path: Assets/Scenes/Map/tMap2-1.unity
+    guid: a6a12b724f843e248b0dbc4ceae42e52
+  - enabled: 1
+    path: Assets/Scenes/Map/tMap2-2.unity
+    guid: 4eeb0f615f1fb5e45b82a3a307b87ac5
+  - enabled: 1
     path: Assets/Scenes/Map/tMap3-1.unity
     guid: f0a591703072e594f8f90ab1bb05f01b
+  - enabled: 1
+    path: Assets/Scenes/Map/tMap4-1.unity
+    guid: 10b8102c9ea04be429e50f7986fdf065
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle1-1.unity
+    guid: 799aa7983ac555e4aa8ca46af45873ea
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle1-2.unity
+    guid: 6436fb922f53cce46b9747d434476b4f
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle1-3.unity
+    guid: 95a074a482a84e14bb8033d777b46698
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle2-1.unity
+    guid: 0499c6e6074659944804262c936434d0
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle2-2.unity
+    guid: d7abb7c3e70e2804098fffc14f028559
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle3-1.unity
+    guid: 40b5ba0c0a4d268458a4bbb94330adb1
+  - enabled: 1
+    path: Assets/Scenes/Battle/tBattle4-1.unity
+    guid: 6a559f354066f1446b9029479fb9e093
   m_configObjects: {}
