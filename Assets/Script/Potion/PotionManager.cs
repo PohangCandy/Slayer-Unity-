@@ -25,7 +25,7 @@ public class PotionManager : MonoBehaviour
     void SetupBuffer()
     {
         potionBuffer=new List<Potion> ();
-        for(int i=0;i<potionSO.potions.Length+4;i++) 
+        for(int i=0;i<potionSO.potions.Length+8;i++) 
         {
             int rand = Random.Range(0, potionSO.potions.Length);
             Potion potion = potionSO.potions[rand];
@@ -39,10 +39,7 @@ public class PotionManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.O)) 
         {
-           if (potionBuffer.Count <= 0) return;
-           int rand=Random.Range(0,potionBuffer.Count-1);
-           addPotion(potionBuffer[rand]);
-           potionBuffer.RemoveAt(rand);
+            RandomPotionAdd();
 
 
         }
@@ -56,6 +53,13 @@ public class PotionManager : MonoBehaviour
             Debug.Log(PopPotion().name);
     }
 
+    public void RandomPotionAdd()
+    {
+        if (potionBuffer.Count <= 0) return;
+        int rand = Random.Range(0, potionBuffer.Count - 1);
+        addPotion(potionBuffer[rand]);
+        potionBuffer.RemoveAt(rand);
+    }
     public Potion PopPotion()
     {
         if( potionBuffer.Count <= 0 ) 
