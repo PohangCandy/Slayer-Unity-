@@ -293,7 +293,13 @@ public class CardManager : MonoBehaviour
         DrawPile.Clear();
         BurnPile.Clear();
         DiscardPile.Clear();
+        int c = HandOfCards.Count;
+        for(int i=0;i < c;i++) 
+        {
+            DestroyHandofCard(HandOfCards[i]);
+        }
         HandOfCards.Clear();
+
     }
 
     public void DrawCard(int count)

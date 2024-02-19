@@ -4,24 +4,49 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject defect;
+    public GameObject victory;
     public Player player;
     public GameObject[] enemyBases;
+
+    public GameObject enemySocket;
+    public GameObject playerSocket;
     // Start is called before the first frame update
     void Start()
     {
+        defect.SetActive(false);
+        victory.SetActive(false);
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         enemyBases = GameObject.FindGameObjectsWithTag("Enemy");
+    }
+    void PlayerLose()
+    {
+        playerSocket.SetActive(false);
+        defect.SetActive(true);
+        CardManager.Inst.BattleEnd();
+    }
+    void PlayerWin()
+    {
+        enemySocket.SetActive(false);
+        //enemyBases[i].SetActive(false);
+        victory.SetActive(true);
+        CardManager.Inst.BattleEnd();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player != null) 
+       if(Input.GetKeyDown(KeyCode.C))
+        { PlayerLose(); }
+        if (Input.GetKeyDown(KeyCode.D))
+        {   PlayerWin(); }
+
+        if (player != null) 
         {
             if(player.getCurrentHp()<=0)
             {
-
+                PlayerLose();
             }
         }
 
@@ -29,11 +54,11 @@ public class GameManager : MonoBehaviour
         {
             for(int i=0;i<enemyBases.Length; i++) 
             {
-                if ()
+                if (enemyBases[i].GetComponent<EnemyBase>().GetEnemyCurHp()>0)
                 {
-                    
+                    return;
                 }
-                enemyBases[i].GetComponent<EnemyBase>();
+                    PlayerWin();
             }
         }
     }
