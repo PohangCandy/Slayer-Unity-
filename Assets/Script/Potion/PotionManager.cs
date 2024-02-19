@@ -72,6 +72,7 @@ public class PotionManager : MonoBehaviour
         int rand = Random.Range(0, potionSO.potions.Length-1);
         addPotion(potionSO.potions[rand]);
         potionBuffer.Add(potionSO.potions[rand]);
+        DontDestroyDeck.instance.HasPotion.Add(potionSO.potions[rand]);
         //potionBuffer.RemoveAt(rand);
     }
     //public Potion PopPotion()
