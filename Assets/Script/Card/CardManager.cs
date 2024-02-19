@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
@@ -9,6 +10,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class CardManager : MonoBehaviour
 {
     public TurnManager turnManager;
+    bool openone;
     public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
     private void Awake()
@@ -29,6 +31,21 @@ public class CardManager : MonoBehaviour
     List<Card> DrawPile;
     int curturn;
 
+    //보여주기용
+    public TextMeshProUGUI Drawpiletext;
+    public TextMeshProUGUI Discardpiletext;
+
+    public GameObject Drawpiledrawer;
+    public GameObject Discardpiledrawer;
+    public GameObject Deckpiledrawer;
+
+    List<GameObject> showDrawpiledrawer;
+    List<GameObject> showDiscardpiledrawer;
+    List<GameObject> showDeckpiledrawer;
+
+    public GameObject showcaseCardPrefeb; 
+
+
     public Transform CardSpawnPoint;
     public Transform CardLeft;
     public Transform CardRight;
@@ -37,20 +54,16 @@ public class CardManager : MonoBehaviour
     State CurrentState;
     int MaxHandleCardCount;
     public bool istriggered;
-    enum State
-    {
-        Normal
-        , Battle
-    }
+
     private void Start()
     {
+        openone = false;
         MaxEnergy = 3;
         Energy = MaxEnergy;
         istriggered = false;
         MaxHandleCardCount = 10;
         FirstSetup();
         DeckShuffle();
-        CurrentState = State.Normal;
 
         DeckToDraw();
         MyTurn();
@@ -62,6 +75,10 @@ public class CardManager : MonoBehaviour
         BurnPile = new List<Card>();
         DrawPile = new List<Card>();
         DiscardPile = new List<Card>();
+
+        showDiscardpiledrawer=new List<GameObject>();
+        showDrawpiledrawer=new List<GameObject>();
+        showDeckpiledrawer =new List<GameObject>();
 
         HandOfCards = new List<Object>(10);
         for (int i = 0; i < 4; i++)
@@ -75,7 +92,77 @@ public class CardManager : MonoBehaviour
         Deck.Add(CardSO.cards[2]);
 
     }
-    public  int  GetEnergy(){ return Energy; }
+    public void openshowDrawCard()
+    {
+        if (openone)
+            return;
+        for(int i = 0;i <DrawPile.Count;i++) 
+        { 
+            GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
+            gameObject.GetComponent<SpriteRenderer>().sprite = DrawPile[i].sprite;
+            gameObject.transform.SetParent(Drawpiledrawer.transform);
+            showDrawpiledrawer.Add(gameObject);
+        }
+        openone = true;
+    }
+
+    public void closeshowDrawCard()
+    {
+        openone = false;
+        for(int i = 0;i< showDrawpiledrawer.Count;i++)
+        {
+            Destroy(showDrawpiledrawer[i]);
+        }
+        showDrawpiledrawer.Clear();
+    }
+    public void openshowDeckCard()
+    {
+        if (openone)
+            return;
+        for (int i = 0;i <Deck.Count;i++) 
+        { 
+            GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
+            gameObject.GetComponent<SpriteRenderer>().sprite = Deck[i].sprite;
+            gameObject.transform.SetParent(Deckpiledrawer.transform);
+            showDeckpiledrawer.Add(gameObject);
+        }
+        openone = true;
+    }
+
+    public void closeshowDeckCard()
+    {
+        openone = false;
+        for (int i = 0;i< showDeckpiledrawer.Count;i++)
+        {
+            Destroy(showDeckpiledrawer[i]);
+        }
+        showDeckpiledrawer.Clear();
+    }
+
+    public void openshowDiscardCard()
+    {
+        if (openone)
+            return;
+        for (int i = 0; i < DiscardPile.Count; i++)
+        {
+            GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
+            gameObject.GetComponent<SpriteRenderer>().sprite = DiscardPile[i].sprite;
+            gameObject.transform.SetParent(Discardpiledrawer.transform);
+            showDiscardpiledrawer.Add(gameObject);
+        }
+        openone = true;
+    }
+
+    public void closeshowDiscardCard()
+    {
+        openone = false;
+        for (int i = 0; i < showDiscardpiledrawer.Count; i++)
+        {
+            Destroy(showDiscardpiledrawer[i]);
+        }
+        showDiscardpiledrawer.Clear();
+    }
+    public int  GetEnergy(){ return Energy; }
     public void PlusEnergy(int plus) { Energy += plus; }
 
     void DeckShuffle()
@@ -111,26 +198,18 @@ public class CardManager : MonoBehaviour
     void Update()
     {
 
-        
-        switch (CurrentState)
-        {
-            case State.Normal:
-                break;
-            case State.Battle:
-                {
-                }
-                break;
-        }
 
+        Drawpiletext.text = DrawPile.Count.ToString();
+        Discardpiletext.text= DiscardPile.Count.ToString();
         {//if(Input.GetKeyDown(KeyCode.E)) { Debug.Log("E"); }
-            if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
-            if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
-            if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                DrawPileRestart();
-                PartialShuffle();
-            }
+            //if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
+            //if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
+            //if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
+            //if (Input.GetKeyDown(KeyCode.D))
+            //{
+            //    DrawPileRestart();
+            //    PartialShuffle();
+            //}
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Deck.Add(CardSO.cards[0]);
@@ -186,7 +265,7 @@ public class CardManager : MonoBehaviour
         {
             DrawPile.Add(Deck[i]);
         }
-        CurrentState= State.Battle;
+
     }
 
     public void TurnOver()

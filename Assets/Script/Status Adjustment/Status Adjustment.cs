@@ -118,7 +118,7 @@ public static class StatusAdjustment
                     break;
                 case "defense":
                     {
-                        DefenseUP(targetObject, sAInformation);
+                        Defense(targetObject, sAInformation);
                     }break;
             }
            
