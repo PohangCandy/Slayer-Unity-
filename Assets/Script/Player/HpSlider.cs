@@ -36,6 +36,8 @@ public class HpSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         //Debug.Log(Mathf.Lerp(hpBar.value, (player.getCurrentHp() / player.getMaxHp()), Time.deltaTime * 10));
         changeState();
         setHpText();
@@ -46,6 +48,7 @@ public class HpSlider : MonoBehaviour
         {
             case state.normal:
                 {
+                    
                     defenseText.enabled = false;
                     //stateImage=Resources.Load("Texture/Icon/heart.png",typeof(Texture2D)) as Image;
                     //Texture2D texture = Resources.Load("Texture/Icon/heart") as Texture2D;

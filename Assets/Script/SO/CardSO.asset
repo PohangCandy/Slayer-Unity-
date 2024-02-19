@@ -109,7 +109,7 @@ MonoBehaviour:
     target: hp
     type: Power
     turn: -1
-    category: playerhpminusone allenemydamage
+    category: allenemydamage playerhpminusone
     amount: 5
     reinforcelevel: 0
     cost: 1
