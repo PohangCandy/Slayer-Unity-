@@ -164,7 +164,7 @@ public static class StatusAdjustment
         if (IsPlayer(targetObject))
         {
             Player player = targetObject as Player;
-            player.pureHptakeDamage(1);
+            player.pureHptakeDamage(5);
         }
     }
 
