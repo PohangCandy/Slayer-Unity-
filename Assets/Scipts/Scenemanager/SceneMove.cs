@@ -20,9 +20,54 @@ public class SceneMove : MonoBehaviour
     {
         SceneManager.LoadScene("Map");
     }
-    public void LoadBattleScene()
+    public void LoadFirstFirstMapScene()
     {
-        SceneManager.LoadScene("Battle");
+        SceneManager.LoadScene("tMap1-1");
+    }
+    public void LoadFirstSecondMapScene()
+    {
+        SceneManager.LoadScene("tMap1-2");
+    }
+    public void LoadFirstThirdMapScene()
+    {
+        SceneManager.LoadScene("tMap1-3");
+    }
+    public void LoadSecondFirstMapScene()
+    {
+        SceneManager.LoadScene("tMap2-1");
+    }
+    public void LoadEliteandStoreMapScene()
+    {
+        SceneManager.LoadScene("tMap3-1");
+    }
+    public void LoadBattleFirstFirstScene()
+    {
+        SceneManager.LoadScene("tBattle1-1");
+    }
+    public void LoadBattleFirstSecondScene()
+    {
+        SceneManager.LoadScene("tBattle1-2");
+    }
+    public void LoadBattleFirstThridScene()
+    {
+        SceneManager.LoadScene("tBattle1-3");
+    }
+    public void LoadBattleSecondFirstScene()
+    {
+        SceneManager.LoadScene("tBattle2-1");
+    }
+    public void LoadBattleSecondSecondScene()
+    {
+        SceneManager.LoadScene("tBattle2-2");
+    }
+
+    public void LoadBattleThirdFirstScene()
+    {
+        SceneManager.LoadScene("tBattle3-1");
+    }
+    public void LoadBattleFouthFirstScene()
+    {
+        SceneManager.LoadScene("tBattle4-1");
     }
     public void ResetButtonState()
     {
