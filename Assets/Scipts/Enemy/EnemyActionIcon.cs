@@ -25,7 +25,7 @@ public class EnemyActionIcon : MonoBehaviour
     public void SetNextActionImage(EnemyBase.EnemyPatternType nextpattern)
     {
         switch (nextpattern)
-        //ChargeDefense, ReadyAttack, ChargeDeBuff, ChargeBuff
+        //ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower
         {
             case EnemyPatternType.ChargeDefense:
                 PowertxtObj.SetActive(false);
@@ -39,11 +39,11 @@ public class EnemyActionIcon : MonoBehaviour
                 //powertext.text = Enemypower.ToString();
                 SetPowerTxt(Enemypower);
                 break;
-            case EnemyPatternType.ChargeDeBuff:
+            case EnemyPatternType.ChargeVulnerable:
                 PowertxtObj.SetActive(false);
                 ChangeImage(NextAction[2]);
                 break;
-            case EnemyPatternType.ChargeBuff:
+            case EnemyPatternType.ChargePower:
                 PowertxtObj.SetActive(false);
                 ChangeImage(NextAction[3]);
                 break;
