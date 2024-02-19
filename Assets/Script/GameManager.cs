@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,17 +43,19 @@ public class GameManager : MonoBehaviour
         battleSocket.SetActive(false);
         victory.SetActive(true);
         CardManager.Inst.BattleEnd();
+        PotionManager.instance.EndBattle();
         DontDestroyDeck.instance.playerhp=player.getCurrentHp();
     }
 
     public void GoNextScene()
     {
-
+        SceneManager.LoadScene(nextScenename);
     }
 
     public void GoTitle()
     {
-
+        dont.startgame();
+        SceneManager.LoadScene("Title");
     }
 
     // Update is called once per frame

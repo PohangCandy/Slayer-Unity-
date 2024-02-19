@@ -29,7 +29,9 @@ public class PotionManager : MonoBehaviour
         potionBuffer=new List<Potion> ();
         for (int i = 0; i < DontDestroyDeck.instance.HasPotion.Count; i++)
         {
-            potionBuffer.Add(DontDestroyDeck.instance.HasPotion[i]);
+            addPotion(DontDestroyDeck.instance.HasPotion[i]);
+            //potionBuffer.Add(DontDestroyDeck.instance.HasPotion[i]);
+
         }
 
         //for(int i=0;i<potionSO.potions.Length+8;i++) 
