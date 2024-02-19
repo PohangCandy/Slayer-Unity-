@@ -14,7 +14,9 @@ public class PotionManager : MonoBehaviour
     [SerializeField] List<GameObject> potionPrefab;
     public GameObject sockect;
 
+    //List<GameObject> giveit;
     List<Potion> potionBuffer;
+    
     List<CardTarget> cardPotionbuffer;
     List<PlayerTarget> playerPotionbuffer;
     List<EnemyTarget> enemyPotionbuffer;
@@ -25,23 +27,36 @@ public class PotionManager : MonoBehaviour
     void SetupBuffer()
     {
         potionBuffer=new List<Potion> ();
-        for(int i=0;i<potionSO.potions.Length+8;i++) 
+        for (int i = 0; i < DontDestroyDeck.instance.HasPotion.Count; i++)
         {
-            int rand = Random.Range(0, potionSO.potions.Length);
-            Potion potion = potionSO.potions[rand];
-           potionBuffer.Add(potion);
+            addPotion(DontDestroyDeck.instance.HasPotion[i]);
+            //potionBuffer.Add(DontDestroyDeck.instance.HasPotion[i]);
 
         }
-    }
 
+        //for(int i=0;i<potionSO.potions.Length+8;i++) 
+        //{
+        //    int rand = Random.Range(0, potionSO.potions.Length);
+        //    Potion potion = potionSO.potions[rand];
+        //   potionBuffer.Add(potion);
+        //}
+    }
+    public void EndBattle()
+    {
+        DontDestroyDeck.instance.HasPotion.Clear();   
+        for (int i = 0; i < sockect.transform.childCount; i++)
+        {
+            DontDestroyDeck.instance.HasPotion.Add(sockect.transform.GetChild(i).GetComponent<Potion>());
+
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.O)) 
         {
             RandomPotionAdd();
-
-
         }
         //if (Input.GetKeyDown(KeyCode.Q))
         //    addPotion(0);
@@ -49,28 +64,32 @@ public class PotionManager : MonoBehaviour
         //    addPotion(1);
         //if (Input.GetKeyDown(KeyCode.E))
         //    addPotion(2);
-        if (Input.GetKeyDown(KeyCode.R))
-            Debug.Log(PopPotion().name);
+        //if (Input.GetKeyDown(KeyCode.R))
+        //    Debug.Log(PopPotion().name);
     }
 
     public void RandomPotionAdd()
     {
-        if (potionBuffer.Count <= 0) return;
-        int rand = Random.Range(0, potionBuffer.Count - 1);
-        addPotion(potionBuffer[rand]);
-        potionBuffer.RemoveAt(rand);
+        //if (potionBuffer.Count <= 0) return;
+        int rand = Random.Range(0, potionSO.potions.Length-1);
+        addPotion(potionSO.potions[rand]);
+        potionBuffer.Add(potionSO.potions[rand]);
+        DontDestroyDeck.instance.HasPotion.Add(potionSO.potions[rand]);
+        //potionBuffer.RemoveAt(rand);
     }
-    public Potion PopPotion()
-    {
-        if( potionBuffer.Count <= 0 ) 
-        {
-            SetupBuffer ();
-        }
-        Potion potion = potionBuffer[0];
-        potionBuffer.RemoveAt(0);
-        return potion;
-    }
+    //public Potion PopPotion()
+    //{
+    //    if( potionBuffer.Count <= 0 ) 
+    //    {
+    //        SetupBuffer ();
+    //    }
+    //    Potion potion = potionBuffer[0];
+    //    potionBuffer.RemoveAt(0);
+    //    return potion;
+    //}
     
+
+    //포션을 추가하면 
     void addPotion(Potion potion)
     {
         
@@ -78,7 +97,6 @@ public class PotionManager : MonoBehaviour
         {
             case "Card":
                 {
-                    
                     var potionObject = Instantiate(potionPrefab[0],new Vector3(0,0,0), Quaternion.identity);
                 var cardTarget=potionObject.GetComponent<CardTarget>();
                     cardTarget.transform.SetParent(sockect.transform, false);

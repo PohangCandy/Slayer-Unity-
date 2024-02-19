@@ -24,11 +24,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         maxHp = 80;
-        currenthp = maxHp;
+        //currenthp = maxHp;
+
     }
     // Start is called before the first frame update
     void Start()
     {
+        currenthp = DontDestroyDeck.instance.playerhp;
         gold = 50;
         drawPerTurn = 5;
         additionalDefense = 0;
@@ -86,6 +88,10 @@ public class Player : MonoBehaviour
         }
         defense = 0;
         currenthp += temp;
+    }
+    public void battleEnd()
+    {
+        DontDestroyDeck.instance.playerhp = currenthp;
     }
 
     public void pureHptakeDamage(float damage)

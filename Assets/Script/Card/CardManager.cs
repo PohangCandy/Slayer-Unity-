@@ -69,6 +69,7 @@ public class CardManager : MonoBehaviour
 
         DeckToDraw();
         MyTurn();
+        StartCoroutine(alignment());
         curturn = 0;
     }
     void FirstSetup()
@@ -199,12 +200,19 @@ public class CardManager : MonoBehaviour
         DontDestroyDeck.instance.addDeck(CardSO.cards[random]);
     }
     // Update is called once per frame
+    IEnumerator alignment()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CardAlignment();
+        
+    }
     void Update()
     {
 
 
         Drawpiletext.text = DrawPile.Count.ToString();
         Discardpiletext.text= DiscardPile.Count.ToString();
+        //CardAlignment();
         {//if(Input.GetKeyDown(KeyCode.E)) { Debug.Log("E"); }
             if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
             if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }

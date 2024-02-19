@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class GameManager : MonoBehaviour
     public GameObject victory;
     public Player player;
     public GameObject[] enemyBases;
-
+    public DontDestroyDeck dont;
     public GameObject enemySocket;
     public GameObject playerSocket;
     public GameObject battleSocket;
+    public string nextScenename;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,11 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         enemyBases = GameObject.FindGameObjectsWithTag("Enemy");
+        dont = GameObject.Find("DeckDontDestroy").GetComponent<DontDestroyDeck>();
+    }
+    public void endGame()
+    {
+        dont.endgame();
     }
     void PlayerLose()
     {
@@ -27,6 +34,7 @@ public class GameManager : MonoBehaviour
         defect.SetActive(true);
         battleSocket.SetActive(false);
         CardManager.Inst.BattleEnd();
+
     }
     void PlayerWin()
     {
@@ -35,12 +43,27 @@ public class GameManager : MonoBehaviour
         battleSocket.SetActive(false);
         victory.SetActive(true);
         CardManager.Inst.BattleEnd();
+        PotionManager.instance.EndBattle();
+        DontDestroyDeck.instance.playerhp=player.getCurrentHp();
+    }
+
+    public void GoNextScene()
+    {
+        SceneManager.LoadScene(nextScenename);
+    }
+
+    public void GoTitle()
+    {
+        dont.startgame();
+        SceneManager.LoadScene("Title");
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.C))
+        if(dont==null)
+            dont = GameObject.Find("DeckDontDestroy").GetComponent<DontDestroyDeck>();
+        if (Input.GetKeyDown(KeyCode.C))
         { PlayerLose(); }
         if (Input.GetKeyDown(KeyCode.D))
         {   PlayerWin(); }
