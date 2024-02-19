@@ -42,7 +42,7 @@ public static class SA_enemy
     public static void t_EnemyGetWeak(EnemyBase enemy, int lastTurn)
     {
         float WeakPercent_float = 1f - (t_WeakPercentage / 100f);//0.75
-        enemy.ApplyWeak(t_WeakPercentage,lastTurn);
+        enemy.ApplyWeak(WeakPercent_float, lastTurn);
     }
 
 
