@@ -89,12 +89,12 @@ public class TurnManager : MonoBehaviour
 
     public void StartCountEnemyTurn()
     {
-        StartCountTurn(t_curEnemyturnCount);
+        StartCountTurn(ref t_curEnemyturnCount);
     }
 
     public void StartCountPlayerTurn()
     {
-        StartCountTurn(t_curPlayerturnCount);
+        StartCountTurn(ref t_curPlayerturnCount);
     }
 
     public int GetEnemyTurnCount()
