@@ -49,14 +49,14 @@ public static class SA_enemy
     public static void t_EnemyGetVulnerable(EnemyBase enemy, int lastturn)
     {
         float VulnerablePercent_float = (float)((t_VulnerablePercentage + 100f) / 100f);//0.5
-        
         enemy.ApplyVulnerable(VulnerablePercent_float, lastturn);
     }
 
 
     public static void t_EnemyGetDefense(EnemyBase enemy, int value, int lastturn)
     {
-        enemy.SetDefense(value, lastturn);
+        //enemy.SetDefense(value, lastturn);
+        enemy.ApplyDefense(value, lastturn);
     }
 
 

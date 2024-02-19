@@ -132,8 +132,8 @@ public class EnemyBase : MonoBehaviour
         }
         else
         {
-            WeakLastturn = 0;
-            WeakPercent_to_float = 1f;
+            DefenseLastturn = 0;
+            DefenseValue = 0f;
         }
 
     }
@@ -175,7 +175,7 @@ public class EnemyBase : MonoBehaviour
 
     public void GetAttack(int damage)
     {
-        if (DefenseValue > damage)
+        if (DefenseValue > damage * GetVunlerablePercent())
         {
             DefenseValue -= (int)(damage * GetVunlerablePercent());
             EnemySA.Set_UI_Defense((int)DefenseValue, DefenseLastturn);
@@ -187,6 +187,7 @@ public class EnemyBase : MonoBehaviour
             Curhp -= (int)((damage - DefenseValue) * GetVunlerablePercent());
 
             DefenseValue = 0;
+            DefenseLastturn = 0;
 
             Debug.Log("after DefenseValue is " + DefenseValue);
 
