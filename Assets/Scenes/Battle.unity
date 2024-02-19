@@ -3254,7 +3254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 79d07aa01612b5742a7a487cd897b811, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0bd71e95a6ff15f40acad7fde32959c1, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3327,8 +3327,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f965506d77f0ac34f862fd10032c4fb4, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8909,7 +8909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: f1724b758f742b746973a66da143c304, type: 3}
+  m_Texture: {fileID: 2800000, guid: b5f19f505d184ee49be38e3fc4178716, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -13872,7 +13872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ef564ef6d70d2c4458bc65d8a2a7e942, type: 3}
+  m_Texture: {fileID: 2800000, guid: 4825328477151bc40b36b2b3f5505940, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -14032,6 +14032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d626b8a727e454a84ed76c38846d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img: {fileID: 260398425}
   hpBar: {fileID: 2008302685}
   player: {fileID: 1154429887}
   hpText: {fileID: 1884586127}
@@ -14050,7 +14051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldtext: {fileID: 546521075}
-  player: {fileID: 0}
+  playerSAUI: {fileID: 2037073172}
 --- !u!212 &1154429888
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21869,7 +21870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7fe99d376e9015a4ca1d59a527890de8, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0e44eba7eccfef240b5ac0ee5451e96d, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -23229,7 +23230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2392ff5f784914644ad378bbd8cef154, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9fc2e79e313983c4893dead2a927a997, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

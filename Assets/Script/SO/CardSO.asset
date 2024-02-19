@@ -113,7 +113,7 @@ MonoBehaviour:
     amount: 5
     reinforcelevel: 0
     cost: 1
-    isdiscarding: 0
+    isdiscarding: 1
     mode: NonTarget
   - sprite: {fileID: 21300000, guid: 65765e892001f5e4f9b77b9706f3648b, type: 3}
     name: "\uBBF8\uB798 \uC608\uC9C0"

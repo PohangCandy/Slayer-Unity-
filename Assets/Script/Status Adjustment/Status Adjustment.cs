@@ -223,7 +223,7 @@ public static class StatusAdjustment
         if(IsEnemy(targetObject))
         {
             EnemyBase enemy=targetObject as EnemyBase;
-            enemy.GetAttack(sAInformation.amount+p.getAttackstat());
+            enemy.GetAttack((int)((sAInformation.amount+p.getAttackstat())*p.getattackdamagepercent()));
         }
     }
 
