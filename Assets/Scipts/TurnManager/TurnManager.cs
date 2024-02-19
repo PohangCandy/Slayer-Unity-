@@ -41,15 +41,19 @@ public class TurnManager : MonoBehaviour
         Debug.Log("Allturn : "+t_AllturnCount);
     }
 
-    void StartCountTurn(int turn)
+    void StartCountTurn(ref int turn)
     {
         turn = t_AllturnCount;
+        Debug.Log("UpdateCurturn is : " + t_AllturnCount);
+        Debug.Log("Add allturn to curEnemyTurn" + t_curEnemyturnCount);
     }
 
 
 
     int GetCurcount(int turn)
     {
+        Debug.Log("before divide % 2 EnemyCurturn" + t_curEnemyturnCount);
+        Debug.Log("PlayerCurturn" + t_curPlayerturnCount);
         int countturn = 0;
         if (turn % 2 == t_AllturnCount % 2)
         {
@@ -76,6 +80,7 @@ public class TurnManager : MonoBehaviour
     public void EnemyTurnOver()
     {
         Curturn = TurnType.Playerturn;
+        Debug.Log("before add 2 to allturn" + t_curEnemyturnCount);
         t_AddTurnCount();
         Enemy.EnemyTurnOver();
         turnCount++;
@@ -96,6 +101,7 @@ public class TurnManager : MonoBehaviour
     {
         int UpdateEnemyturnCount = 0;
         Debug.Log("Here is Enemy count");
+        Debug.Log("before update % 2 EnemyCurturn" + t_curEnemyturnCount);
         UpdateEnemyturnCount = GetCurcount(t_curEnemyturnCount);
         return UpdateEnemyturnCount;
     }
@@ -103,6 +109,7 @@ public class TurnManager : MonoBehaviour
     {
         int UpdateEnemyturnCount = 0;
         Debug.Log("Here is Player count");
+        Debug.Log("before update % 2 PlayerCurturn" + t_curEnemyturnCount);
         UpdateEnemyturnCount = GetCurcount(t_curPlayerturnCount);
         return UpdateEnemyturnCount;
     }

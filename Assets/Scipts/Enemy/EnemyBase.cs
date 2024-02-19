@@ -211,7 +211,7 @@ public class EnemyBase : MonoBehaviour
         int Updateturn = turnManager.GetEnemyTurnCount();
         turnManager.StartCountEnemyTurn();
         UpdateEnemySA_Enemyturnvalue(Updateturn);
-        Debug.Log("EnemytrunStart's " + Updateturn);
+        Debug.Log("EnemytrunUpdate's " + Updateturn);
         SetCurAction();
     }
 
@@ -221,17 +221,18 @@ public class EnemyBase : MonoBehaviour
         int Updateturn = turnManager.GetPlayerTurnCount();
         turnManager.StartCountPlayerTurn();
         UpdateEnemySA_Playerturnvalue(Updateturn);
-        Debug.Log("PlayertrunStart's " + Updateturn);
+        Debug.Log("PlayertrunUpdate's " + Updateturn);
     }
 
     void UpdateEnemySA_Enemyturnvalue(int updateturn)
     {
+        Debug.Log("Enemy's Updateturnvalue is " + updateturn);
         GetDown_DefenseLastTurn(-updateturn);
     }
 
     void UpdateEnemySA_Playerturnvalue(int updateturn)
     {
-        Debug.Log("Updateturnvalue is " + updateturn);
+        Debug.Log("Player's Updateturnvalue is " + updateturn);
         GetDown_VulnerableLastTurn(-updateturn);
     }
 
