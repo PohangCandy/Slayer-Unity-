@@ -73,4 +73,9 @@ public class SceneMove : MonoBehaviour
     {
         Debug.Log("Damm");
     }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
 }
