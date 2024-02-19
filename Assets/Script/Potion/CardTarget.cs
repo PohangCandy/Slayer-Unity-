@@ -9,12 +9,12 @@ public class CardTarget :MonoBehaviour , PotionInterface
 {
     public TextMeshProUGUI description;
     public TextMeshProUGUI potionname;
-    int rarity;
+    public int rarity;
     State currentState;
     Collider2D collider;
     Vector3 point;
     [SerializeField]
-    SpriteRenderer potionsprite;
+    public  SpriteRenderer potionsprite;
     public GameObject button;
     public SAInformation saInformation;
     public Object player;
