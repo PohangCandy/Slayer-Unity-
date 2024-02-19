@@ -12429,6 +12429,7 @@ MonoBehaviour:
   hpBar: {fileID: 2008302685}
   player: {fileID: 1154429887}
   hpText: {fileID: 1884586127}
+  tophpText: {fileID: 29402681}
   defenseText: {fileID: 405257868}
 --- !u!114 &1154429887
 MonoBehaviour:
@@ -12442,6 +12443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c16daa9e4b2c4f4886a4d98a2c95c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldtext: {fileID: 546521075}
+  player: {fileID: 2037073172}
 --- !u!212 &1154429888
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16428,6 +16431,12 @@ MonoBehaviour:
   CardSO: {fileID: 11400000, guid: 1b957b60fdd3fdf4694aaf4d706a86b6, type: 2}
   TargetCardPrefeb: {fileID: 6457242200426887880, guid: fabd8b900df531446993de561191b953, type: 3}
   NonTargetCardPrefeb: {fileID: 6457242200426887880, guid: 93da3fda4a33954489f97bc423642040, type: 3}
+  Drawpiletext: {fileID: 0}
+  Discardpiletext: {fileID: 0}
+  Drawpiledrawer: {fileID: 0}
+  Discardpiledrawer: {fileID: 0}
+  Deckpiledrawer: {fileID: 0}
+  showcaseCardPrefeb: {fileID: 0}
   CardSpawnPoint: {fileID: 289297189}
   CardLeft: {fileID: 1301934697}
   CardRight: {fileID: 769917240}
