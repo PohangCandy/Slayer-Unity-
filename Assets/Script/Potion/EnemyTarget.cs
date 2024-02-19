@@ -154,7 +154,7 @@ void Update()
         else if (currentState == State.Apply)
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
-            StatusAdjustment.SetFunction(this,player, saInformation);
+            StatusAdjustment.SetFunction(this,enemy, saInformation);
             Destroy(this.gameObject);
         }
     }
