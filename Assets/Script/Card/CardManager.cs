@@ -195,6 +195,11 @@ public class CardManager : MonoBehaviour
             DrawPile.Add(DiscardPile[i]);
         DiscardPile.Clear();
     }
+    public void RandomCardAddDeck()
+    {
+        int random = Random.Range(0, CardSO.cards.Length-1);
+        Deck.Add(CardSO.cards[random]);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -211,51 +216,51 @@ public class CardManager : MonoBehaviour
                 DrawPileRestart();
                 PartialShuffle();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Deck.Add(CardSO.cards[0]);
-                //CardInstance(Deck[0]);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Deck.Add(CardSO.cards[1]);
-                //CardInstance(Deck[0]);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Deck.Add(CardSO.cards[2]);
-                //CardInstance(Deck[0]);
-            }
-            //attackdraw
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                Deck.Add(CardSO.cards[3]);
-                //CardInstance(Deck[0]);
-            }
-            //tempattackpower
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                Deck.Add(CardSO.cards[4]);
-                //CardInstance(Deck[0]);
-            }
-            //defensediscard
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                Deck.Add(CardSO.cards[5]);
-                //CardInstance(Deck[0]);
-            }
-            //alldamage
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                Deck.Add(CardSO.cards[6]);
-                //CardInstance(Deck[0]);
-            }
-            //draw two
-            if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                Deck.Add(CardSO.cards[7]);
-                //CardInstance(Deck[0]);
-            }
+            //if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    Deck.Add(CardSO.cards[0]);
+            //    //CardInstance(Deck[0]);
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha2))
+            //{
+            //    Deck.Add(CardSO.cards[1]);
+            //    //CardInstance(Deck[0]);
+            //}
+            //if (Input.GetKeyDown(KeyCode.Alpha3))
+            //{
+            //    Deck.Add(CardSO.cards[2]);
+            //    //CardInstance(Deck[0]);
+            //}
+            ////attackdraw
+            //if (Input.GetKeyDown(KeyCode.Alpha4))
+            //{
+            //    Deck.Add(CardSO.cards[3]);
+            //    //CardInstance(Deck[0]);
+            //}
+            ////tempattackpower
+            //if (Input.GetKeyDown(KeyCode.Alpha5))
+            //{
+            //    Deck.Add(CardSO.cards[4]);
+            //    //CardInstance(Deck[0]);
+            //}
+            ////defensediscard
+            //if (Input.GetKeyDown(KeyCode.Alpha6))
+            //{
+            //    Deck.Add(CardSO.cards[5]);
+            //    //CardInstance(Deck[0]);
+            //}
+            ////alldamage
+            //if (Input.GetKeyDown(KeyCode.Alpha7))
+            //{
+            //    Deck.Add(CardSO.cards[6]);
+            //    //CardInstance(Deck[0]);
+            //}
+            ////draw two
+            //if (Input.GetKeyDown(KeyCode.Alpha8))
+            //{
+            //    Deck.Add(CardSO.cards[7]);
+            //    //CardInstance(Deck[0]);
+            //}
         }
 
     }

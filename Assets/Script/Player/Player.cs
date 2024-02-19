@@ -116,4 +116,9 @@ public class Player : MonoBehaviour
         }
         currenthp += plus;
     }
+    public void RandomGoldGet() 
+    {
+        int random=(int)(50*(Random.value+0.5f));
+        gold += random;
+    }
 }
