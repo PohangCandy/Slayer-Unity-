@@ -5,6 +5,8 @@ using UnityEngine;
 public class DontDestroyDeck : MonoBehaviour
 {
     public List<Card> Deck;
+    public List<Potion> HasPotion;
+    public float playerhp;
     public static DontDestroyDeck instance {get;private set;}
 
     void Awake()
@@ -14,6 +16,8 @@ public class DontDestroyDeck : MonoBehaviour
         {
             instance = this;
             Deck = new List<Card>();
+            HasPotion = new List<Potion>();
+
             //for (int i = 0; i < 4; i++)
             //{
             //    Deck.Add(CardManager.Inst.CardSO.cards[0]);
@@ -54,6 +58,10 @@ public class DontDestroyDeck : MonoBehaviour
     public void addDeck(Card card)
     {
         Deck.Add(card);
+    }
+    public void addPotion(Potion potion)
+    {
+        HasPotion.Add(potion);
     }
     //씬이 초기화 될때
     public void endgame()
