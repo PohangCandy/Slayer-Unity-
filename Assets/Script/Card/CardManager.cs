@@ -18,7 +18,8 @@ public class CardManager : MonoBehaviour
     {
         Inst = this;
     }
-    [SerializeField] CardSO CardSO;
+    [SerializeField] 
+    public CardSO CardSO;
     //[SerializeField] GameObject AttackCardPrefeb;
     //[SerializeField] GameObject SkillCardPrefeb;
     //[SerializeField] GameObject PowerCardPrefeb;
@@ -82,15 +83,11 @@ public class CardManager : MonoBehaviour
         showDeckpiledrawer =new List<GameObject>();
 
         HandOfCards = new List<Object>(10);
-        for (int i = 0; i < 4; i++)
+
+        for(int i=0;i<DontDestroyDeck.instance.Deck.Count;i++)
         {
-            Deck.Add(CardSO.cards[0]);
+            Deck.Add(DontDestroyDeck.instance.Deck[i]);
         }
-        for (int i = 0; i < 5; i++)
-        {
-            Deck.Add(CardSO.cards[1]);
-        }
-        Deck.Add(CardSO.cards[2]);
 
     }
     public void openshowDrawCard()
@@ -199,6 +196,7 @@ public class CardManager : MonoBehaviour
     {
         int random = Random.Range(0, CardSO.cards.Length-1);
         Deck.Add(CardSO.cards[random]);
+        DontDestroyDeck.instance.addDeck(CardSO.cards[random]);
     }
     // Update is called once per frame
     void Update()
