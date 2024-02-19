@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class HpSlider : MonoBehaviour
 {
     [SerializeField]
+    Image img;
+    [SerializeField]
     private Slider hpBar;
     [SerializeField]
     private Player player;
@@ -48,7 +50,7 @@ public class HpSlider : MonoBehaviour
         {
             case state.normal:
                 {
-                    
+                    img.enabled = false;
                     defenseText.enabled = false;
                     //stateImage=Resources.Load("Texture/Icon/heart.png",typeof(Texture2D)) as Image;
                     //Texture2D texture = Resources.Load("Texture/Icon/heart") as Texture2D;
@@ -62,6 +64,7 @@ public class HpSlider : MonoBehaviour
                 break;
             case state.defense:
                 {
+                    img.enabled = true;
                     defenseText.enabled = true;
                     setDefenseText();
                     //Texture2D texture = Resources.Load("Texture/Icon/heart-shield") as Texture2D;
