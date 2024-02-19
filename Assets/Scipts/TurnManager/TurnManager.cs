@@ -7,13 +7,16 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     public enum TurnType { Playerturn, Enemyturn }
     TurnType Curturn;
-    public EnemyBase Enemy;
+    [SerializeField]
+    public EnemyBase[] Enemy;
     int turnCount;
     int t_curEnemyturnCount;
     int t_curPlayerturnCount;
     int t_AllturnCount;
+    int endturn_Enemy;
     void Start()
     {
+        endturn_Enemy = 0;
         turnCount = 0;
         t_AllturnCount = 0;
         t_curEnemyturnCount = 0;
@@ -72,17 +75,34 @@ public class TurnManager : MonoBehaviour
     {
         Curturn = TurnType.Enemyturn;
         t_AddTurnCount();
-        Enemy.EnemyTurnStart();
+        for(int i = 0;i < Enemy.Length;i++)
+        {
+            Enemy[i].UpdateSALastTurnWhenEnemyTurnStart();
+            Debug.Log("i" + i);
+        }
         CardManager.Inst.TurnOver();
     }
 
+    public void CheckAllEnemyTurnOver(int add_endEnemy)
+    {
+        endturn_Enemy += add_endEnemy;
+        if (Enemy.Length == endturn_Enemy)
+        {
+            endturn_Enemy = 0;
+            EnemyTurnOver();
+        }
+
+    }
 
     public void EnemyTurnOver()
     {
         Curturn = TurnType.Playerturn;
         Debug.Log("before add 2 to allturn" + t_curEnemyturnCount);
         t_AddTurnCount();
-        Enemy.EnemyTurnOver();
+        for (int i = 0; i < Enemy.Length; i++)
+        {
+            Enemy[i].UpdateSALastTurnWhenPlayerTurnStart();
+        }
         turnCount++;
         CardManager.Inst.MyTurn();
     }

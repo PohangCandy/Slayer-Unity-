@@ -57,7 +57,7 @@ public class EnemyActionIcon : MonoBehaviour
     public void GetEnemyPower(int enemypower)
     {
         Enemypower = enemypower;
-        SetPowerTxt(Enemypower);
+        //SetPowerTxt(Enemypower);
     }
 
     void SetPowerTxt(int enemypower)

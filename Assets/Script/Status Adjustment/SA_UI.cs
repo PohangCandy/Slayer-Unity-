@@ -61,9 +61,20 @@ public class SA_UI : MonoBehaviour
     {
         if (lastturn > 0)
         {
-            Debug.Log("value " + value);
-            uiobj.SetActive(true);
-            uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
+            if(uiobj.activeSelf == false)
+            {
+                uiobj.SetActive(true);
+                uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
+            }
+            else if(uiobj.activeSelf == true)
+            {
+                SA_anim.SetTrigger("ChangeValue");
+                uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
+            }
+            else
+            {
+                Debug.Log("activeSelf may not work ");
+            }
         }
         else
         {
