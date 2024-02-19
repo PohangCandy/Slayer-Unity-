@@ -65,7 +65,7 @@ public class EnemyBase : MonoBehaviour
     {
         RandomNumber = Random.Range(0, 99);
         PickNextActionWithPercentage(RandomNumber);
-        EnemyTurnOver();
+        UpdateSALastTurnWhenPlayerTurnStart();
     }
     public int GetEnemyPower(int enemypower)
     {
@@ -200,6 +200,7 @@ public class EnemyBase : MonoBehaviour
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
+        CheckEnemyDie();
     }
 
 
@@ -267,17 +268,19 @@ public class EnemyBase : MonoBehaviour
         //몬스터의 다음 행동에 저장되어있는 이미지 가지고오기
         //다음 행동의 패턴 이미지 넣기
     }
-    public void EnemyTurnStart()
+    public void UpdateSALastTurnWhenEnemyTurnStart()
     {
         Debug.Log("EnemytrunStart!");
         int Updateturn = turnManager.GetEnemyTurnCount();
         turnManager.StartCountEnemyTurn();
         UpdateEnemySA_Enemyturnvalue(Updateturn);
         Debug.Log("EnemytrunUpdate's " + Updateturn);
-        SetCurAction();
+
+
+        SetCurAction();//AfterFinishing SA Update, Do Enemy Action
     }
 
-    public void EnemyTurnOver()
+    public void UpdateSALastTurnWhenPlayerTurnStart()
     {
         Debug.Log("EnemytrunOver!");
         int Updateturn = turnManager.GetPlayerTurnCount();
@@ -389,7 +392,16 @@ public class EnemyBase : MonoBehaviour
     {
         RandomNumber = Random.Range(0, 99);
         PickNextActionWithPercentage(RandomNumber);
-        turnManager.EnemyTurnOver();
+        turnManager.CheckAllEnemyTurnOver(1);
+    }
+
+    void CheckEnemyDie()
+    {
+        if(GetEnemyCurHp() == 0)
+        {
+            this.gameObject.SetActive(false);
+            EnemyActionIcon.gameObject.SetActive(false);
+        }
     }
 }
 
