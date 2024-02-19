@@ -40,11 +40,13 @@ public class GameManager : MonoBehaviour
     {
         //enemySocket.SetActive(false);
         //enemyBases[i].SetActive(false);
+        CardManager.Inst.BattleEnd();
+        DontDestroyDeck.instance.playerhp = player.getCurrentHp();
+        PotionManager.instance.EndBattle();
         battleSocket.SetActive(false);
         victory.SetActive(true);
-        CardManager.Inst.BattleEnd();
-        PotionManager.instance.EndBattle();
-        DontDestroyDeck.instance.playerhp=player.getCurrentHp();
+        
+        
     }
 
     public void GoNextScene()

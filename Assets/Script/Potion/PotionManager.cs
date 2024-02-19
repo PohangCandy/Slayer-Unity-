@@ -46,8 +46,31 @@ public class PotionManager : MonoBehaviour
         DontDestroyDeck.instance.HasPotion.Clear();   
         for (int i = 0; i < sockect.transform.childCount; i++)
         {
-            DontDestroyDeck.instance.HasPotion.Add(sockect.transform.GetChild(i).GetComponent<Potion>());
+            if (sockect.transform.GetChild(i).GetComponent<PotionInterface>() != null)
+            {
+                if(sockect.transform.GetChild(i).GetComponent<PotionInterface>() is EnemyTarget)
+                {
+                    EnemyTarget temp = sockect.transform.GetChild(i).GetComponent<PotionInterface>() as EnemyTarget;
 
+                    Potion potion = new Potion(temp.potionsprite.sprite, temp.potionname.text, temp.description.text, temp.rarity, "Enemy", temp.saInformation.target, temp.saInformation.turn, temp.saInformation.category, temp.saInformation.amount);
+                    DontDestroyDeck.instance.HasPotion.Add(potion);
+                }
+                else if(sockect.transform.GetChild(i).GetComponent<PotionInterface>() is CardTarget)
+                {
+                    CardTarget temp = sockect.transform.GetChild(i).GetComponent<PotionInterface>() as CardTarget;
+
+                    Potion potion = new Potion(temp.potionsprite.sprite, temp.potionname.text, temp.description.text, temp.rarity, "Card", temp.saInformation.target, temp.saInformation.turn, temp.saInformation.category, temp.saInformation.amount);
+                    DontDestroyDeck.instance.HasPotion.Add(potion);
+                }
+                else if(sockect.transform.GetChild(i).GetComponent<PotionInterface>() is PlayerTarget)
+                {
+                    PlayerTarget temp = sockect.transform.GetChild(i).GetComponent<PotionInterface>() as PlayerTarget;
+
+                    Potion potion = new Potion(temp.potionsprite.sprite, temp.potionname.text, temp.description.text, temp.rarity, "Player", temp.saInformation.target, temp.saInformation.turn, temp.saInformation.category, temp.saInformation.amount);
+                    DontDestroyDeck.instance.HasPotion.Add(potion);
+                }
+                
+            }
         }
         
     }
