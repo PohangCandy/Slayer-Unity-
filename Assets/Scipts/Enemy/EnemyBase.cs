@@ -56,6 +56,11 @@ public class EnemyBase : MonoBehaviour
         //ResetEnemyBehaviour();
     }
 
+    public int GetEnemyCurHp()
+    {
+        return Curhp;
+    }
+
     void InintEnemyBehaviour()
     {
         RandomNumber = Random.Range(0, 99);
