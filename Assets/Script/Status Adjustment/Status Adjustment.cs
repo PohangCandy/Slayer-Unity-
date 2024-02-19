@@ -164,7 +164,7 @@ public static class StatusAdjustment
         if (IsPlayer(targetObject))
         {
             Player player = targetObject as Player;
-            player.pureHptakeDamage(1);
+            player.pureHptakeDamage(5);
         }
     }
 
@@ -214,7 +214,7 @@ public static class StatusAdjustment
         {
             Player player = targetObject as Player;
             player.setDefense(sAInformation.amount);
-            player.playerSAUI.Set_UI_Defense(sAInformation.amount, 1);
+            player.playerSAUI.SA_UI_Obj[6].SetActive(true);
         }
     }
 

@@ -10,6 +10,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class CardManager : MonoBehaviour
 {
     public TurnManager turnManager;
+    public Player player;
     bool openone;
     public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
@@ -320,6 +321,7 @@ public class CardManager : MonoBehaviour
     {
         DrawCard(5);
         Energy = MaxEnergy;
+        player.defenseReset();
     }
     public void SwapPop(Object _card)
     {

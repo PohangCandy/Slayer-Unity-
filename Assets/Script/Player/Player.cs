@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I)) { defense -= 10; }
         if(getDefense() <= 0) { playerColor.material.color = Color.white; }
     }
+    public void defenseReset() {  defense = 0; }
     public void setDefense(int amount)
     {
         defense += amount+additionalDefense;

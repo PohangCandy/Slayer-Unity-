@@ -18023,6 +18023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnManager: {fileID: 1343672120}
+  player: {fileID: 1154429887}
   CardSO: {fileID: 11400000, guid: 1b957b60fdd3fdf4694aaf4d706a86b6, type: 2}
   TargetCardPrefeb: {fileID: 6457242200426887880, guid: fabd8b900df531446993de561191b953, type: 3}
   NonTargetCardPrefeb: {fileID: 6457242200426887880, guid: 93da3fda4a33954489f97bc423642040, type: 3}
