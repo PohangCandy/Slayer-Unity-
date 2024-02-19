@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 30968812}
   - component: {fileID: 30968811}
   - component: {fileID: 30968810}
+  - component: {fileID: 30968813}
   m_Layer: 5
   m_Name: WeakIcon
   m_TagString: Untagged
@@ -451,6 +452,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30968808}
   m_CullTransparentMesh: 1
+--- !u!114 &30968813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30968808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffb8b5c68276b47804708fe7105db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &33398436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1222,7 @@ GameObject:
   - component: {fileID: 63499441}
   - component: {fileID: 63499440}
   - component: {fileID: 63499439}
+  - component: {fileID: 63499442}
   m_Layer: 5
   m_Name: RegenIcon
   m_TagString: Untagged
@@ -1292,6 +1306,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63499437}
   m_CullTransparentMesh: 1
+--- !u!114 &63499442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63499437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffb8b5c68276b47804708fe7105db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &76937626
 GameObject:
   m_ObjectHideFlags: 0
@@ -13094,6 +13120,7 @@ GameObject:
   - component: {fileID: 1073893095}
   - component: {fileID: 1073893094}
   - component: {fileID: 1073893093}
+  - component: {fileID: 1073893096}
   m_Layer: 5
   m_Name: StrenthDownIcon
   m_TagString: Untagged
@@ -13177,6 +13204,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073893091}
   m_CullTransparentMesh: 1
+--- !u!114 &1073893096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073893091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffb8b5c68276b47804708fe7105db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1090089347
 GameObject:
   m_ObjectHideFlags: 0
@@ -16739,6 +16778,7 @@ GameObject:
   - component: {fileID: 1413078684}
   - component: {fileID: 1413078683}
   - component: {fileID: 1413078682}
+  - component: {fileID: 1413078685}
   m_Layer: 5
   m_Name: StrengthIcon
   m_TagString: Untagged
@@ -16822,6 +16862,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413078680}
   m_CullTransparentMesh: 1
+--- !u!114 &1413078685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413078680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffb8b5c68276b47804708fe7105db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1415089672
 GameObject:
   m_ObjectHideFlags: 0

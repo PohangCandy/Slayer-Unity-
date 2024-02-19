@@ -54,14 +54,14 @@ public class SA_UI : MonoBehaviour
     }
     public void Set_UI_Defense(int defensevalue, int lastturn)
     {
-        
+        Debug.Log("Here is Defense");
         UpdateUIwithTurn(SA_UI_Obj[6], defensevalue, lastturn);
     }
     void UpdateUIwithTurn(GameObject uiobj, int value, int lastturn)
     {
         if (lastturn > 0)
         {
-            Debug.Log("lastturn is "+value);
+            Debug.Log("value " + value);
             uiobj.SetActive(true);
             uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
         }

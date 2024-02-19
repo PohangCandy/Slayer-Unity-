@@ -28,6 +28,7 @@ public class EnemyBase : MonoBehaviour
     private float WeakPercent_to_float;
     private int WeakLastturn;
     private float DefenseValue;
+    private int DefenseLastturn;
     private int PowerUpValue;
 
     public enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower};
@@ -42,6 +43,7 @@ public class EnemyBase : MonoBehaviour
         WeakPercent_to_float = 1f;
         WeakLastturn = 0;
         DefenseValue = 0;
+        DefenseLastturn = 0;
         PowerUpValue = 0;
 
         Maxhp = 100;
@@ -52,6 +54,11 @@ public class EnemyBase : MonoBehaviour
         slider.value = Maxhp;
         InintEnemyBehaviour();
         //ResetEnemyBehaviour();
+    }
+
+    public int GetEnemyCurHp()
+    {
+        return Curhp;
     }
 
     void InintEnemyBehaviour()
@@ -72,6 +79,19 @@ public class EnemyBase : MonoBehaviour
         SetVulnerablePercent(vulnerablepercentage, lastturn);
         EnemySA.Set_UI_Vulnerable(VulnerableLastturn);
     }
+    public void ApplyWeak(float weakpercentage, int lastturn)
+    {
+        SetWeakPercent(weakpercentage, lastturn);
+        power = (int)(power * weakpercentage);
+        EnemyActionIcon.GetEnemyPower(power);
+        EnemySA.Set_UI_Weak(WeakLastturn);
+    }
+
+    public void ApplyDefense(float defensevalue, int lastturn)
+    {
+        SetDefenseValue(defensevalue, lastturn);
+        EnemySA.Set_UI_Defense((int)defensevalue,DefenseLastturn);
+    }
     void SetVulnerablePercent(float vulnerable, int lastturn)
     {
        
@@ -89,15 +109,43 @@ public class EnemyBase : MonoBehaviour
         
     }
 
+    void SetWeakPercent(float weak, int lastturn)
+    {
+
+        if (WeakLastturn + lastturn > 0)
+        {
+            WeakLastturn += lastturn;
+            WeakPercent_to_float = weak;
+
+        }
+        else
+        {
+            WeakLastturn = 0;
+            WeakPercent_to_float = 1f;
+        }
+
+    }
+
+    void SetDefenseValue(float defensevalue, int lastturn)
+    {
+
+        if (DefenseLastturn + lastturn > 0)
+        {
+            DefenseValue += defensevalue;
+            DefenseLastturn += lastturn;
+
+        }
+        else
+        {
+            DefenseLastturn = 0;
+            DefenseValue = 0f;
+        }
+
+    }
+
     float GetVunlerablePercent()
     {
         return VulnerablePercent_to_float;
-    }
-
-    public void ApplyWeak(float weakpercentage, int lastturn)
-    {
-        power = (int)(power * weakpercentage);
-        EnemySA.Set_UI_Weak(lastturn);
     }
 
     public void SetWeak(int value) //for SA
@@ -132,9 +180,23 @@ public class EnemyBase : MonoBehaviour
 
     public void GetAttack(int damage)
     {
-        if (Curhp > 0)
+        if (DefenseValue > damage * GetVunlerablePercent())
         {
-            Curhp -= (int)(damage * GetVunlerablePercent());
+            DefenseValue -= (int)(damage * GetVunlerablePercent());
+            EnemySA.Set_UI_Defense((int)DefenseValue, DefenseLastturn);
+        }
+        else
+        {
+            Debug.Log("before DefenseValue is " + DefenseValue);
+
+            Curhp -= (int)((damage - DefenseValue) * GetVunlerablePercent());
+
+            DefenseValue = 0;
+            DefenseLastturn = 0;
+
+            Debug.Log("after DefenseValue is " + DefenseValue);
+
+            EnemySA.Set_UI_Defense((int)DefenseValue, DefenseLastturn);
             slider.value = Curhp;
             hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
         }
@@ -278,8 +340,8 @@ public class EnemyBase : MonoBehaviour
 
     void GetDown_DefenseLastTurn(int updateturn)
     {
-        SA_enemy.t_EnemyGetDefense(this, 0, updateturn); //(target, value, lastturn)
-        EnemySA.Set_UI_Defense(0, updateturn);//(value,lastturn)
+        SA_enemy.t_EnemyGetDefense(this, (int)DefenseValue, updateturn); //(target, value, lastturn)
+        EnemySA.Set_UI_Defense((int)DefenseValue, updateturn);//(value,lastturn)
     }
     void GetDown_VulnerableLastTurn(int updateturn)
     {

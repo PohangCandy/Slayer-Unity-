@@ -42,21 +42,21 @@ public static class SA_enemy
     public static void t_EnemyGetWeak(EnemyBase enemy, int lastTurn)
     {
         float WeakPercent_float = 1f - (t_WeakPercentage / 100f);//0.75
-        enemy.ApplyWeak(t_WeakPercentage,lastTurn);
+        enemy.ApplyWeak(WeakPercent_float, lastTurn);
     }
 
 
     public static void t_EnemyGetVulnerable(EnemyBase enemy, int lastturn)
     {
         float VulnerablePercent_float = (float)((t_VulnerablePercentage + 100f) / 100f);//0.5
-        
         enemy.ApplyVulnerable(VulnerablePercent_float, lastturn);
     }
 
 
     public static void t_EnemyGetDefense(EnemyBase enemy, int value, int lastturn)
     {
-        enemy.SetDefense(value, lastturn);
+        //enemy.SetDefense(value, lastturn);
+        enemy.ApplyDefense(value, lastturn);
     }
 
 
