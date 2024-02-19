@@ -13,6 +13,8 @@ public class HpSlider : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI hpText;
     [SerializeField]
+    private TextMeshProUGUI tophpText;
+    [SerializeField]
     private TextMeshProUGUI defenseText;
     //[SerializeField]
     //private TextMeshPro EnergyText;
@@ -38,6 +40,7 @@ public class HpSlider : MonoBehaviour
         changeState();
         setHpText();
         setHpBarValue();
+        setUpperHpText();
         //setEnergyText();
         switch(currentState)
         {
@@ -72,6 +75,7 @@ public class HpSlider : MonoBehaviour
         
     }
     public void setHpText() { hpText.text = player.getCurrentHp() + "/" + player.getMaxHp(); }
+    public void setUpperHpText() { tophpText.text = player.getCurrentHp() + "/" + player.getMaxHp(); }
     public void setDefenseText() { defenseText.text = player.getDefense().ToString();  }
     public void setHpBarValue() { hpBar.value = Mathf.Lerp(hpBar.value,(player.getCurrentHp() / player.getMaxHp()),Time.deltaTime*10);  }
     public void changeState()

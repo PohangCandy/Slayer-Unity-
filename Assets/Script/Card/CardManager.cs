@@ -10,6 +10,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class CardManager : MonoBehaviour
 {
     public TurnManager turnManager;
+    bool openone;
     public static CardManager Inst { get; private set; }
     // Start is called before the first frame update
     private void Awake()
@@ -33,10 +34,15 @@ public class CardManager : MonoBehaviour
     //보여주기용
     public TextMeshProUGUI Drawpiletext;
     public TextMeshProUGUI Discardpiletext;
+
     public GameObject Drawpiledrawer;
     public GameObject Discardpiledrawer;
+    public GameObject Deckpiledrawer;
+
     List<GameObject> showDrawpiledrawer;
     List<GameObject> showDiscardpiledrawer;
+    List<GameObject> showDeckpiledrawer;
+
     public GameObject showcaseCardPrefeb; 
 
 
@@ -51,6 +57,7 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
+        openone = false;
         MaxEnergy = 3;
         Energy = MaxEnergy;
         istriggered = false;
@@ -71,6 +78,7 @@ public class CardManager : MonoBehaviour
 
         showDiscardpiledrawer=new List<GameObject>();
         showDrawpiledrawer=new List<GameObject>();
+        showDeckpiledrawer =new List<GameObject>();
 
         HandOfCards = new List<Object>(10);
         for (int i = 0; i < 4; i++)
@@ -86,6 +94,8 @@ public class CardManager : MonoBehaviour
     }
     public void openshowDrawCard()
     {
+        if (openone)
+            return;
         for(int i = 0;i <DrawPile.Count;i++) 
         { 
             GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
@@ -93,20 +103,46 @@ public class CardManager : MonoBehaviour
             gameObject.transform.SetParent(Drawpiledrawer.transform);
             showDrawpiledrawer.Add(gameObject);
         }
-        
+        openone = true;
     }
 
     public void closeshowDrawCard()
     {
+        openone = false;
         for(int i = 0;i< showDrawpiledrawer.Count;i++)
         {
             Destroy(showDrawpiledrawer[i]);
         }
         showDrawpiledrawer.Clear();
     }
+    public void openshowDeckCard()
+    {
+        if (openone)
+            return;
+        for (int i = 0;i <Deck.Count;i++) 
+        { 
+            GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
+            gameObject.GetComponent<SpriteRenderer>().sprite = Deck[i].sprite;
+            gameObject.transform.SetParent(Deckpiledrawer.transform);
+            showDeckpiledrawer.Add(gameObject);
+        }
+        openone = true;
+    }
+
+    public void closeshowDeckCard()
+    {
+        openone = false;
+        for (int i = 0;i< showDeckpiledrawer.Count;i++)
+        {
+            Destroy(showDeckpiledrawer[i]);
+        }
+        showDeckpiledrawer.Clear();
+    }
 
     public void openshowDiscardCard()
     {
+        if (openone)
+            return;
         for (int i = 0; i < DiscardPile.Count; i++)
         {
             GameObject gameObject = GameObject.Instantiate(showcaseCardPrefeb);
@@ -114,11 +150,12 @@ public class CardManager : MonoBehaviour
             gameObject.transform.SetParent(Discardpiledrawer.transform);
             showDiscardpiledrawer.Add(gameObject);
         }
-
+        openone = true;
     }
 
     public void closeshowDiscardCard()
     {
+        openone = false;
         for (int i = 0; i < showDiscardpiledrawer.Count; i++)
         {
             Destroy(showDiscardpiledrawer[i]);
@@ -165,14 +202,14 @@ public class CardManager : MonoBehaviour
         Drawpiletext.text = DrawPile.Count.ToString();
         Discardpiletext.text= DiscardPile.Count.ToString();
         {//if(Input.GetKeyDown(KeyCode.E)) { Debug.Log("E"); }
-            if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
-            if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
-            if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                DrawPileRestart();
-                PartialShuffle();
-            }
+            //if (Input.GetKeyDown(KeyCode.A)) { if (HandOfCards.Count < 10) DrawCard(1);/*CardInstance(DrawPile[DrawPile.Count])*/; }
+            //if (Input.GetKeyDown(KeyCode.S)) { DeckToDraw(); }
+            //if (Input.GetKeyDown(KeyCode.M)) { MyTurn(); }
+            //if (Input.GetKeyDown(KeyCode.D))
+            //{
+            //    DrawPileRestart();
+            //    PartialShuffle();
+            //}
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Deck.Add(CardSO.cards[0]);
