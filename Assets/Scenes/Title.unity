@@ -4844,7 +4844,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 444010173}
         m_TargetAssemblyTypeName: SceneMove, Assembly-CSharp
-        m_MethodName: LoadBattleScene
+        m_MethodName: LoadMapScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
