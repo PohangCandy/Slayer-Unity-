@@ -21438,6 +21438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927085354}
   - component: {fileID: 1927085355}
+  - component: {fileID: 1927085356}
   m_Layer: 0
   m_Name: DeckDontDestroy
   m_TagString: Untagged
@@ -21472,6 +21473,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f083f2576219948971e06ec1fc7ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1927085356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927085353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75732a6fca6580d4c9d4c1c52f373b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Deck: []
 --- !u!1 &1930499494
 GameObject:
   m_ObjectHideFlags: 0
