@@ -2926,6 +2926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be256d8ea3897f4591128ff06b8f527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxhp: 200
+  MaxPower: 15
   power: 0
   slider: {fileID: 744267401}
   turnManager: {fileID: 1343672120}
@@ -8322,7 +8324,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 200
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

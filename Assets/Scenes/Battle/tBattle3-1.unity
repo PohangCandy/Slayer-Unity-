@@ -2926,6 +2926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be256d8ea3897f4591128ff06b8f527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxhp: 100
+  MaxPower: 10
   power: 0
   slider: {fileID: 744267401}
   turnManager: {fileID: 1343672120}

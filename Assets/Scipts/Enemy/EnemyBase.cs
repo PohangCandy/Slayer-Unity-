@@ -7,7 +7,10 @@ using TMPro;
 public class EnemyBase : MonoBehaviour
 {
     int Curhp;
-    int Maxhp;
+    [SerializeField]
+    public int Maxhp;
+    [SerializeField]
+    public int MaxPower;
     int RandomNumber;
 
     int SwitchNumber;
@@ -46,10 +49,11 @@ public class EnemyBase : MonoBehaviour
         DefenseLastturn = 0;
         PowerUpValue = 0;
 
-        Maxhp = 100;
+
+        //Maxhp = 100;
+        power = MaxPower;
         Curhp = Maxhp;
         hptxt.text = Maxhp.ToString();
-        power = 10;
         EnemyActionIcon.GetEnemyPower(power);
         slider.value = Maxhp;
         InintEnemyBehaviour();
