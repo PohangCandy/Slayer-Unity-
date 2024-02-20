@@ -272,7 +272,7 @@ public static class StatusAdjustment
     public static void EnemyGetpowerUp(EnemyBase enemy,int Maxpower,int Minpower)
     {
         int EnemyPowerUPValue = Random.Range(Minpower, Maxpower);
-        enemy.SetPowerUP(EnemyPowerUPValue);
+        enemy.ApplyPowerUP(EnemyPowerUPValue);
     }
 
 

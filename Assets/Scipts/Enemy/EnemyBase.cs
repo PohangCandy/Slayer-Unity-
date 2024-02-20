@@ -37,7 +37,8 @@ public class EnemyBase : MonoBehaviour
     public enum EnemyPatternType { ChargeDefense, ReadyAttack, ChargeVulnerable, ChargePower};
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
-    enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargePowerPercent = 20 };
+    [SerializeField]
+    public enum EnemyPatternPercent { ChargeDefensePercent = 0 , ReadyAttackPercent = 50, ChargeDeBuffPercent = 0, ChargePowerPercent = 50 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -76,7 +77,11 @@ public class EnemyBase : MonoBehaviour
         return enemypower;
     }
 
-
+    public void ApplyPowerUP(int value)
+    {
+        SetPowerValue(value);
+        power += value;
+    }
     public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 1.5,2
     {
        
@@ -96,6 +101,7 @@ public class EnemyBase : MonoBehaviour
         SetDefenseValue(defensevalue, lastturn);
         EnemySA.Set_UI_Defense((int)defensevalue,DefenseLastturn);
     }
+
     void SetVulnerablePercent(float vulnerable, int lastturn)
     {
        
@@ -147,6 +153,11 @@ public class EnemyBase : MonoBehaviour
 
     }
 
+    void SetPowerValue(int value)
+    {
+        PowerUpValue += value;
+        power = (PowerUpValue + power) * 
+    }
     float GetVunlerablePercent()
     {
         return VulnerablePercent_to_float;
@@ -178,8 +189,8 @@ public class EnemyBase : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.V))
         {
-            
-            GetAttack(10); }
+            GetAttack(10);
+        }
     }
 
     public void GetAttack(int damage)
@@ -274,34 +285,26 @@ public class EnemyBase : MonoBehaviour
     }
     public void UpdateSALastTurnWhenEnemyTurnStart()
     {
-        Debug.Log("EnemytrunStart!");
         int Updateturn = turnManager.GetEnemyTurnCount();
         turnManager.StartCountEnemyTurn();
         UpdateEnemySA_Enemyturnvalue(Updateturn);
-        Debug.Log("EnemytrunUpdate's " + Updateturn);
-
-
         SetCurAction();//AfterFinishing SA Update, Do Enemy Action
     }
 
     public void UpdateSALastTurnWhenPlayerTurnStart()
     {
-        Debug.Log("EnemytrunOver!");
         int Updateturn = turnManager.GetPlayerTurnCount();
         turnManager.StartCountPlayerTurn();
         UpdateEnemySA_Playerturnvalue(Updateturn);
-        Debug.Log("PlayertrunUpdate's " + Updateturn);
     }
 
     void UpdateEnemySA_Enemyturnvalue(int updateturn)
     {
-        Debug.Log("Enemy's Updateturnvalue is " + updateturn);
         GetDown_DefenseLastTurn(-updateturn);
     }
 
     void UpdateEnemySA_Playerturnvalue(int updateturn)
     {
-        Debug.Log("Player's Updateturnvalue is " + updateturn);
         GetDown_VulnerableLastTurn(-updateturn);
         GetDown_WeakLastTurn(-updateturn);
     }
@@ -341,14 +344,14 @@ public class EnemyBase : MonoBehaviour
     {
         //StatusAdjustment.EnemyGetDefense(this, 5);
         SA_enemy.t_EnemyGetDefense(this, 5 , 1); //(target, value, lastturn)
-        EnemySA.Set_UI_Defense(5,1);//(value,lastturn)
+        //EnemySA.Set_UI_Defense(5,1);//(value,lastturn)
         ResetEnemyBehaviour(); // Set Next Pattern
     }
 
     void GetDown_DefenseLastTurn(int updateturn)
     {
         SA_enemy.t_EnemyGetDefense(this, (int)DefenseValue, updateturn); //(target, value, lastturn)
-        EnemySA.Set_UI_Defense((int)DefenseValue, updateturn);//(value,lastturn)
+        //EnemySA.Set_UI_Defense((int)DefenseValue, updateturn);//(value,lastturn)
     }
     void GetDown_VulnerableLastTurn(int updateturn)
     {
@@ -362,7 +365,6 @@ public class EnemyBase : MonoBehaviour
     }
     void Do_DeBuff()
     {
-        Debug.Log("DoDeuff" );
         //StatusAdjustment.PlayerGetVulnerable(this, 5);
         //StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
         //SA_enemy.t_EnemyGetVulnerable(this, 2);
@@ -373,7 +375,6 @@ public class EnemyBase : MonoBehaviour
 
     void get_Debuff()
     {
-        Debug.Log("Buff");
         SA_enemy.t_EnemyGetVulnerable(this, 2);
         EnemySA.Set_UI_Vulnerable(2);
         ResetEnemyBehaviour();

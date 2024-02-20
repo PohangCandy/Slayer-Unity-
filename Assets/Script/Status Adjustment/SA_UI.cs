@@ -40,8 +40,7 @@ public class SA_UI : MonoBehaviour
     }
     public void Set_UI_strength(int powervalue)
     {
-        SA_UI_Obj[2].SetActive(true);
-        SA_UI_Obj[2].GetComponentInChildren<TextMeshProUGUI>().text = powervalue.ToString();
+        UpdateUIwithTurn(SA_UI_Obj[2], powervalue, powervalue);
     }
     public void Set_UI_Weak(int lastturn)
     {
@@ -54,7 +53,6 @@ public class SA_UI : MonoBehaviour
     }
     public void Set_UI_Defense(int defensevalue, int lastturn)
     {
-        Debug.Log("Here is Defense");
         UpdateUIwithTurn(SA_UI_Obj[6], defensevalue, lastturn);
     }
     void UpdateUIwithTurn(GameObject uiobj, int value, int lastturn)
@@ -63,11 +61,14 @@ public class SA_UI : MonoBehaviour
         {
             if(uiobj.activeSelf == false)
             {
+                Debug.Log("Make SetActive");
                 uiobj.SetActive(true);
                 uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
             }
             else if(uiobj.activeSelf == true)
             {
+                Debug.Log("Already Ture so only change value");
+                SA_anim = uiobj.GetComponent<Animator>();
                 SA_anim.SetTrigger("ChangeValue");
                 uiobj.GetComponentInChildren<TextMeshProUGUI>().text = value.ToString();
             }

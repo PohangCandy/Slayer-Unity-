@@ -35,7 +35,7 @@ public static class SA_enemy
     public static void t_EnemyGetpowerUp(EnemyBase enemy, int Maxpower, int Minpower)
     {
         int EnemyPowerUPValue = Random.Range(Minpower, Maxpower);
-        enemy.SetPowerUP(EnemyPowerUPValue);
+        enemy.ApplyPowerUP(EnemyPowerUPValue);
     }
 
 
