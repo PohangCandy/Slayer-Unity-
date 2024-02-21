@@ -156,7 +156,7 @@ public class EnemyBase : MonoBehaviour
     void SetPowerValue(int value)
     {
         PowerUpValue += value;
-        power = (PowerUpValue + power) * 
+        power = (int)((PowerUpValue + power) * WeakPercent_to_float);
     }
     float GetVunlerablePercent()
     {
