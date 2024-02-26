@@ -218,6 +218,11 @@ public class EnemyBase : MonoBehaviour
         CheckEnemyDie();
     }
 
+    void PlayAttackSound()
+    {
+
+    }
+
 
     public void PickNextActionWithPercentage(int randompercentage)
     {
