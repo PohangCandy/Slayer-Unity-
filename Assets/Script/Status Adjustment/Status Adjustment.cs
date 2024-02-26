@@ -147,6 +147,8 @@ public static class StatusAdjustment
 
     private static void attackdamagenuff(SAInformation sAInformation, Object targetObject)
     {
+        if (!CardManager.Inst.audioSource.isPlaying)
+            CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[3]);
         SA_enemy.t_EnemyGetWeak(targetObject as EnemyBase, sAInformation.amount);
     }
 
@@ -209,6 +211,9 @@ public static class StatusAdjustment
     {
         if (IsEnemy(targetObject))
         {
+
+            if (!CardManager.Inst.audioSource.isPlaying)
+                CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[3]);
             EnemyBase enemy = targetObject as EnemyBase;
             SA_enemy.t_EnemyGetVulnerable(enemy, 2);
             //enemy.SetWeak(50);
