@@ -131,6 +131,8 @@ public static class StatusAdjustment
     {
         if(IsPlayer(targetObject))
         {
+            if (!CardManager.Inst.audioSource.isPlaying)
+                CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[2]);
             Player p=targetObject as Player;
             p.healHp(sAInformation.turn);
             if(sAInformation.turn <= 1) 
@@ -172,8 +174,11 @@ public static class StatusAdjustment
     {
         if (IsPlayer(targetObject))
         {
+
             if (sAInformation.turn > 0)
             {
+                if(!CardManager.Inst.audioSource.isPlaying)
+                    CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[2]);
                 Player player = targetObject as Player;
                 player.setAttackstat(2);
                 player.playerSAUI.SA_UI_Obj[3].SetActive(true);
@@ -192,6 +197,8 @@ public static class StatusAdjustment
     {
         if (IsPlayer(targetObject))
         {
+            if (!CardManager.Inst.audioSource.isPlaying)
+                CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[2]);
             Player player = targetObject as Player;
             player.setAddtionalDefense(sAInformation.amount);
             
@@ -212,6 +219,8 @@ public static class StatusAdjustment
     {
         if (IsPlayer(targetObject))
         {
+            if (!CardManager.Inst.audioSource.isPlaying)
+                CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[2]);
             Player player = targetObject as Player;
             player.setDefense(sAInformation.amount);
             player.playerSAUI.SA_UI_Obj[6].SetActive(true);
@@ -222,6 +231,8 @@ public static class StatusAdjustment
     {
         if(IsEnemy(targetObject))
         {
+            if (!CardManager.Inst.audioSource.isPlaying)
+                CardManager.Inst.audioSource.PlayOneShot(CardManager.Inst.audioClip[4]);
             EnemyBase enemy=targetObject as EnemyBase;
             enemy.GetAttack((int)((sAInformation.amount+p.getAttackstat())*p.getattackdamagepercent()));
         }

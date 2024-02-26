@@ -20,8 +20,11 @@ public class PotionManager : MonoBehaviour
     List<CardTarget> cardPotionbuffer;
     List<PlayerTarget> playerPotionbuffer;
     List<EnemyTarget> enemyPotionbuffer;
+    public AudioSource audioSource;
+    public AudioClip[] audioClip;
     void Start()
     {
+        audioSource=GetComponent<AudioSource>();
         SetupBuffer();
     }
     void SetupBuffer()
