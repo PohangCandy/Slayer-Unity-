@@ -72,7 +72,8 @@ public class TurnManager : MonoBehaviour
         {
             Enemy[i].UpdateSALastTurnWhenEnemyTurnStart();
         }
-        CardManager.Inst.TurnOver();
+        CardManager.Inst.Invoke("TurnOver", 1);
+        //Invoke("CardManager.Inst.TurnOver",2);
     }
 
     public void CheckAllEnemyTurnOver(int add_endEnemy)
@@ -95,7 +96,9 @@ public class TurnManager : MonoBehaviour
             Enemy[i].UpdateSALastTurnWhenPlayerTurnStart();
         }
         turnCount++;
-        CardManager.Inst.MyTurn();
+        CardManager.Inst.Invoke("MyTurn", 1);
+        //*Invoke("CardManager.Inst.MyTurn", 2);
+        //CardManager.Inst.MyTurn();
     }
 
     public void StartCountEnemyTurn()

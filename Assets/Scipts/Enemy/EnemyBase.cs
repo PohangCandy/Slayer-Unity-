@@ -25,6 +25,11 @@ public class EnemyBase : MonoBehaviour
     public EnemyActionIcon EnemyActionIcon;
     public SA_UI EnemySA;
     public TextMeshProUGUI hptxt;
+    public AudioSource AttackSound;
+    public AudioSource DefenseSound;
+    public AudioSource DebuffSound;
+    public AudioSource BuffSound;
+    public AudioSource DieSound;
     private Animator EnemyAnim;
     private float VulnerablePercent_to_float;
     private int VulnerableLastturn;
@@ -38,7 +43,7 @@ public class EnemyBase : MonoBehaviour
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
     [SerializeField]
-    public enum EnemyPatternPercent { ChargeDefensePercent = 0 , ReadyAttackPercent = 50, ChargeDeBuffPercent = 0, ChargePowerPercent = 50 };
+    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargePowerPercent = 20 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -220,8 +225,25 @@ public class EnemyBase : MonoBehaviour
 
     void PlayAttackSound()
     {
-
+        AttackSound.Play();
     }
+    void PlayDefenseSound()
+    {
+        DefenseSound.Play();
+    }
+    void PlayBuffSound()
+    {
+        BuffSound.Play();
+    }
+    void PlayDebuffSound()
+    {
+        DebuffSound.Play();
+    }
+    void PlayDieSound()
+    {
+        DieSound.Play();
+    }
+
 
 
     public void PickNextActionWithPercentage(int randompercentage)
@@ -409,6 +431,7 @@ public class EnemyBase : MonoBehaviour
     {
         if(GetEnemyCurHp() == 0)
         {
+            PlayDieSound();
             this.gameObject.SetActive(false);
             EnemyActionIcon.gameObject.SetActive(false);
         }
