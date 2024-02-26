@@ -72,7 +72,8 @@ public class TurnManager : MonoBehaviour
         {
             Enemy[i].UpdateSALastTurnWhenEnemyTurnStart();
         }
-        CardManager.Inst.Invoke("TurnOver", 1);
+        CardManager.Inst.TurnOver();
+        //CardManager.Inst.Invoke("TurnOver", 1);
         //Invoke("CardManager.Inst.TurnOver",2);
     }
 
