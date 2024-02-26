@@ -60,7 +60,11 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
             case State.Idle:
                 {
                     if (isInside(point))
+                    {
                         currentState = State.Hover;
+                        if (!PotionManager.instance.audioSource.isPlaying)
+                            PotionManager.instance.audioSource.PlayOneShot(PotionManager.instance.audioClip[0]);
+                    }
                 }
                 break;
             case State.Hover:
@@ -146,7 +150,8 @@ public class PlayerTarget :MonoBehaviour, PotionInterface
             //curturn = CardManager.Inst.turnManager.GetTurnCount();
             currentState = State.Check;
             //Destroy(this.gameObject);
-
+            if (!PotionManager.instance.audioSource.isPlaying)
+                PotionManager.instance.audioSource.PlayOneShot(PotionManager.instance.audioClip[1]);
             gameObject.GetComponent<Renderer>().enabled = false;
             gameObject.transform.SetParent(null);
         }

@@ -52,6 +52,10 @@ public class CardManager : MonoBehaviour
     public Transform CardLeft;
     public Transform CardRight;
 
+    
+    public AudioClip []audioClip;
+    public AudioSource audioSource;
+
     List<Object> HandOfCards;
     State CurrentState;
     int MaxHandleCardCount;
@@ -59,6 +63,7 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         openone = false;
         MaxEnergy = 3;
         Energy = MaxEnergy;
@@ -71,6 +76,7 @@ public class CardManager : MonoBehaviour
         MyTurn();
         StartCoroutine(alignment());
         curturn = 0;
+        
     }
     void FirstSetup()
     {
@@ -329,10 +335,12 @@ public class CardManager : MonoBehaviour
                 DrawPile.RemoveAt(DrawPile.Count - 1);
                 continue; 
             }
-
+            if (audioClip != null) { audioSource.PlayOneShot(audioClip[0],0.6f); }
             CardInstance(DrawPile[DrawPile.Count-1]);
             DrawPile.RemoveAt(DrawPile.Count-1);
         }
+        
+        
     }
     public void MyTurn()
     {
@@ -411,6 +419,7 @@ public class CardManager : MonoBehaviour
 
     public void CardAlignment()
     { 
+        
         List<PRS> originCardPRSs=new List<PRS>();
         originCardPRSs = RoundAlignment(CardLeft, CardRight, HandOfCards.Count, 0.5f, Vector3.one * 0.9f);
         for(int i=0;i<HandOfCards.Count;i++) 
@@ -471,11 +480,13 @@ public class CardManager : MonoBehaviour
     }
     public void GotoDiscardPile(CardInterface card)
     {
+        audioSource.PlayOneShot(audioClip[1]);
         Card temp=card.getCard();
         DiscardPile.Add(temp);
     }
     public void GotoBurnPile(CardInterface card)
     {
+        audioSource.PlayOneShot(audioClip[1]);
         Card temp = card.getCard();
         BurnPile.Add(temp);
     }

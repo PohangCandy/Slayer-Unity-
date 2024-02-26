@@ -70,7 +70,11 @@ public class EnemyTarget : MonoBehaviour, PotionInterface
             case State.Idle:
                 {
                     if (isInside(point))
+                    {
                         currentState = State.Hover;
+                        if (!PotionManager.instance.audioSource.isPlaying)
+                            PotionManager.instance.audioSource.PlayOneShot(PotionManager.instance.audioClip[0]);
+                    }
                 }
                 break;
             case State.Hover:
@@ -155,6 +159,8 @@ void Update()
         {
             //StatusAdjustment(Card,saInformation)//(적용대상과,적용되야하는 값 정보) CATEGORY (DEFENSE,ATTACK,WEAKNESS,
             StatusAdjustment.SetFunction(this,enemy, saInformation);
+            if (!PotionManager.instance.audioSource.isPlaying)
+                PotionManager.instance.audioSource.PlayOneShot(PotionManager.instance.audioClip[1]);
             Destroy(this.gameObject);
         }
     }
