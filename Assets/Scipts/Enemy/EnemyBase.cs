@@ -60,10 +60,8 @@ public class EnemyBase : MonoBehaviour
         power = MaxPower;
         Curhp = Maxhp;
         hptxt.text = Maxhp.ToString();
-        //EnemyActionIcon.GetEnemyPower(power);
         slider.value = Maxhp;
         InintEnemyBehaviour();
-        //ResetEnemyBehaviour();
     }
 
     public int GetEnemyCurHp()
@@ -85,7 +83,7 @@ public class EnemyBase : MonoBehaviour
     public void ApplyPowerUP(int value)
     {
         SetPowerValue(value);
-        power += value;
+        power = (int)((PowerUpValue + power) * WeakPercent_to_float);
     }
     public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 1.5,2
     {
@@ -161,7 +159,6 @@ public class EnemyBase : MonoBehaviour
     void SetPowerValue(int value)
     {
         PowerUpValue += value;
-        power = (int)((PowerUpValue + power) * WeakPercent_to_float);
     }
     float GetVunlerablePercent()
     {
