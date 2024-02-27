@@ -83,7 +83,7 @@ public class EnemyBase : MonoBehaviour
     public void ApplyPowerUP(int value)
     {
         SetPowerValue(value);
-        power = (int)((PowerUpValue + power) * WeakPercent_to_float);
+        power = (int)(power + (int)(PowerUpValue * WeakPercent_to_float));
     }
     public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 1.5,2
     {
