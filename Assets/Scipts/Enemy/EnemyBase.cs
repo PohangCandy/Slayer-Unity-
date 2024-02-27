@@ -60,7 +60,7 @@ public class EnemyBase : MonoBehaviour
         power = MaxPower;
         Curhp = Maxhp;
         hptxt.text = Maxhp.ToString();
-        EnemyActionIcon.GetEnemyPower(power);
+        //EnemyActionIcon.GetEnemyPower(power);
         slider.value = Maxhp;
         InintEnemyBehaviour();
         //ResetEnemyBehaviour();
@@ -96,7 +96,7 @@ public class EnemyBase : MonoBehaviour
     public void ApplyWeak(float weakpercentage, int lastturn)
     {
         SetWeakPercent(weakpercentage, lastturn);
-        power = (int)(power * weakpercentage);
+        power = (int)(power * WeakPercent_to_float);
         EnemyActionIcon.GetEnemyPower(power);
         EnemySA.Set_UI_Weak(WeakLastturn);
     }
@@ -418,6 +418,7 @@ public class EnemyBase : MonoBehaviour
     {
         EnemyAnim.SetTrigger("StartAttack");
         target.takeDamage(this.power);
+        Debug.Log(power);
     }
 
     public void ResetEnemyBehaviour()
