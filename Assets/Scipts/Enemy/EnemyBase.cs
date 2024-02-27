@@ -218,7 +218,7 @@ public class EnemyBase : MonoBehaviour
 
             EnemySA.Set_UI_Defense((int)DefenseValue, DefenseLastturn);
             slider.value = Curhp;
-            hptxt.text = Maxhp.ToString() + "/" + Curhp.ToString();
+            hptxt.text = Curhp.ToString() + "/" + Maxhp.ToString();
         }
         CheckEnemyDie();
     }
