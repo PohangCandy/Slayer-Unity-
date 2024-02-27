@@ -43,7 +43,7 @@ public class EnemyBase : MonoBehaviour
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
     [SerializeField]
-    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 40, ChargeDeBuffPercent = 20, ChargePowerPercent = 20 };
+    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 50, ChargeDeBuffPercent = 0, ChargePowerPercent = 30 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -396,7 +396,7 @@ public class EnemyBase : MonoBehaviour
         //StatusAdjustment.EnemyGetVulnerable(this, 5);//enemy get debuff by himself just for Test
         //SA_enemy.t_EnemyGetVulnerable(this, 2);
         //EnemySA.Set_UI_Vulnerable(5);
-        target.settakedamagepercent(1.5f); // Set player get vulnerable
+        target.settakedamagepercent(1.5f);// Set player get vulnerable
         ResetEnemyBehaviour();
     }
 
@@ -417,7 +417,7 @@ public class EnemyBase : MonoBehaviour
     void Do_Attack()
     {
         EnemyAnim.SetTrigger("StartAttack");
-        target.takeDamage(this.power * WeakPercent_to_float);
+        target.takeDamage(this.power);
     }
 
     public void ResetEnemyBehaviour()
