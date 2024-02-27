@@ -43,7 +43,7 @@ public class EnemyBase : MonoBehaviour
     EnemyPatternType CurPattern;
     EnemyPatternType NextPattern;
     [SerializeField]
-    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 50, ChargeDeBuffPercent = 0, ChargePowerPercent = 30 };
+    public enum EnemyPatternPercent { ChargeDefensePercent = 20 , ReadyAttackPercent = 60, ChargeDeBuffPercent = 0, ChargePowerPercent = 20 };
     void Start()
     {
         EnemyAnim = GetComponent<Animator>();
@@ -83,7 +83,10 @@ public class EnemyBase : MonoBehaviour
     public void ApplyPowerUP(int value)
     {
         SetPowerValue(value);
+        Debug.Log("PowerUpValue: " + PowerUpValue);
+        Debug.Log("Power: " + power);
         power = (int)(power + (int)(PowerUpValue * WeakPercent_to_float));
+        Debug.Log("Update Power: " + power);
     }
     public void ApplyVulnerable(float vulnerablepercentage,int lastturn) //damage * 1.5,2
     {
@@ -158,7 +161,7 @@ public class EnemyBase : MonoBehaviour
 
     void SetPowerValue(int value)
     {
-        PowerUpValue += value;
+        PowerUpValue = value;
     }
     float GetVunlerablePercent()
     {
@@ -183,7 +186,6 @@ public class EnemyBase : MonoBehaviour
     public void SetPowerUP(int value)
     {
         PowerUpValue += value;
-        power += value;
     }
 
     // Update is called once per frame
