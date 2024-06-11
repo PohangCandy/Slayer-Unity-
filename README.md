@@ -18,9 +18,9 @@
 
 ## 게임설명 
 **“가상세계 위협하는 바이러스, 과연 인터넷을 되찾을 수 있을까?”**
-![_2024_06_10_21_09_06_990-ezgif com-video-to-gif-converter (1)](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/adad940e-9366-4934-b935-5b0889e43e33)
 ![UI_타이틀](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/94968c3f-b932-4e2e-986c-5e8548e5f8d6)
-![UI_플레이_아이콘](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/39da3b99-97bf-416a-a3fa-e28332ef6460)
+![_2024_06_10_21_09_06_990-ezgif com-video-to-gif-converter (1)](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/adad940e-9366-4934-b935-5b0889e43e33)
+
 
 사이버 펑크화된 먼 미래에서 진행되는 **CCG**(Collectible Card Game) Game
 
@@ -44,27 +44,38 @@
 **차규빈**: 캐릭터,배경 메인, 게임 기획 서브, UI,UX
 
 ### 소프트웨어
-**민기찬**: 시스템 기획, **몬스터 구현**, 시스템 구현
-
-
-##### Figma로 UI기획,UGUI로 UI구현
+![header](https://capsule-render.vercel.app/api?type=slice&text=민기찬&color=2BAE66FF&fontColor=FCF6F5FF&fontAlign=90&fontAlignY=40&fontSize=50)
+#### 시스템 기획
+##### Figma로 UI기획
 [UI기획서.pptx](https://github.com/user-attachments/files/15782024/UI.pptx)
 
 ![_2024_06_10_22_02_08_820-ezgif com-video-to-gif-converter (1)](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/6118f714-8bc2-4b98-b4d4-1df8df6c0e05)
 
-피그마|타이틀|맵
+##### UGUI로 UI배치
+
+타이틀|맵|인게임
 ----|----|----|
-|||
+![UI_타이틀](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/746ea3b6-2293-449e-872c-3fcb4afefcd8)|![UI_맵](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/670333ab-ab32-4be2-bee0-3dae0175500a)|![UI_플레이_아이콘](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/90a36e25-2d10-4bf0-bf6d-71252f4086e0)|
 
-##### 몬스터 버프, 행동로직
-버프,디버프|행동로직
+#### 몬스터 전체 구현
+##### 주요기능
+버프 계산|다음상태 예고
 ----|----|
-|||
+![적 버프계산](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/0843542f-1bad-4b44-b7e2-c01847004834)|![적 다음 행동 예고](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/2a3cc55f-f147-4f42-a4a3-c132b760d01f)|
+[@pseudo-code](https://www.notion.so/b865431b937f43508232babfdf1f3db7?pvs=4)|[@pseudo-code](https://www.notion.so/ba29f0d1b37146f6b89336edc0b2c6a6?pvs=4)|
 
-**임건형**: 시스템 기획, 카드 구현 ,포션 구현 , **플레이어 구현** , 시스템 구현
+
+![header](https://capsule-render.vercel.app/api?type=slice&text=임건형&color=755139FF&fontColor=F2EDD7FF&fontAlign=90&fontAlignY=40&fontSize=50)
+#### 데이터 기획
+
+#### 카드 구현
+
+#### 포션 구현
+
+#### 플레이어 구현
 
 ## 플레이방식
-스테이지 마지막인 보스의 방을 향해 나아가며 카드와 아이템을 수집하고 전략을 세워 적을 물리치는 게임
+보스의 방을 향해 나아가며 카드와 아이템을 수집하고 전략을 세워 적을 물리치는 게임
 
 
 ## 프로젝트 후기
@@ -84,17 +95,17 @@
 
 ## 개선점
 ### 그래픽
-#### 안혜지
+**안혜지**
 
-#### 차규빈
+**차규빈**
 
 
 ### 소프트웨어
-#### 민기찬
+**민기찬**
 프로그래밍 적으로 맵을 선택했을때, 경로에 따라 갈 수 있는 다음 구간이 나눠지도록 하는 작업을 상속을 통해서 구현하고 싶었지만 실패해서, UGUI로 마무리 해놓은 상태로 리팩토링 할 때 다시 도전해볼 생각입니다.
 기획적으로는 아직 구현하지 못한 **상점**과 **유물** 구현이 미완성으로 남아 아쉽습니다.
 
-#### 임건형
+**임건형**
 
 
 
