@@ -63,7 +63,7 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&text=민기찬&color=2BAE66FF&fontColor=FCF6F5FF&fontAlign=90&fontAlignY=40&fontSize=50)
 
 #### 1. Figma, UGUI
-:page_with_curl:[UI기획서.pptx](https://github.com/user-attachments/files/15782024/UI.pptx)  
+:page_with_curl: [UI기획서.pptx](https://github.com/user-attachments/files/15782024/UI.pptx)  
 <a href="https://www.figma.com/design/QeMAo69WUSgph7Cz4x4Gmy/Slay-the-Spire-%EB%AA%A8%EC%9E%91?node-id=0-1&t=nfVWtF2NYnIzDTOg-1" target="blank"><img align="center" src="https://i.namu.wiki/i/tyR9148Wphjb2F4cAstF0NdEfTnxF5gEmmMzzjPmNzF7u7gwmk2D3USUfjJ3JA-nrvkZQAynHevRmGyrm7ciU3rdiV-rxeS2CQk_15tnzhMfVScDbzl4aMQBerHC5vZPXCT_ihMWrHh7QVBbHk3LNQ.svg" alt="Figma" height="27" width="20" /></a> [Figma 프로토타입](https://www.figma.com/design/QeMAo69WUSgph7Cz4x4Gmy/Slay-the-Spire-%EB%AA%A8%EC%9E%91?node-id=0-1&t=nfVWtF2NYnIzDTOg-1)  
 ![Group 21](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/10ca5570-d2eb-470e-9251-1eadbf1df62b)
 
@@ -120,8 +120,8 @@
 
 ### 소프트웨어
 **민기찬**
-프로그래밍 적으로 맵을 선택했을때, 경로에 따라 갈 수 있는 다음 구간이 나눠지도록 하는 작업을 상속을 통해서 구현하고 싶었지만 실패해서, UGUI로 마무리 해놓은 상태로 리팩토링 할 때 다시 도전해볼 생각입니다.
-기획적으로는 아직 구현하지 못한 **상점**과 **유물** 구현이 미완성으로 남아 아쉽습니다.
+Map을 선택했을때, 경로에 따라 갈 수 있는 다음 구간이 나눠지도록 하는 작업을 **배열**과 **상속**을 통해서 리팩토링 할 예정입니다.  
+시간상 아직 구현하지 못한 **상점**과 **유물**을 구현해볼 생각입니다.
 
 **임건형**
 
