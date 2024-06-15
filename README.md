@@ -65,7 +65,6 @@
 #### 1. Figma, UGUI
 :page_with_curl:[UI기획서.pptx](https://github.com/user-attachments/files/15782024/UI.pptx)  
 [Figma 프로토타입](https://www.figma.com/design/QeMAo69WUSgph7Cz4x4Gmy/Slay-the-Spire-%EB%AA%A8%EC%9E%91?node-id=0-1&t=nfVWtF2NYnIzDTOg-1)  
-![_2024_06_10_22_02_08_820-ezgif com-video-to-gif-converter (1)](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/6118f714-8bc2-4b98-b4d4-1df8df6c0e05)  
 ![Group 21](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/10ca5570-d2eb-470e-9251-1eadbf1df62b)
 
 * **Figma** : 피그마를 통해 기존의 CCG게임  **UI 분석** 후 프로젝트 UI 기획, **컴포넌트 기능**을 활용해 자주 쓰는 UI의 **재사용성** 높임. **ProtoType**을 수행하며 클래스 다이어그래임으로 생각해내지 못한 기획을 자세하게 수정.
