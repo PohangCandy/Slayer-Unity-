@@ -39,7 +39,7 @@
 ----|----|
 ![다운로드](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/7821af10-13b0-453b-af48-6266c3ed3a7e)|![다운로드](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/17788435-9f69-424e-b0cb-e0f10b1296e9)
 @Instagram|@Instagram
-
+##
 **소프트웨어**
 민기찬|임건형
 ----|----|
@@ -53,7 +53,7 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&text=안혜지&color=FFA351FF&fontColor=FFFFFFFF&fontAlign=90&fontAlignY=40&fontSize=50)  
 * 게임 기획 메인
 * 캐릭터,배경 서브
-
+##
 ![header](https://capsule-render.vercel.app/api?type=waving&text=차규빈&color=F99FC9FF&fontColor=FFFFFFFF&fontAlign=90&fontAlignY=40&fontSize=50)
 * 캐릭터,배경 메인
 * 게임 기획 서브
@@ -82,7 +82,7 @@
 * **버프/디버프** : **Static 클래스**를 개별적으로 만들어 플레이어가 카드, 포션, 유물 등을 사용해서 Enemy 객체에 각기 다른 동작을 취할 수 있도록 만듬.
 
 
-
+##
 ![header](https://capsule-render.vercel.app/api?type=waving&text=임건형&color=755139FF&fontColor=F2EDD7FF&fontAlign=90&fontAlignY=40&fontSize=50)
 #### 데이터 기획
 
@@ -96,34 +96,41 @@
 ---
 ## 프로젝트 후기
 ### 그래픽
+
 #### 안혜지
 
 #### 차규빈
 
-
+##
 ### 소프트웨어
+
 #### 민기찬
 갑작스러운 일정이었음에도 끝까지 열심히 참여해준 팀원 분들께 너무 감사하고, 지난번 프로젝트때 같이 작업 했던 분들과 함께해서 빠른 시간안에 좋은 결과물이 나온 것 같아 좋았습니다.
 
 지난번 작품과 달리 **성능 향상**과 **최적화**에 신경을 쓰기위해서, **Update문**을 사용하지 않고 적의 **FSM**을 구현함으로써 현재 행동과 다음 행동 예고에 대한 로직을 세워보았습니다. 특히 적이 시작한 버프의 경우 다시 적의 턴이 되었을 때 1턴의 효과를 지나고, 플레이어가 건 디버프의 경우 다시 플레이어의 턴이 되었을 때 1턴이 지나는 기능을 매프레임 단위로 적의 버프, 디버프를 체크하지 않고 구현하는 작업이 상당히 까다로웠으나 턴제 게임이기에 가능한 턴 종료 버튼을 누렀을 때의 확실한 턴 전환이 있닫는 점을 생각해서 **턴 계산 방법**을 생각해낸 것이 개인적으로 뿌듯했습니다.
 
+
+##
 #### 임건형
 
 
 ---
 ## 개선점
 ### 그래픽
-**안혜지**
+#### 안혜지
 
-**차규빈**
+#### 차규빈
 
-
+##
 ### 소프트웨어
-**민기찬**
+
+#### 민기찬 
 Map을 선택했을때, 경로에 따라 갈 수 있는 다음 구간이 나눠지도록 하는 작업을 **배열**과 **상속**을 통해서 리팩토링 할 예정입니다.  
 시간상 아직 구현하지 못한 **상점**과 **유물**을 구현해볼 생각입니다.
 
-**임건형**
+
+##
+#### 임건형  
 
 
 
