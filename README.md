@@ -18,10 +18,9 @@
 
 ## 게임설명 
 **“가상세계 위협하는 바이러스, 과연 인터넷을 되찾을 수 있을까?”**
-- 사이버 펑크 미래에서 진행되는 **CCG**(Collectible Card Game) Game
-
+-
+<a href="https://youtu.be/AtsgU5bLuS8?feature=shared" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="ghospital" height="30" width="40" /></a> [사이버 펑크 미래에서 진행되는 **CCG**(Collectible Card Game) Game  ](https://youtu.be/AtsgU5bLuS8?feature=shared)
 ![UI_타이틀](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/94968c3f-b932-4e2e-986c-5e8548e5f8d6)
-![_2024_06_10_21_09_06_990-ezgif com-video-to-gif-converter (1)](https://github.com/PohangCandy/Slayer-Unity-/assets/130345776/adad940e-9366-4934-b935-5b0889e43e33)
 
 ## 팀원소개 
 **그래픽**
