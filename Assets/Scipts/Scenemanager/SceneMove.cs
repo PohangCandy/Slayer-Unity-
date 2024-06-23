@@ -10,6 +10,16 @@ public class SceneMove : MonoBehaviour
     void Start()
     {
         floor = 0;
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Login")
+        {
+            if (PlayerPrefs.HasKey("user_name"))
+                SceneManager.LoadScene("Title");
+            return;
+        }
+
+        if (!PlayerPrefs.HasKey("user_name"))
+            SceneManager.LoadScene("Login");
     }
 
     public void LoadTitleScene()
@@ -72,6 +82,25 @@ public class SceneMove : MonoBehaviour
     public void ResetButtonState()
     {
         Debug.Log("Damm");
+    }
+
+    public void Logout()
+    {
+        var asyncLoad = SceneManager.LoadSceneAsync("Login");
+        if (asyncLoad.isDone)
+        {
+            Debug.Log("로그인 이동");
+        }
+        
+    }
+
+    public void Login()
+    {
+        var asyncLoad = SceneManager.LoadSceneAsync("Title");
+        if (asyncLoad.isDone)
+        {
+            Debug.Log("타이틀 이동");
+        }
     }
 
     public void GameExit()

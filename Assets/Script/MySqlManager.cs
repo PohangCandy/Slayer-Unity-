@@ -5,12 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
+using Newtonsoft.Json;
 
 public class MySqlManager
 {
     [Serializable]
     public class Player
     {
+        public string error { get; set; }
         public string user_id;
         public string name;
         public string email;
@@ -51,8 +53,16 @@ public class MySqlManager
             {
                 return false;
             }
+            Debug.Log("response: " + req.downloadHandler.text);
+            var res =JsonConvert.DeserializeObject<Player>(req.downloadHandler.text);
 
-            return true;
+            if(res.error=="no")
+                return true;
+            return false;
+            //res.error=
+            //JsonConvert.SerializeObject(res)
+            //if (res.)
+
         }
     }
 
