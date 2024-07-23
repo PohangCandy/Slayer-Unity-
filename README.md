@@ -85,25 +85,29 @@
 ##
 ![header](https://capsule-render.vercel.app/api?type=waving&text=임건형&color=755139FF&fontColor=F2EDD7FF&fontAlign=90&fontAlignY=40&fontSize=50)
 #### 데이터 기획&클래스
-![image](https://github.com/user-attachments/assets/b31cfd2c-cf63-41a4-8539-e8956d8b4db0)
+<img src="https://github.com/user-attachments/assets/b31cfd2c-cf63-41a4-8539-e8956d8b4db0" width="300" height="300">
 
 * 전반적인 게임의 데이터들을 주고 받고하는 **설계**를 ER다이어그램을 통해서 구상
 
-![image](https://github.com/user-attachments/assets/a1aad14f-eb04-422c-984d-6bd877b6903f)
+<img src="https://github.com/user-attachments/assets/a1aad14f-eb04-422c-984d-6bd877b6903f" width="300" height="300">
 
 * 맡은 파트의 클래스에 필요한 것을 UML을 통해서 **클래스를 설계**하였다.
 #### 카드 구현
-![공격카드](https://github.com/user-attachments/assets/de3e85df-f79f-496e-a45d-fa6a7c93b853)
-![논타겟 카드](https://github.com/user-attachments/assets/ee9cf68f-9697-4686-b523-984287d82faa)
-![카드덱](https://github.com/user-attachments/assets/17110e28-b55b-4e60-ae25-43c11d7f4f97)
+<img src="https://github.com/user-attachments/assets/de3e85df-f79f-496e-a45d-fa6a7c93b853" width="300" height="300">
+
+<img src="https://github.com/user-attachments/assets/ee9cf68f-9697-4686-b523-984287d82faa" width="300" height="300">
+
+<img src="https://github.com/user-attachments/assets/17110e28-b55b-4e60-ae25-43c11d7f4f97" width="300" height="300">
 
 카드를 구현할 때 **인터페이스**를 사용해서 공통된 분야를 만들고 해당하는 것으로 부터 파생되어 카드의 종류별로 클래스를 생성
 FSM을 사용해서 사용자의 input에 따라서 카드의 상태를 변경하며, 상태에 맞는 행동을 하도록 구현
 카드를 매니저를 통해서 관리하고 사용하여 덱에 있는 카드,뽑을 카드에 있는 목록,이미 사용한 카드등을 판단가능하도록 하였다.
 
 #### 포션 구현
-![포션 적용](https://github.com/user-attachments/assets/b0733449-03b3-492b-9bb0-f16ddc57e3fc)
-![포션적용(타겟)](https://github.com/user-attachments/assets/17b3f9f0-357f-4582-935d-9dfca78bae49)
+
+<img src="https://github.com/user-attachments/assets/b0733449-03b3-492b-9bb0-f16ddc57e3fc" width="300" height="300">
+
+<img src="https://github.com/user-attachments/assets/17b3f9f0-357f-4582-935d-9dfca78bae49" width="300" height="300">
 
 포션도 카드와 동일하게 인터페이스 사용,FSM 구축,매니저를 통해서 관리하였다. 
 #### 플레이어 구현
