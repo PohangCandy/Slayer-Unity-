@@ -84,14 +84,60 @@
 
 ##
 ![header](https://capsule-render.vercel.app/api?type=waving&text=임건형&color=755139FF&fontColor=F2EDD7FF&fontAlign=90&fontAlignY=40&fontSize=50)
-#### 데이터 기획
+#### 데이터 기획&클래스
+![image](https://github.com/user-attachments/assets/b31cfd2c-cf63-41a4-8539-e8956d8b4db0)
 
+* 전반적인 게임의 데이터들을 주고 받고하는 **설계**를 ER다이어그램을 통해서 구상
+
+![image](https://github.com/user-attachments/assets/a1aad14f-eb04-422c-984d-6bd877b6903f)
+
+* 맡은 파트의 클래스에 필요한 것을 UML을 통해서 **클래스를 설계**하였다.
 #### 카드 구현
+![공격카드](https://github.com/user-attachments/assets/de3e85df-f79f-496e-a45d-fa6a7c93b853)
+![논타겟 카드](https://github.com/user-attachments/assets/ee9cf68f-9697-4686-b523-984287d82faa)
+![카드덱](https://github.com/user-attachments/assets/17110e28-b55b-4e60-ae25-43c11d7f4f97)
+
+카드를 구현할 때 **인터페이스**를 사용해서 공통된 분야를 만들고 해당하는 것으로 부터 파생되어 카드의 종류별로 클래스를 생성
+FSM을 사용해서 사용자의 input에 따라서 카드의 상태를 변경하며, 상태에 맞는 행동을 하도록 구현
+카드를 매니저를 통해서 관리하고 사용하여 덱에 있는 카드,뽑을 카드에 있는 목록,이미 사용한 카드등을 판단가능하도록 하였다.
 
 #### 포션 구현
+![포션 적용](https://github.com/user-attachments/assets/b0733449-03b3-492b-9bb0-f16ddc57e3fc)
+![포션적용(타겟)](https://github.com/user-attachments/assets/17b3f9f0-357f-4582-935d-9dfca78bae49)
 
+포션도 카드와 동일하게 인터페이스 사용,FSM 구축,매니저를 통해서 관리하였다. 
 #### 플레이어 구현
+캐릭터의 정보를 담아두는 저장소를 구현하였고, 상호작용할 때마다 세부내용이 변동되도록 설정.
 
+### 추가 구현
+
+MySQL을 php로 연동해서 구축
+## 구현기능
+* 사용자 등록
+
+![사용자 등록](https://github.com/user-attachments/assets/62b9c7eb-1c02-4cea-8520-c02d894caf72)
+
+* 로그인
+
+![로그인](https://github.com/user-attachments/assets/337b922c-5147-4270-91af-5b508ec176c4)
+
+  
+* 로그인 시에 타이틀로 이동
+
+  
+* 로그아웃
+
+![로그아웃](https://github.com/user-attachments/assets/5344410f-efc2-467f-b18c-4c2d316a9d43)
+
+
+* 캐릭터 생성여부
+
+![캐릭터 생성여부 확인](https://github.com/user-attachments/assets/f92c48f0-1e4e-48df-99e9-6f54d4a69486)
+
+
+* 캐릭터 생성
+
+![캐릭터 생성](https://github.com/user-attachments/assets/43d27cdb-8336-4e51-a6f0-13255c4d6265)
 
 ---
 ## 프로젝트 후기
@@ -112,7 +158,8 @@
 
 ##
 #### 임건형
-
+급한 일정으로 인해서 몸도 힘들고 마음도 힘들었지만 혼자였다면 중간에 포기할 것 같았는데 팀원들이랑 어떻게 잘 해내서 좋았습니다.
+학기중에 배웠던 내용을 활용해서 게임을 만들어내니 스킬도 늘어나고 자신감이 붙게 되어서 좋았습니다.
 
 ---
 ## 개선점
@@ -131,7 +178,7 @@ Map을 선택했을때, 경로에 따라 갈 수 있는 다음 구간이 나눠�
 
 ##
 #### 임건형  
-
+급하게 짜다보니 코드의 조잡한점과 구조적으로 좀 더 풀어낼수 있는 부분이 있는데 이를 집중적으로 하면서, 나중에 mysql로 카드와 포션까지 연동시켜서 작업하면은 좀 더 복잡한 부분까지 연습하고 싶습니다.
 
 
 
