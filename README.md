@@ -7,7 +7,7 @@
 * [플레이방식](#플레이방식)  
 * [프로젝트 후기](#프로젝트-후기)  
 * [개선점](#개선점)
-
+* [빌드파일](#빌드파일)
 
 ---
 ## 개요 
@@ -17,6 +17,9 @@
 -   개발 엔진 및 언어: **Unity** / C#
 -   멤버: **SweetCone**, :art: **Designer** ( 안혜지, 차규빈 ), :computer: **Programmer** ( 임건형, 민기찬)
 
+---
+## 빌드파일
+💾 https://drive.google.com/file/d/1m8Ko0VPSgRFzeDE7vbradTDzgaYvFuBC/view?usp=drive_link
 
 ---
 ## 게임설명 
